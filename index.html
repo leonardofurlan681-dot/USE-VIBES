@@ -5,130 +5,128 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VIBES | Sunglasses</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
         :root {
             --vibe-orange: #FF8F1C;
-            --vibe-yellow: #FFD21E;
+            --vibe-orange-dark: #e67e17;
             --bg-color: #ffffff;
-            --text-main: #000000;
             --whatsapp-color: #25D366;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
-        body { background-color: var(--bg-color); color: var(--text-main); overflow-x: hidden; }
+        body { background-color: var(--bg-color); color: #000; overflow-x: hidden; }
 
-        .promo-bar { background: var(--vibe-orange); color: var(--vibe-yellow); text-align: center; padding: 8px; font-size: 10px; text-transform: uppercase; font-weight: 600; letter-spacing: 1px; }
+        .promo-bar { background: var(--vibe-orange); color: #000; text-align: center; padding: 10px; font-size: 11px; text-transform: uppercase; font-weight: 800; letter-spacing: 2px; border-bottom: 2px solid rgba(0,0,0,0.1); }
 
-        /* Header Adaptável */
+        /* Header */
         header {
             display: grid;
             grid-template-columns: 80px 1fr 80px;
             align-items: center;
-            padding: 10px 20px;
-            border-bottom: 1px solid #f0f0f0;
+            padding: 15px 20px;
+            border-bottom: 2px solid var(--vibe-orange);
             position: sticky;
             top: 0;
-            background: rgba(255,255,255,0.95);
-            backdrop-filter: blur(5px);
+            background: rgba(255,255,255,0.98);
+            backdrop-filter: blur(10px);
             z-index: 100;
         }
         
-        .header-left { display: flex; align-items: center; }
-        .logo-img { height: 40px; width: auto; object-fit: contain; }
+        .logo-central { font-weight: 800; font-size: 26px; letter-spacing: 8px; text-transform: uppercase; text-align: center; cursor: pointer; color: #000; text-decoration: none; transition: 0.3s; }
+        .logo-central:hover { color: var(--vibe-orange); }
+        .cart-btn { position: relative; cursor: pointer; font-size: 22px; color: #333; }
+        .cart-count { position: absolute; top: -8px; right: -10px; background: var(--vibe-orange); color: #000; font-size: 10px; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; }
 
-        .logo-central { 
-            font-weight: 600; 
-            font-size: 22px; 
-            letter-spacing: 6px; 
-            text-transform: uppercase; 
-            color: #000; 
-            text-align: center;
-            cursor: pointer;
+        /* Banner Hero */
+        .hero-slider { 
+            width: 100%; 
+            min-height: 550px;
+            background: linear-gradient(135deg, #fdfdfd 0%, #f4f4f4 100%); 
+            position: relative; 
+            display: flex; 
+            align-items: center; 
+            overflow: hidden; 
         }
-
-        .icons { display: flex; justify-content: flex-end; font-size: 20px; }
-        .cart-btn { position: relative; cursor: pointer; }
-        .cart-count {
-            position: absolute; top: -8px; right: -10px; background: var(--vibe-orange); color: #fff;
-            font-size: 10px; width: 18px; height: 18px; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-        }
-
-        /* Banner Mobile Friendly */
-        .hero-slider { width: 100%; height: auto; min-height: 250px; background: #f9f9f9; position: relative; display: flex; align-items: center; padding: 20px; }
-        .slide { display: flex; flex-direction: row; align-items: center; justify-content: space-between; width: 100%; max-width: 1200px; margin: 0 auto; }
-        .slide-content h2 { font-size: 24px; text-transform: uppercase; line-height: 1.1; }
-        .slide-img img { max-width: 180px; height: auto; mix-blend-mode: multiply; }
-
-        /* Layout Responsivo */
-        .main-layout { display: flex; flex-direction: row; max-width: 1400px; margin: 0 auto; padding: 20px; gap: 30px; }
-
-        /* Sidebar que vira menu horizontal no mobile */
-        .sidebar { width: 220px; flex-shrink: 0; }
-        .sidebar h4 { font-size: 11px; letter-spacing: 2px; margin-bottom: 15px; }
-        .sidebar-menu { list-style: none; display: flex; flex-direction: column; gap: 5px; }
-        .sidebar-menu li { padding: 12px 15px; border-radius: 5px; cursor: pointer; font-size: 13px; transition: 0.2s; border: 1px solid transparent; }
-        .sidebar-menu li.active { background: #000; color: #fff; font-weight: 600; }
-
-        /* Grid de Produtos */
-        .product-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; flex-grow: 1; }
-        .product-card { border: 1px solid #eee; padding: 10px; text-align: center; border-radius: 8px; background: #fff; }
+        .slide { display: flex; align-items: center; justify-content: space-between; width: 100%; max-width: 1400px; margin: 0 auto; padding: 0 40px; gap: 50px; }
+        .slide-content { flex: 1; z-index: 2; }
+        .slide-content h2 { font-size: clamp(40px, 6vw, 70px); font-weight: 800; text-transform: uppercase; line-height: 0.9; margin-bottom: 20px; }
+        .slide-content h2 span { color: var(--vibe-orange); }
+        .btn-banner { background: #000; color: #fff; padding: 18px 40px; text-decoration: none; font-weight: 800; font-size: 14px; border-radius: 50px; display: inline-block; transition: 0.3s; border: 2px solid transparent; }
+        .btn-banner:hover { background: var(--vibe-orange); color: #000; transform: translateY(-3px); }
         
-        .img-box { position: relative; background: #fcfcfc; aspect-ratio: 1/1; display: flex; align-items: center; justify-content: center; margin-bottom: 10px; border-radius: 5px; }
-        .img-box img { width: 95%; height: auto; transition: 0.3s; }
-        .nav-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.9); border: 1px solid #eee; width: 32px; height: 32px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 2; }
-        .btn-l { left: 4px; }
-        .btn-r { right: 4px; }
+        .slide-images-wrapper { flex: 1.2; display: flex; gap: 20px; justify-content: flex-end; position: relative; }
+        .slide-images-wrapper img { width: 55%; height: 450px; object-fit: cover; border-radius: 20px; border: 4px solid var(--vibe-orange); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+        .slide-images-wrapper img:last-child { margin-top: 60px; margin-left: -100px; border-color: #000; }
 
-        .product-card h4 { font-size: 13px; margin-top: 5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .price { color: var(--vibe-orange); font-weight: 600; font-size: 16px; display: block; margin: 5px 0; }
-        .btn-add { width: 100%; padding: 12px; background: #000; color: #fff; border: none; cursor: pointer; text-transform: uppercase; font-size: 10px; font-weight: 600; border-radius: 4px; }
+        /* Layout */
+        .main-layout { display: flex; flex-direction: row; max-width: 1400px; margin: 0 auto; padding: 60px 20px; gap: 40px; }
+        .sidebar { width: 220px; }
+        .sidebar-menu li { padding: 12px 15px; border-radius: 8px; cursor: pointer; font-size: 13px; font-weight: 700; margin-bottom: 5px; transition: 0.3s; }
+        .sidebar-menu li.active { background: var(--vibe-orange); color: #000; }
+        .sidebar-menu li:hover:not(.active) { background: #f0f0f0; padding-left: 20px; }
+
+        /* Product Cards */
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px; flex-grow: 1; }
+        .product-card { background: #fff; border-radius: 15px; overflow: hidden; border: 1px solid #eee; transition: 0.4s; cursor: pointer; position: relative; }
+        .product-card:hover { transform: translateY(-5px); border-color: var(--vibe-orange); box-shadow: 0 15px 30px rgba(0,0,0,0.05); }
+
+        .img-box { height: 320px; width: 100%; background: #f9f9f9; position: relative; overflow: hidden; }
+        .img-box img { width: 100%; height: 100%; object-fit: cover; transition: opacity 0.3s; }
+        
+        /* Setinhas de Navegação (Estilo unificado) */
+        .nav-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.8); border: none; width: 32px; height: 32px; border-radius: 50%; cursor: pointer; z-index: 5; font-size: 12px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); color: #000; display: flex; align-items: center; justify-content: center; transition: 0.2s; }
+        .nav-btn:hover { background: var(--vibe-orange); color: #000; }
+        .btn-l { left: 8px; } .btn-r { right: 8px; }
+
+        .card-info { padding: 20px; text-align: center; }
+        .price { color: var(--vibe-orange); font-weight: 800; font-size: 22px; margin: 10px 0; display: block; }
+        
+        /* Modal de Detalhes */
+        .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); z-index: 1000; display: none; align-items: center; justify-content: center; padding: 20px; }
+        .modal.active { display: flex; }
+        .modal-content { background: #fff; width: 100%; max-width: 950px; border-radius: 20px; overflow: hidden; display: flex; position: relative; animation: slideUp 0.3s ease; max-height: 90vh; }
+        @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        
+        /* Container de imagem no modal com setas */
+        .modal-img-container { width: 55%; background: #f9f9f9; position: relative; display: flex; align-items: center; justify-content: center; }
+        .modal-img-container img { width: 100%; height: 100%; object-fit: cover; }
+        /* Setas maiores no modal */
+        .modal-img-container .nav-btn { width: 45px; height: 45px; font-size: 16px; background: rgba(255,255,255,0.9); }
+
+        .modal-details { width: 45%; padding: 50px; display: flex; flex-direction: column; justify-content: center; overflow-y: auto; }
+        .close-modal { position: absolute; top: 20px; right: 20px; font-size: 24px; cursor: pointer; color: #999; z-index: 10; transition: 0.2s; }
+        .close-modal:hover { color: var(--vibe-orange); }
+        
+        .btn-buy { background: var(--vibe-orange); color: #000; border: none; padding: 18px; border-radius: 10px; font-weight: 800; cursor: pointer; margin-top: 20px; transition: 0.3s; text-transform: uppercase; font-size: 13px; letter-spacing: 1px;}
+        .btn-buy:hover { background: var(--vibe-orange-dark); transform: scale(1.02); }
 
         /* Carrinho Lateral */
-        .cart-sidebar { position: fixed; top: 0; right: -100%; width: 100%; max-width: 350px; height: 100%; background: #fff; box-shadow: -5px 0 15px rgba(0,0,0,0.1); transition: 0.4s; z-index: 200; padding: 25px; }
+        .cart-sidebar { position: fixed; top: 0; right: -100%; width: 100%; max-width: 400px; height: 100%; background: #fff; box-shadow: -10px 0 30px rgba(0,0,0,0.1); transition: 0.4s; z-index: 1100; padding: 30px; display: flex; flex-direction: column; }
         .cart-sidebar.active { right: 0; }
-        
-        /* Ajustes Mobile (Telas até 768px) */
+
         @media (max-width: 768px) {
-            header { grid-template-columns: 60px 1fr 60px; padding: 10px; }
-            .logo-img { height: 35px; }
-            .logo-central { font-size: 16px; letter-spacing: 3px; }
-
-            .slide { flex-direction: column-reverse; text-align: center; gap: 15px; }
-            .slide-img img { max-width: 150px; }
-
-            .main-layout { flex-direction: column; padding: 15px; }
-            .sidebar { width: 100%; }
-            .sidebar h4 { text-align: center; }
-            .sidebar-menu { flex-direction: row; overflow-x: auto; padding-bottom: 10px; scrollbar-width: none; }
-            .sidebar-menu::-webkit-scrollbar { display: none; }
-            .sidebar-menu li { white-space: nowrap; padding: 8px 15px; background: #f5f5f5; border-radius: 20px; }
-
-            .product-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
-            .product-card { padding: 8px; }
-            .product-card h4 { font-size: 12px; }
-            .price { font-size: 14px; }
-            
-            .nav-btn { width: 28px; height: 28px; font-size: 10px; }
+            .slide { flex-direction: column; text-align: center; padding-top: 40px; }
+            .slide-images-wrapper { width: 100%; height: 300px; }
+            .slide-images-wrapper img { height: 250px; }
+            .modal-content { flex-direction: column; overflow-y: auto; }
+            .modal-img-container, .modal-details { width: 100%; }
+            .modal-img-container { height: 350px; }
+            .modal-details { padding: 30px; }
         }
-
-        .whatsapp-float { position: fixed; bottom: 20px; right: 20px; background: var(--whatsapp-color); color: #fff; width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; z-index: 99; text-decoration: none; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
     </style>
 </head>
 <body>
 
-<div class="promo-bar">VIBES | COLEÇÃO ESPORTIVA 2026</div>
+<div class="promo-bar">VIBES | PREMIUM SUNGLASSES 2026</div>
 
 <header>
     <div class="header-left">
-        <img src="logo.png" alt="Logo" class="logo-img">
+        <img src="logo.png" alt="Logo" style="height:40px" onerror="this.style.display='none'">
     </div>
-    
     <div class="logo-central" onclick="window.location.reload()">VIBES</div>
-    
     <div class="icons">
         <div class="cart-btn" onclick="toggleCart()">
             <i class="fa-solid fa-bag-shopping"></i>
@@ -140,135 +138,201 @@
 <section class="hero-slider">
     <div class="slide">
         <div class="slide-content">
-            <h2>Estilo &<br>Performance</h2>
-            <p style="font-size: 12px; color: #666; margin-top: 5px;">Novos Esportivos Vibes</p>
+            <h2>Estilo &<br><span>Performance</span></h2>
+            <p>Conheça a nova linha Vibes. Design arrojado e proteção máxima para quem não abre mão do estilo.</p><br>
+            <a href="#grid" class="btn-banner">VER COLEÇÃO COMPLETA</a>
         </div>
-        <div class="slide-img">
-            <img src="banner destaque/banner1.jpg" onerror="this.src='https://via.placeholder.com/300x200?text=Vibes+Destaque'">
+        <div class="slide-images-wrapper">
+            <img src="banner destaque/banner1.jpg" onerror="this.src='https://images.unsplash.com/photo-1572635196237-14b3f281503f?auto=format&fit=crop&w=800&q=80'">
+            <img src="banner destaque/oculos casual dourado lente verde.jpg" onerror="this.src='https://images.unsplash.com/photo-1511499767390-90342f56771f?auto=format&fit=crop&w=800&q=80'">
         </div>
     </div>
 </section>
 
 <div class="main-layout">
     <aside class="sidebar">
-        <h4>CATEGORIAS</h4>
         <ul class="sidebar-menu">
             <li class="active" onclick="filtrar('todos', this)">TODOS</li>
-            <li onclick="filtrar('esportivo', this)">ESPORTIVOS</li>
-            <li onclick="filtrar('feminino', this)">FEMININOS</li>
-            <li onclick="filtrar('masculino', this)">MASCULINOS</li>
+            <li onclick="filtrar('esportivo', this)">ESPORTIVO</li>
+            <li onclick="filtrar('masculino', this)">MASCULINO</li>
+            <li onclick="filtrar('feminino', this)">FEMININO</li>
         </ul>
     </aside>
 
-    <main class="product-grid" id="grid">
-        </main>
+    <main class="product-grid" id="grid"></main>
+</div>
+
+<div class="modal" id="productModal">
+    <div class="modal-content">
+        <i class="fa-solid fa-xmark close-modal" onclick="closeModal()"></i>
+        <div class="modal-img-container" id="modalImgContainer"></div>
+        <div class="modal-details" id="modalDetails"></div>
+    </div>
 </div>
 
 <div class="cart-sidebar" id="cart">
-    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
-        <h3>SACOLA</h3>
-        <i class="fa-solid fa-xmark" onclick="toggleCart()" style="cursor:pointer; font-size:20px;"></i>
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:25px;">
+        <h3 style="letter-spacing:2px">MINHA SACOLA</h3>
+        <i class="fa-solid fa-xmark" onclick="toggleCart()" style="cursor:pointer; font-size:22px;"></i>
     </div>
-    <div id="cartItems" style="max-height: 60vh; overflow-y: auto;"></div>
-    <div style="margin-top: 20px; border-top: 1px solid #eee; padding-top: 20px;">
-        <p style="display:flex; justify-content:space-between;">Total: <strong id="cartTotal">R$ 0,00</strong></p><br>
-        <button class="btn-add" onclick="finalizar()" style="background: var(--whatsapp-color);">FINALIZAR WHATSAPP</button>
+    <div id="cartItems" style="flex-grow:1; overflow-y:auto;"></div>
+    <div style="margin-top: auto; border-top: 2px solid #f0f0f0; padding-top: 20px;">
+        <p style="display:flex; justify-content:space-between; font-weight:800; font-size:18px;">Total: <span id="cartTotal">R$ 0,00</span></p><br>
+        <button class="btn-buy" onclick="finalizar()" style="background: var(--whatsapp-color); color: #fff; width: 100%; border-radius: 50px;">FINALIZAR NO WHATSAPP</button>
     </div>
 </div>
 
-<a href="https://wa.me/5519989620949" class="whatsapp-float" target="_blank">
+<a href="https://wa.me/5519989620949" class="whatsapp-float" target="_blank" style="position: fixed; bottom: 25px; right: 25px; background: var(--whatsapp-color); color: #fff; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; z-index: 99; text-decoration: none; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
     <i class="fa-brands fa-whatsapp"></i>
 </a>
 
 <script>
-    const nomesCores = ["Preto", "Branco", "Azul", "Vermelho", "Verde", "Amarelo", "Laranja", "Cinza"];
-    const produtos = [];
+    // Mantenha o seu catálogo original aqui
+    const catalogoVibes = [
+        ["Casual Dourado Lente Verde", 189.90, "masculino", ["oculos casual dourado lente verde.jpg", "oculos dourado casual lente verde 2.jpg"]],
+        ["Casual Redondo Madeira", 169.90, "masculino", ["oculos casual redondo madeira.jpg", "oculos casual redondo madeira 2.jpg"]],
+        ["Esportivo Lente Amarela", 219.90, "esportivo", ["oculos esportivo lente amarela.jpg", "oculos esportivo lente amarela 2.jpg"]],
+        ["Esportivo Carbon Preto", 219.90, "esportivo", ["oculos esportivo preto.jpg", "oculos esportivo preto 2.jpg"]],
+        ["Casual Quadrado Black", 159.90, "masculino", ["oculos preto casual quadrado.jpg", "oculos preto casual quadrado 2.jpg"]],
+        ["Casual Redondo Black", 159.90, "masculino", ["oculos preto casual redondo.jpg", "oculos preto casual redondo 2.jpg"]],
+        ["Transparente Lente Verde", 179.90, "masculino", ["oculos preto transparente lente verde.jpg", "oculos preto transparente lente verde 2.jpg"]],
+        ["Redondo Marrom Tortoise", 169.90, "feminino", ["oculos redondo casual marrom.jpg", "oculos redondo casual marrom 2.jpg"]],
+        ["Urban White Style", 199.90, "masculino", ["oculos urban branco.jpg", "oculos urban 2.jpg"]],
+        ["Urban Red Matte", 199.90, "masculino", ["oculos urban vermelho.jpg", "oculos urban vermelho 2.jpg"]]
+    ];
 
-    // Gerar 12 Esportivos
-    for(let i=1; i<=12; i++) {
-        produtos.push({ id: i, nome: `Sport Model ${i}`, preco: 259.90, pasta: "esportivos", cat: "esportivo", corAtual: 0 });
-    }
-    // Femininos e Masculinos
-    produtos.push({ id: 101, nome: "Lux Feminino", preco: 199.0, pasta: "femininos", cat: "feminino", corAtual: 0 });
-    produtos.push({ id: 201, nome: "Bold Masculino", preco: 219.0, pasta: "masculinos", cat: "masculino", corAtual: 0 });
-
+    // Adicionado o controle de fotoAtual para cada produto
+    const produtos = catalogoVibes.map((p, i) => ({ id: i, nome: p[0], preco: p[1], cat: p[2], fotos: p[3], fotoAtual: 0 }));
     let carrinho = [];
+    let produtoAtivoNoModal = null; // Controle para saber qual produto está aberto no modal
 
     function render(lista) {
-        const grid = document.getElementById('grid');
-        grid.innerHTML = lista.map(p => {
-            const imgPath = `${p.pasta}/${p.id}_${p.corAtual}.jpg`;
-            return `
+        document.getElementById('grid').innerHTML = lista.map(p => `
             <div class="product-card">
                 <div class="img-box">
-                    <button class="nav-btn btn-l" onclick="trocarCor(${p.id}, -1)">❮</button>
-                    <img src="${imgPath}" onerror="this.src='https://via.placeholder.com/200x200?text=Foto+${p.id}'">
-                    <button class="nav-btn btn-r" onclick="trocarCor(${p.id}, 1)">❯</button>
+                    ${p.fotos.length > 1 ? `<button class="nav-btn btn-l" onclick="event.stopPropagation(); trocarFotoCard(${p.id}, -1)">❮</button>` : ''}
+                    
+                    <img src="oculos/${p.fotos[p.fotoAtual]}" onclick="openModal(${p.id})" onerror="this.src='https://via.placeholder.com/400x500?text=Use+Vibes'">
+                    
+                    ${p.fotos.length > 1 ? `<button class="nav-btn btn-r" onclick="event.stopPropagation(); trocarFotoCard(${p.id}, 1)">❯</button>` : ''}
                 </div>
-                <h4>${p.nome}</h4>
-                <p style="font-size:10px; color:#999; margin:3px 0;">Cor: ${nomesCores[p.corAtual]}</p>
-                <span class="price">R$ ${p.preco.toFixed(2).replace('.',',')}</span>
-                <button class="btn-add" onclick="add(${p.id})">ADICIONAR</button>
+                <div class="card-info" onclick="openModal(${p.id})">
+                    <h4 style="font-size:13px; text-transform:uppercase; letter-spacing:1px; font-weight:700;">${p.nome}</h4>
+                    <span class="price">R$ ${p.preco.toFixed(2).replace('.',',')}</span>
+                    <small style="color:#aaa; font-weight:600; font-size:11px; text-transform:uppercase;">Ver detalhes</small>
+                </div>
             </div>
-            `;
-        }).join('');
+        `).join('');
     }
 
-    function trocarCor(id, dir) {
+    // Função para trocar foto direto no card da vitrine
+    function trocarFotoCard(id, direcao) {
         const p = produtos.find(x => x.id === id);
-        p.corAtual += dir;
-        if(p.corAtual > 7) p.corAtual = 0;
-        if(p.corAtual < 0) p.corAtual = 7;
-        render(produtos);
+        if(!p) return;
+        p.fotoAtual = (p.fotoAtual + direcao + p.fotos.length) % p.fotos.length;
+        
+        // Renderiza novamente apenas os produtos da categoria ativa para atualizar a imagem
+        const catAtiva = document.querySelector('.sidebar-menu li.active').innerText.toLowerCase();
+        render(catAtiva === 'todos' ? produtos : produtos.filter(i => i.cat === catAtiva));
+    }
+
+    // Função para abrir o modal e carregar as setas lá dentro também
+    function openModal(id) {
+        produtoAtivoNoModal = produtos.find(x => x.id === id);
+        const p = produtoAtivoNoModal;
+        const modal = document.getElementById('productModal');
+        
+        // Zera a foto atual ao abrir o modal
+        p.fotoAtual = 0;
+
+        renderConteudoModal(p);
+        
+        modal.classList.add('active');
+    }
+
+    // Renderiza o conteúdo interno do modal (separado para poder atualizar só a imagem)
+    function renderConteudoModal(p) {
+        // Container da Imagem com Setas
+        document.getElementById('modalImgContainer').innerHTML = `
+            ${p.fotos.length > 1 ? `<button class="nav-btn btn-l" onclick="trocarFotoModal(-1)">❮</button>` : ''}
+            <img src="oculos/${p.fotos[p.fotoAtual]}" id="modalMainImg" onerror="this.src='https://via.placeholder.com/600x600?text=Vibes'">
+            ${p.fotos.length > 1 ? `<button class="nav-btn btn-r" onclick="trocarFotoModal(1)">❯</button>` : ''}
+        `;
+
+        // Detalhes
+        document.getElementById('modalDetails').innerHTML = `
+            <h2 style="font-size:clamp(24px, 4vw, 36px); margin-bottom:10px; font-weight:800; text-transform:uppercase; line-height:1;">${p.nome}</h2>
+            <p style="color:#666; margin-bottom:25px; font-size:14px; line-height:1.6;">Lentes com proteção máxima UV400 contra raios solares e armação premium de alta durabilidade. O equilíbrio perfeito entre estilo arrojado e conforto para o seu dia a dia.</p>
+            <span class="price" style="font-size:32px; margin-bottom:10px;">R$ ${p.preco.toFixed(2).replace('.',',')}</span>
+            <small style="color:#888; display:block; margin-bottom:30px;">Disponibilidade: <span style="color:var(--vibe-orange); font-weight:700;">Em Estoque</span></small>
+            
+            <button class="btn-buy" onclick="add(${p.id}); closeModal();">ADICIONAR AO CARRINHO</button>
+            <button class="btn-buy" onclick="buyNow(${p.id})" style="background:#000; color:#fff; margin-top:10px; border:1px solid #333;">COMPRAR AGORA</button>
+        `;
+    }
+
+    // Função para trocar foto dentro do modal
+    function trocarFotoModal(direcao) {
+        if(!produtoAtivoNoModal) return;
+        const p = produtoAtivoNoModal;
+        p.fotoAtual = (p.fotoAtual + direcao + p.fotos.length) % p.fotos.length;
+        
+        // Atualiza apenas a imagem principal do modal (efeito mais rápido)
+        document.getElementById('modalMainImg').src = `oculos/${p.fotos[p.fotoAtual]}`;
+    }
+
+    function closeModal() { 
+        document.getElementById('productModal').classList.remove('active'); 
+        produtoAtivoNoModal = null;
+    }
+
+    function buyNow(id) {
+        const p = produtos.find(x => x.id === id);
+        let msg = `Olá Vibes! Quero comprar agora o modelo: *${p.nome}* (R$ ${p.preco.toFixed(2)})`;
+        window.open(`https://wa.me/5519989620949?text=${encodeURIComponent(msg)}`, "_blank");
+    }
+
+    function add(id) { 
+        carrinho.push({...produtos.find(x => x.id === id)}); 
+        atualizarCarrinho(); 
+        toggleCart();
     }
 
     function filtrar(cat, el) {
         document.querySelectorAll('.sidebar-menu li').forEach(l => l.classList.remove('active'));
         el.classList.add('active');
-        const f = cat === 'todos' ? produtos : produtos.filter(p => p.cat === cat);
-        render(f);
+        render(cat === 'todos' ? produtos : produtos.filter(p => p.cat === cat));
     }
 
     function toggleCart() { document.getElementById('cart').classList.toggle('active'); }
-
-    function add(id) {
-        const p = produtos.find(x => x.id === id);
-        carrinho.push({ ...p, corNome: nomesCores[p.corAtual] });
-        atualizarCarrinho();
-        if(window.innerWidth > 768) toggleCart();
-    }
+    function remover(i) { carrinho.splice(i, 1); atualizarCarrinho(); }
 
     function atualizarCarrinho() {
         document.getElementById('cartCount').innerText = carrinho.length;
         let t = 0;
         document.getElementById('cartItems').innerHTML = carrinho.map((p, i) => {
             t += p.preco;
-            return `<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; border-bottom:1px solid #eee; padding-bottom:5px;">
-                <div style="font-size:12px;">
-                    <strong>${p.nome}</strong><br><small>${p.corNome}</small>
-                </div>
-                <div>
-                    <span style="font-size:12px; font-weight:600;">R$ ${p.preco.toFixed(2)}</span>
-                    <i class="fa-solid fa-trash" onclick="remover(${i})" style="color:#ccc; margin-left:10px; cursor:pointer;"></i>
+            return `<div style="display:flex; gap:12px; margin-bottom:15px; border-bottom:1px solid #eee; padding-bottom:10px; align-items:center;">
+                <img src="oculos/${p.fotos[0]}" style="width:60px; height:60px; object-fit:cover; border-radius:8px; background:#f9f9f9;">
+                <div style="flex-grow:1;">
+                    <p style="font-size:13px; font-weight:700;">${p.nome}</p>
+                    <p style="font-size:14px; color:var(--vibe-orange); font-weight:800;">R$ ${p.preco.toFixed(2)}</p>
+                    <small onclick="remover(${i})" style="color:#ff4444; cursor:pointer; text-decoration:underline;">Remover</small>
                 </div>
             </div>`;
         }).join('');
         document.getElementById('cartTotal').innerText = `R$ ${t.toFixed(2).replace('.',',')}`;
     }
 
-    function remover(i) {
-        carrinho.splice(i, 1);
-        atualizarCarrinho();
+    function finalizar() {
+        let msg = "🚀 *NOVO PEDIDO VIBES*:\n\n" + carrinho.map(p => `• ${p.nome}`).join('\n');
+        window.open(`https://wa.me/5519989620949?text=${encodeURIComponent(msg)}`, "_blank");
     }
 
-    function finalizar() {
-        if(carrinho.length === 0) return alert("Adicione itens à sacola!");
-        let msg = "🚀 *NOVO PEDIDO VIBES*:%0A%0A" + carrinho.map(p => `• ${p.nome} (${p.corNome})`).join('%0A');
-        window.open(`https://wa.me/5519989620949?text=${msg}`, "_blank");
-    }
+    // Fechar modal ao clicar fora
+    window.onclick = (e) => { if(e.target == document.getElementById('productModal')) closeModal(); }
 
     render(produtos);
 </script>
 </body>
 </html>
-
