@@ -19,14 +19,14 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
         body { background-color: var(--bg-color); color: #000; overflow-x: hidden; }
 
-        .promo-bar { background: var(--vibe-orange); color: #000; text-align: center; padding: 10px; font-size: 11px; text-transform: uppercase; font-weight: 800; letter-spacing: 2px; border-bottom: 2px solid rgba(0,0,0,0.1); }
+        .promo-bar { background: var(--vibe-orange); color: #000; text-align: center; padding: 10px; font-size: 10px; text-transform: uppercase; font-weight: 800; letter-spacing: 2px; }
 
         /* Header */
         header {
             display: grid;
-            grid-template-columns: 80px 1fr 80px;
+            grid-template-columns: 60px 1fr 60px;
             align-items: center;
-            padding: 15px 20px;
+            padding: 15px;
             border-bottom: 2px solid var(--vibe-orange);
             position: sticky;
             top: 0;
@@ -35,87 +35,86 @@
             z-index: 100;
         }
         
-        .logo-central { font-weight: 800; font-size: 26px; letter-spacing: 8px; text-transform: uppercase; text-align: center; cursor: pointer; color: #000; text-decoration: none; transition: 0.3s; }
-        .logo-central:hover { color: var(--vibe-orange); }
-        .cart-btn { position: relative; cursor: pointer; font-size: 22px; color: #333; }
-        .cart-count { position: absolute; top: -8px; right: -10px; background: var(--vibe-orange); color: #000; font-size: 10px; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; }
+        .logo-central { font-weight: 800; font-size: 22px; letter-spacing: 4px; text-transform: uppercase; text-align: center; cursor: pointer; color: #000; text-decoration: none; }
+        .cart-btn { position: relative; cursor: pointer; font-size: 20px; text-align: right; }
+        .cart-count { position: absolute; top: -8px; right: -10px; background: var(--vibe-orange); color: #000; font-size: 10px; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; }
 
-        /* Banner Hero */
+        /* Banner Hero Responsivo */
         .hero-slider { 
             width: 100%; 
-            min-height: 550px;
+            min-height: 400px;
             background: linear-gradient(135deg, #fdfdfd 0%, #f4f4f4 100%); 
-            position: relative; 
             display: flex; 
             align-items: center; 
-            overflow: hidden; 
+            padding: 40px 20px;
         }
-        .slide { display: flex; align-items: center; justify-content: space-between; width: 100%; max-width: 1400px; margin: 0 auto; padding: 0 40px; gap: 50px; }
-        .slide-content { flex: 1; z-index: 2; }
-        .slide-content h2 { font-size: clamp(40px, 6vw, 70px); font-weight: 800; text-transform: uppercase; line-height: 0.9; margin-bottom: 20px; }
+        .slide { display: flex; align-items: center; justify-content: space-between; width: 100%; max-width: 1200px; margin: 0 auto; gap: 30px; }
+        .slide-content { flex: 1; text-align: left; }
+        .slide-content h2 { font-size: clamp(32px, 5vw, 60px); font-weight: 800; text-transform: uppercase; line-height: 0.9; margin-bottom: 15px; }
         .slide-content h2 span { color: var(--vibe-orange); }
-        .btn-banner { background: #000; color: #fff; padding: 18px 40px; text-decoration: none; font-weight: 800; font-size: 14px; border-radius: 50px; display: inline-block; transition: 0.3s; border: 2px solid transparent; }
-        .btn-banner:hover { background: var(--vibe-orange); color: #000; transform: translateY(-3px); }
+        .btn-banner { background: #000; color: #fff; padding: 15px 30px; text-decoration: none; font-weight: 800; font-size: 12px; border-radius: 50px; display: inline-block; transition: 0.3s; }
         
-        .slide-images-wrapper { flex: 1.2; display: flex; gap: 20px; justify-content: flex-end; position: relative; }
-        .slide-images-wrapper img { width: 55%; height: 450px; object-fit: cover; border-radius: 20px; border: 4px solid var(--vibe-orange); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
-        .slide-images-wrapper img:last-child { margin-top: 60px; margin-left: -100px; border-color: #000; }
+        .slide-images-wrapper { flex: 1; display: flex; gap: 10px; justify-content: flex-end; }
+        .slide-images-wrapper img { width: 45%; height: 300px; object-fit: cover; border-radius: 15px; border: 3px solid var(--vibe-orange); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
 
-        /* Layout */
-        .main-layout { display: flex; flex-direction: row; max-width: 1400px; margin: 0 auto; padding: 60px 20px; gap: 40px; }
-        .sidebar { width: 220px; }
-        .sidebar-menu li { padding: 12px 15px; border-radius: 8px; cursor: pointer; font-size: 13px; font-weight: 700; margin-bottom: 5px; transition: 0.3s; }
+        /* Layout Principal */
+        .main-layout { display: flex; flex-direction: row; max-width: 1200px; margin: 0 auto; padding: 40px 20px; gap: 30px; }
+        .sidebar { width: 200px; }
+        .sidebar-menu { list-style: none; }
+        .sidebar-menu li { padding: 12px; border-radius: 8px; cursor: pointer; font-size: 12px; font-weight: 700; margin-bottom: 5px; text-transform: uppercase; }
         .sidebar-menu li.active { background: var(--vibe-orange); color: #000; }
-        .sidebar-menu li:hover:not(.active) { background: #f0f0f0; padding-left: 20px; }
 
-        /* Product Cards */
-        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px; flex-grow: 1; }
-        .product-card { background: #fff; border-radius: 15px; overflow: hidden; border: 1px solid #eee; transition: 0.4s; cursor: pointer; position: relative; }
-        .product-card:hover { transform: translateY(-5px); border-color: var(--vibe-orange); box-shadow: 0 15px 30px rgba(0,0,0,0.05); }
-
-        .img-box { height: 320px; width: 100%; background: #f9f9f9; position: relative; overflow: hidden; }
-        .img-box img { width: 100%; height: 100%; object-fit: cover; transition: opacity 0.3s; }
+        /* Grid de Produtos */
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; flex-grow: 1; }
+        .product-card { background: #fff; border-radius: 12px; overflow: hidden; border: 1px solid #eee; transition: 0.3s; cursor: pointer; position: relative; }
         
-        /* Setinhas de Navegação (Estilo unificado) */
-        .nav-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.8); border: none; width: 32px; height: 32px; border-radius: 50%; cursor: pointer; z-index: 5; font-size: 12px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); color: #000; display: flex; align-items: center; justify-content: center; transition: 0.2s; }
-        .nav-btn:hover { background: var(--vibe-orange); color: #000; }
-        .btn-l { left: 8px; } .btn-r { right: 8px; }
-
-        .card-info { padding: 20px; text-align: center; }
-        .price { color: var(--vibe-orange); font-weight: 800; font-size: 22px; margin: 10px 0; display: block; }
+        .img-box { height: 280px; width: 100%; background: #f9f9f9; position: relative; }
+        .img-box img { width: 100%; height: 100%; object-fit: cover; }
         
-        /* Modal de Detalhes */
-        .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); z-index: 1000; display: none; align-items: center; justify-content: center; padding: 20px; }
+        /* Setas */
+        .nav-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.9); border: none; width: 30px; height: 30px; border-radius: 50%; cursor: pointer; z-index: 5; font-size: 10px; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .btn-l { left: 5px; } .btn-r { right: 5px; }
+
+        .card-info { padding: 15px; text-align: center; }
+        .price { color: var(--vibe-orange); font-weight: 800; font-size: 20px; margin: 5px 0; display: block; }
+        
+        /* Modal Corrigido para Celular */
+        .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(5px); z-index: 1000; display: none; align-items: center; justify-content: center; padding: 15px; }
         .modal.active { display: flex; }
-        .modal-content { background: #fff; width: 100%; max-width: 950px; border-radius: 20px; overflow: hidden; display: flex; position: relative; animation: slideUp 0.3s ease; max-height: 90vh; }
-        @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        .modal-content { background: #fff; width: 100%; max-width: 850px; border-radius: 20px; overflow: hidden; display: flex; position: relative; max-height: 90vh; }
         
-        /* Container de imagem no modal com setas */
-        .modal-img-container { width: 55%; background: #f9f9f9; position: relative; display: flex; align-items: center; justify-content: center; }
+        .modal-img-container { width: 50%; background: #f9f9f9; position: relative; min-height: 300px; }
         .modal-img-container img { width: 100%; height: 100%; object-fit: cover; }
-        /* Setas maiores no modal */
-        .modal-img-container .nav-btn { width: 45px; height: 45px; font-size: 16px; background: rgba(255,255,255,0.9); }
-
-        .modal-details { width: 45%; padding: 50px; display: flex; flex-direction: column; justify-content: center; overflow-y: auto; }
-        .close-modal { position: absolute; top: 20px; right: 20px; font-size: 24px; cursor: pointer; color: #999; z-index: 10; transition: 0.2s; }
-        .close-modal:hover { color: var(--vibe-orange); }
+        .modal-details { width: 50%; padding: 30px; display: flex; flex-direction: column; justify-content: center; overflow-y: auto; }
+        .close-modal { position: absolute; top: 15px; right: 15px; font-size: 22px; cursor: pointer; color: #000; z-index: 11; background: #fff; width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
         
-        .btn-buy { background: var(--vibe-orange); color: #000; border: none; padding: 18px; border-radius: 10px; font-weight: 800; cursor: pointer; margin-top: 20px; transition: 0.3s; text-transform: uppercase; font-size: 13px; letter-spacing: 1px;}
-        .btn-buy:hover { background: var(--vibe-orange-dark); transform: scale(1.02); }
+        .btn-buy { background: var(--vibe-orange); color: #000; border: none; padding: 16px; border-radius: 10px; font-weight: 800; cursor: pointer; margin-top: 15px; text-transform: uppercase; font-size: 12px; }
+
+        /* Ajustes Mobile (Telas até 768px) */
+        @media (max-width: 768px) {
+            .slide { flex-direction: column; text-align: center; }
+            .slide-content { text-align: center; order: 1; }
+            .slide-images-wrapper { order: 2; width: 100%; justify-content: center; margin-top: 20px; }
+            .slide-images-wrapper img { height: 200px; }
+
+            .main-layout { flex-direction: column; padding: 20px; }
+            .sidebar { width: 100%; overflow-x: auto; margin-bottom: 10px; }
+            .sidebar-menu { display: flex; gap: 10px; padding-bottom: 10px; }
+            .sidebar-menu li { white-space: nowrap; margin-bottom: 0; }
+
+            .product-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+            .img-box { height: 180px; }
+
+            /* Modal Mobile - Empilhado */
+            .modal-content { flex-direction: column; width: 100%; }
+            .modal-img-container { width: 100%; height: 250px; min-height: 250px; }
+            .modal-details { width: 100%; padding: 20px; }
+            .modal-details h2 { font-size: 20px; }
+        }
 
         /* Carrinho Lateral */
-        .cart-sidebar { position: fixed; top: 0; right: -100%; width: 100%; max-width: 400px; height: 100%; background: #fff; box-shadow: -10px 0 30px rgba(0,0,0,0.1); transition: 0.4s; z-index: 1100; padding: 30px; display: flex; flex-direction: column; }
+        .cart-sidebar { position: fixed; top: 0; right: -100%; width: 100%; max-width: 320px; height: 100%; background: #fff; box-shadow: -10px 0 30px rgba(0,0,0,0.1); transition: 0.4s; z-index: 1100; padding: 20px; display: flex; flex-direction: column; }
         .cart-sidebar.active { right: 0; }
-
-        @media (max-width: 768px) {
-            .slide { flex-direction: column; text-align: center; padding-top: 40px; }
-            .slide-images-wrapper { width: 100%; height: 300px; }
-            .slide-images-wrapper img { height: 250px; }
-            .modal-content { flex-direction: column; overflow-y: auto; }
-            .modal-img-container, .modal-details { width: 100%; }
-            .modal-img-container { height: 350px; }
-            .modal-details { padding: 30px; }
-        }
     </style>
 </head>
 <body>
@@ -123,9 +122,7 @@
 <div class="promo-bar">VIBES | PREMIUM SUNGLASSES 2026</div>
 
 <header>
-    <div class="header-left">
-        <img src="logo.png" alt="Logo" style="height:40px" onerror="this.style.display='none'">
-    </div>
+    <div style="font-size: 20px;"><i class="fa-solid fa-bars"></i></div>
     <div class="logo-central" onclick="window.location.reload()">VIBES</div>
     <div class="icons">
         <div class="cart-btn" onclick="toggleCart()">
@@ -138,13 +135,13 @@
 <section class="hero-slider">
     <div class="slide">
         <div class="slide-content">
-            <h2>Estilo &<br><span>Performance</span></h2>
-            <p>Conheça a nova linha Vibes. Design arrojado e proteção máxima para quem não abre mão do estilo.</p><br>
-            <a href="#grid" class="btn-banner">VER COLEÇÃO COMPLETA</a>
+            <h2>USE<br><span>VIBES</span></h2>
+            <p>O estilo que você merece, a proteção que você precisa.</p><br>
+            <a href="#grid" class="btn-banner">SHOP NOW</a>
         </div>
         <div class="slide-images-wrapper">
-            <img src="banner destaque/banner1.jpg" onerror="this.src='https://images.unsplash.com/photo-1572635196237-14b3f281503f?auto=format&fit=crop&w=800&q=80'">
-            <img src="banner destaque/oculos casual dourado lente verde.jpg" onerror="this.src='https://images.unsplash.com/photo-1511499767390-90342f56771f?auto=format&fit=crop&w=800&q=80'">
+            <img src="banner destaque/banner1.jpg" onerror="this.src='https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=400'">
+            <img src="banner destaque/oculos casual dourado lente verde.jpg" onerror="this.src='https://images.unsplash.com/photo-1511499767390-90342f56771f?w=400'">
         </div>
     </div>
 </section>
@@ -171,23 +168,18 @@
 </div>
 
 <div class="cart-sidebar" id="cart">
-    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:25px;">
-        <h3 style="letter-spacing:2px">MINHA SACOLA</h3>
-        <i class="fa-solid fa-xmark" onclick="toggleCart()" style="cursor:pointer; font-size:22px;"></i>
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+        <h3>SACOLA</h3>
+        <i class="fa-solid fa-xmark" onclick="toggleCart()" style="cursor:pointer;"></i>
     </div>
     <div id="cartItems" style="flex-grow:1; overflow-y:auto;"></div>
-    <div style="margin-top: auto; border-top: 2px solid #f0f0f0; padding-top: 20px;">
-        <p style="display:flex; justify-content:space-between; font-weight:800; font-size:18px;">Total: <span id="cartTotal">R$ 0,00</span></p><br>
-        <button class="btn-buy" onclick="finalizar()" style="background: var(--whatsapp-color); color: #fff; width: 100%; border-radius: 50px;">FINALIZAR NO WHATSAPP</button>
+    <div style="border-top: 1px solid #eee; padding-top: 20px;">
+        <p style="display:flex; justify-content:space-between; font-weight:800;">Total: <span id="cartTotal">R$ 0,00</span></p><br>
+        <button class="btn-buy" onclick="finalizar()" style="background: var(--whatsapp-color); color: #fff; width: 100%; border-radius: 50px;">FINALIZAR PEDIDO</button>
     </div>
 </div>
 
-<a href="https://wa.me/5519989620949" class="whatsapp-float" target="_blank" style="position: fixed; bottom: 25px; right: 25px; background: var(--whatsapp-color); color: #fff; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; z-index: 99; text-decoration: none; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
-    <i class="fa-brands fa-whatsapp"></i>
-</a>
-
 <script>
-    // Mantenha o seu catálogo original aqui
     const catalogoVibes = [
         ["Casual Dourado Lente Verde", 189.90, "masculino", ["oculos casual dourado lente verde.jpg", "oculos dourado casual lente verde 2.jpg"]],
         ["Casual Redondo Madeira", 169.90, "masculino", ["oculos casual redondo madeira.jpg", "oculos casual redondo madeira 2.jpg"]],
@@ -201,101 +193,74 @@
         ["Urban Red Matte", 199.90, "masculino", ["oculos urban vermelho.jpg", "oculos urban vermelho 2.jpg"]]
     ];
 
-    // Adicionado o controle de fotoAtual para cada produto
     const produtos = catalogoVibes.map((p, i) => ({ id: i, nome: p[0], preco: p[1], cat: p[2], fotos: p[3], fotoAtual: 0 }));
     let carrinho = [];
-    let produtoAtivoNoModal = null; // Controle para saber qual produto está aberto no modal
+    let produtoAtivoModal = null;
 
     function render(lista) {
         document.getElementById('grid').innerHTML = lista.map(p => `
             <div class="product-card">
                 <div class="img-box">
                     ${p.fotos.length > 1 ? `<button class="nav-btn btn-l" onclick="event.stopPropagation(); trocarFotoCard(${p.id}, -1)">❮</button>` : ''}
-                    
-                    <img src="oculos/${p.fotos[p.fotoAtual]}" onclick="openModal(${p.id})" onerror="this.src='https://via.placeholder.com/400x500?text=Use+Vibes'">
-                    
+                    <img src="oculos/${p.fotos[p.fotoAtual]}" onclick="openModal(${p.id})" onerror="this.src='https://via.placeholder.com/300x300?text=Vibes'">
                     ${p.fotos.length > 1 ? `<button class="nav-btn btn-r" onclick="event.stopPropagation(); trocarFotoCard(${p.id}, 1)">❯</button>` : ''}
                 </div>
                 <div class="card-info" onclick="openModal(${p.id})">
-                    <h4 style="font-size:13px; text-transform:uppercase; letter-spacing:1px; font-weight:700;">${p.nome}</h4>
+                    <h4 style="font-size:11px; text-transform:uppercase;">${p.nome}</h4>
                     <span class="price">R$ ${p.preco.toFixed(2).replace('.',',')}</span>
-                    <small style="color:#aaa; font-weight:600; font-size:11px; text-transform:uppercase;">Ver detalhes</small>
                 </div>
             </div>
         `).join('');
     }
 
-    // Função para trocar foto direto no card da vitrine
-    function trocarFotoCard(id, direcao) {
+    function trocarFotoCard(id, dir) {
         const p = produtos.find(x => x.id === id);
-        if(!p) return;
-        p.fotoAtual = (p.fotoAtual + direcao + p.fotos.length) % p.fotos.length;
-        
-        // Renderiza novamente apenas os produtos da categoria ativa para atualizar a imagem
-        const catAtiva = document.querySelector('.sidebar-menu li.active').innerText.toLowerCase();
-        render(catAtiva === 'todos' ? produtos : produtos.filter(i => i.cat === catAtiva));
+        p.fotoAtual = (p.fotoAtual + dir + p.fotos.length) % p.fotos.length;
+        renderAtual();
     }
 
-    // Função para abrir o modal e carregar as setas lá dentro também
+    function renderAtual() {
+        const cat = document.querySelector('.sidebar-menu li.active').innerText.toLowerCase();
+        render(cat === 'todos' ? produtos : produtos.filter(i => i.cat === cat));
+    }
+
     function openModal(id) {
-        produtoAtivoNoModal = produtos.find(x => x.id === id);
-        const p = produtoAtivoNoModal;
-        const modal = document.getElementById('productModal');
+        produtoAtivoModal = produtos.find(x => x.id === id);
+        produtoAtivoModal.fotoAtual = 0;
+        const p = produtoAtivoModal;
         
-        // Zera a foto atual ao abrir o modal
-        p.fotoAtual = 0;
-
-        renderConteudoModal(p);
-        
-        modal.classList.add('active');
+        updateModalImage();
+        document.getElementById('modalDetails').innerHTML = `
+            <h2 style="text-transform:uppercase;">${p.nome}</h2>
+            <span class="price" style="font-size:24px;">R$ ${p.preco.toFixed(2).replace('.',',')}</span>
+            <p style="font-size:13px; color:#666; margin:15px 0;">Proteção UV400 e design exclusivo Use Vibes.</p>
+            <button class="btn-buy" onclick="add(${p.id}); closeModal();">ADICIONAR À SACOLA</button>
+            <button class="btn-buy" onclick="buyNow(${p.id})" style="background:#000; color:#fff;">COMPRAR AGORA</button>
+        `;
+        document.getElementById('productModal').classList.add('active');
     }
 
-    // Renderiza o conteúdo interno do modal (separado para poder atualizar só a imagem)
-    function renderConteudoModal(p) {
-        // Container da Imagem com Setas
+    function updateModalImage() {
+        const p = produtoAtivoModal;
         document.getElementById('modalImgContainer').innerHTML = `
             ${p.fotos.length > 1 ? `<button class="nav-btn btn-l" onclick="trocarFotoModal(-1)">❮</button>` : ''}
-            <img src="oculos/${p.fotos[p.fotoAtual]}" id="modalMainImg" onerror="this.src='https://via.placeholder.com/600x600?text=Vibes'">
+            <img src="oculos/${p.fotos[p.fotoAtual]}" onerror="this.src='https://via.placeholder.com/400x400?text=Vibes'">
             ${p.fotos.length > 1 ? `<button class="nav-btn btn-r" onclick="trocarFotoModal(1)">❯</button>` : ''}
         `;
-
-        // Detalhes
-        document.getElementById('modalDetails').innerHTML = `
-            <h2 style="font-size:clamp(24px, 4vw, 36px); margin-bottom:10px; font-weight:800; text-transform:uppercase; line-height:1;">${p.nome}</h2>
-            <p style="color:#666; margin-bottom:25px; font-size:14px; line-height:1.6;">Lentes com proteção máxima UV400 contra raios solares e armação premium de alta durabilidade. O equilíbrio perfeito entre estilo arrojado e conforto para o seu dia a dia.</p>
-            <span class="price" style="font-size:32px; margin-bottom:10px;">R$ ${p.preco.toFixed(2).replace('.',',')}</span>
-            <small style="color:#888; display:block; margin-bottom:30px;">Disponibilidade: <span style="color:var(--vibe-orange); font-weight:700;">Em Estoque</span></small>
-            
-            <button class="btn-buy" onclick="add(${p.id}); closeModal();">ADICIONAR AO CARRINHO</button>
-            <button class="btn-buy" onclick="buyNow(${p.id})" style="background:#000; color:#fff; margin-top:10px; border:1px solid #333;">COMPRAR AGORA</button>
-        `;
     }
 
-    // Função para trocar foto dentro do modal
-    function trocarFotoModal(direcao) {
-        if(!produtoAtivoNoModal) return;
-        const p = produtoAtivoNoModal;
-        p.fotoAtual = (p.fotoAtual + direcao + p.fotos.length) % p.fotos.length;
-        
-        // Atualiza apenas a imagem principal do modal (efeito mais rápido)
-        document.getElementById('modalMainImg').src = `oculos/${p.fotos[p.fotoAtual]}`;
+    function trocarFotoModal(dir) {
+        produtoAtivoModal.fotoAtual = (produtoAtivoModal.fotoAtual + dir + produtoAtivoModal.fotos.length) % produtoAtivoModal.fotos.length;
+        updateModalImage();
     }
 
-    function closeModal() { 
-        document.getElementById('productModal').classList.remove('active'); 
-        produtoAtivoNoModal = null;
-    }
+    function closeModal() { document.getElementById('productModal').classList.remove('active'); }
+    function toggleCart() { document.getElementById('cart').classList.toggle('active'); }
 
-    function buyNow(id) {
-        const p = produtos.find(x => x.id === id);
-        let msg = `Olá Vibes! Quero comprar agora o modelo: *${p.nome}* (R$ ${p.preco.toFixed(2)})`;
-        window.open(`https://wa.me/5519989620949?text=${encodeURIComponent(msg)}`, "_blank");
-    }
-
-    function add(id) { 
-        carrinho.push({...produtos.find(x => x.id === id)}); 
-        atualizarCarrinho(); 
-        toggleCart();
+    function add(id) {
+        carrinho.push({...produtos.find(x => x.id === id)});
+        atualizarCarrinho();
+        if(window.innerWidth > 768) toggleCart();
     }
 
     function filtrar(cat, el) {
@@ -304,35 +269,39 @@
         render(cat === 'todos' ? produtos : produtos.filter(p => p.cat === cat));
     }
 
-    function toggleCart() { document.getElementById('cart').classList.toggle('active'); }
-    function remover(i) { carrinho.splice(i, 1); atualizarCarrinho(); }
-
     function atualizarCarrinho() {
         document.getElementById('cartCount').innerText = carrinho.length;
         let t = 0;
         document.getElementById('cartItems').innerHTML = carrinho.map((p, i) => {
             t += p.preco;
-            return `<div style="display:flex; gap:12px; margin-bottom:15px; border-bottom:1px solid #eee; padding-bottom:10px; align-items:center;">
-                <img src="oculos/${p.fotos[0]}" style="width:60px; height:60px; object-fit:cover; border-radius:8px; background:#f9f9f9;">
+            return `<div style="display:flex; gap:10px; margin-bottom:15px; align-items:center;">
+                <img src="oculos/${p.fotos[0]}" style="width:50px; height:50px; object-fit:cover; border-radius:5px;">
                 <div style="flex-grow:1;">
-                    <p style="font-size:13px; font-weight:700;">${p.nome}</p>
-                    <p style="font-size:14px; color:var(--vibe-orange); font-weight:800;">R$ ${p.preco.toFixed(2)}</p>
-                    <small onclick="remover(${i})" style="color:#ff4444; cursor:pointer; text-decoration:underline;">Remover</small>
+                    <p style="font-size:12px; font-weight:700;">${p.nome}</p>
+                    <p style="font-size:12px; color:var(--vibe-orange);">R$ ${p.preco.toFixed(2)}</p>
                 </div>
+                <i class="fa-solid fa-trash" onclick="remover(${i})" style="font-size:12px; color:#ccc; cursor:pointer;"></i>
             </div>`;
         }).join('');
         document.getElementById('cartTotal').innerText = `R$ ${t.toFixed(2).replace('.',',')}`;
     }
 
+    function remover(i) { carrinho.splice(i, 1); atualizarCarrinho(); }
+
     function finalizar() {
-        let msg = "🚀 *NOVO PEDIDO VIBES*:\n\n" + carrinho.map(p => `• ${p.nome}`).join('\n');
-        window.open(`https://wa.me/5519989620949?text=${encodeURIComponent(msg)}`, "_blank");
+        let msg = "Novo Pedido Vibes:\n" + carrinho.map(p => `- ${p.nome}`).join('\n');
+        window.open(`https://wa.me/5519989620949?text=${encodeURIComponent(msg)}`);
     }
 
-    // Fechar modal ao clicar fora
+    function buyNow(id) {
+        const p = produtos.find(x => x.id === id);
+        window.open(`https://wa.me/5519989620949?text=Quero comprar: ${p.nome}`);
+    }
+
     window.onclick = (e) => { if(e.target == document.getElementById('productModal')) closeModal(); }
 
     render(produtos);
 </script>
+
 </body>
 </html>
