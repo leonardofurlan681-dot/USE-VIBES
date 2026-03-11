@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>VIBES | Sunglasses</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
@@ -20,10 +20,10 @@
 
         body::before {
             content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); z-index: -1; 
+            background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); z-index: -1; 
         }
 
-        .promo-bar { background: var(--vibe-orange); color: #000; text-align: center; padding: 10px; font-size: 10px; text-transform: uppercase; font-weight: 800; letter-spacing: 2px; }
+        .promo-bar { background: var(--vibe-orange); color: #000; text-align: center; padding: 8px; font-size: 10px; text-transform: uppercase; font-weight: 800; letter-spacing: 2px; }
 
         header {
             display: grid; grid-template-columns: 50px 1fr 50px; align-items: center;
@@ -31,88 +31,87 @@
             position: sticky; top: 0; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(5px); z-index: 100;
         }
         
-        .menu-toggle, .cart-icon { font-size: 20px; cursor: pointer; position: relative; color: #000; }
-        .logo-central { font-weight: 800; font-size: 22px; letter-spacing: 4px; text-transform: uppercase; text-align: center; cursor: pointer; color: #000; text-decoration: none; }
+        .menu-toggle, .cart-icon { font-size: 20px; cursor: pointer; position: relative; color: #000; text-align: center; }
+        .logo-central { font-weight: 800; font-size: 20px; letter-spacing: 3px; text-transform: uppercase; text-align: center; cursor: pointer; color: #000; }
         
         #cart-count {
-            position: absolute; top: -10px; right: -10px; background: var(--vibe-orange);
-            color: #000; font-size: 10px; font-weight: 800; width: 18px; height: 18px;
+            position: absolute; top: -8px; right: 5px; background: #000;
+            color: #fff; font-size: 9px; font-weight: 800; width: 16px; height: 16px;
             border-radius: 50%; display: flex; align-items: center; justify-content: center;
         }
 
-        /* MENU LATERAL E CARRINHO */
-        .sidebar, .cart-sidebar { position: fixed; top: 0; width: 300px; height: 100%; background: #fff; z-index: 200; transition: 0.4s; padding: 30px; display: flex; flex-direction: column; }
-        .sidebar { left: -320px; } 
-        .sidebar.active { left: 0; }
-        .cart-sidebar { right: -320px; } 
-        .cart-sidebar.active { right: 0; }
-        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); display: none; z-index: 150; backdrop-filter: blur(3px); }
-        .overlay.active { display: block; }
-
-        .menu-list { list-style: none; margin-top: 20px; }
-        .menu-list li { padding: 15px 0; border-bottom: 1px solid #eee; cursor: pointer; font-weight: 700; text-transform: uppercase; font-size: 14px; }
-
         /* BANNER */
-        .slider-container { position: relative; width: 100%; height: 550px; background: #fff; overflow: hidden; }
-        .main-slider { width: 300%; height: 100%; display: flex; transition: transform 0.7s cubic-bezier(0.65, 0, 0.35, 1); }
+        .slider-container { position: relative; width: 100%; height: 500px; background: #fff; overflow: hidden; }
+        .main-slider { width: 300%; height: 100%; display: flex; transition: transform 0.6s ease-in-out; }
         .banner-slide { width: 100%; height: 100%; display: flex; align-items: center; position: relative; }
-        .banner-text { width: 45%; z-index: 5; padding-left: 8%; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; }
-        .banner-text h2 { font-size: 50px; font-weight: 800; line-height: 1; margin-bottom: 15px; text-transform: uppercase; }
+        .banner-text { width: 45%; z-index: 5; padding-left: 5%; display: flex; flex-direction: column; align-items: flex-start; }
+        .banner-text h2 { font-size: 42px; font-weight: 800; line-height: 1; margin-bottom: 10px; text-transform: uppercase; }
         .banner-text h2 span { color: var(--vibe-orange); }
-        .banner-text p { font-size: 18px; color: #444; margin-bottom: 25px; line-height: 1.4; max-width: 450px; }
+        .banner-text p { font-size: 16px; color: #333; margin-bottom: 20px; max-width: 400px; }
         .banner-img-area { position: absolute; right: 0; top: 0; width: 55%; height: 100%; }
         .banner-img-area img { width: 100%; height: 100%; object-fit: cover; }
 
-        .slider-arrow { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.8); border: none; width: 45px; height: 45px; border-radius: 50%; cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; }
-        .prev-arrow { left: 20px; } .next-arrow { right: 20px; }
-        .btn-banner { background: #000; color: #fff; padding: 18px 45px; text-decoration: none; font-weight: 800; font-size: 14px; text-transform: uppercase; display: inline-block; }
+        /* SETAS DO BANNER */
+        .slider-arrow { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.7); border: none; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; font-size: 18px; }
+        .prev-arrow { left: 10px; } .next-arrow { right: 10px; }
 
-        /* GRID */
-        .main-layout { max-width: 1200px; margin: 0 auto; padding: 40px 15px; width: 100%; }
-        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px; }
-        .product-card { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.08); transition: 0.3s; }
-        .img-box { height: 320px; width: 100%; position: relative; overflow: hidden; }
-        .img-box img { width: 100%; height: 100%; object-fit: cover; cursor: pointer; }
-        .nav-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.9); border: none; width: 35px; height: 35px; border-radius: 50%; cursor: pointer; z-index: 5; display: flex; align-items: center; justify-content: center; }
-        .btn-l { left: 10px; } .btn-r { right: 10px; }
-        .card-info { padding: 15px; text-align: center; cursor: pointer; }
-        .price { color: var(--vibe-orange); font-weight: 800; font-size: 22px; }
+        .btn-banner { background: #000; color: #fff; padding: 15px 30px; text-decoration: none; font-weight: 800; font-size: 12px; text-transform: uppercase; display: inline-block; }
+
+        /* GRID PRODUTOS */
+        .main-layout { max-width: 1200px; margin: 0 auto; padding: 20px 10px; width: 100%; }
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; }
+        .product-card { background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: 0.3s; display: flex; flex-direction: column; }
         
-        /* BOTÃO ADICIONAR LARANJA */
-        .btn-add-cart { 
-            background: var(--vibe-orange); 
-            color: #000; 
-            border: none; 
-            width: 100%; 
-            padding: 15px; 
-            font-weight: 800; 
-            text-transform: uppercase; 
-            cursor: pointer; 
-            transition: background 0.3s;
+        .img-box { width: 100%; aspect-ratio: 1 / 1; position: relative; overflow: hidden; background: #f9f9f9; }
+        .img-box img { width: 100%; height: 100%; object-fit: cover; transition: 0.3s; }
+        
+        /* --- SETAS DOS PRODUTOS REATIVADAS --- */
+        .nav-btn {
+            position: absolute; top: 50%; transform: translateY(-50%); 
+            background: rgba(255,255,255,0.85); border: none; width: 32px; height: 32px; 
+            border-radius: 50%; cursor: pointer; z-index: 5; 
+            display: flex; align-items: center; justify-content: center; 
+            color: #000; font-weight: bold; box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
-        .btn-add-cart:hover { background: #e67e17; }
+        .btn-l { left: 8px; } .btn-r { right: 8px; }
+
+        .card-info { padding: 12px; text-align: center; flex-grow: 1; }
+        .price { color: var(--vibe-orange); font-weight: 800; font-size: 20px; display: block; margin-top: 5px; }
+        .btn-add-cart { background: var(--vibe-orange); color: #000; border: none; width: 100%; padding: 12px; font-weight: 800; text-transform: uppercase; cursor: pointer; font-size: 11px; }
+
+        /* SIDEBARS */
+        .sidebar, .cart-sidebar { position: fixed; top: 0; width: 320px; height: 100%; background: #fff; z-index: 200; transition: 0.4s; padding: 25px; display: flex; flex-direction: column; }
+        .sidebar { left: -325px; } .sidebar.active { left: 0; }
+        .cart-sidebar { right: -325px; } .cart-sidebar.active { right: 0; }
+        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: none; z-index: 150; }
+        .overlay.active { display: block; }
+
+        .close-sidebar { align-self: flex-end; font-size: 24px; cursor: pointer; margin-bottom: 20px; color: #000; }
+        .cart-item { display: flex; gap: 12px; padding: 12px 0; border-bottom: 1px solid #eee; align-items: center; }
+        .cart-item img { width: 60px; height: 60px; object-fit: cover; border-radius: 6px; flex-shrink: 0; }
 
         /* MODAL */
-        .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 1000; display: none; align-items: center; justify-content: center; padding: 15px; backdrop-filter: blur(10px); }
+        .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 1000; display: none; align-items: center; justify-content: center; padding: 10px; }
         .modal.active { display: flex; }
-        .modal-content { background: #fff; width: 100%; max-width: 900px; display: flex; border-radius: 20px; overflow: hidden; position: relative; min-height: 500px; }
-        .modal-img-side { width: 55%; background: #f4f4f4; position: relative; display: flex; align-items: center; justify-content: center; }
-        .modal-info-side { width: 45%; padding: 40px; display: flex; flex-direction: column; justify-content: center; }
-        .close-modal { position: absolute; top: 20px; right: 20px; font-size: 30px; cursor: pointer; z-index: 10; color: #333; }
+        .modal-content { background: #fff; width: 100%; max-width: 800px; display: flex; border-radius: 15px; overflow: hidden; position: relative; }
+        .modal-img-side { width: 50%; aspect-ratio: 1/1; position: relative; background: #f0f0f0; }
+        .modal-info-side { width: 50%; padding: 30px; display: flex; flex-direction: column; justify-content: center; }
 
-        /* CARRINHO ITEM - CORREÇÃO DA IMAGEM */
-        .cart-item { display: flex; gap: 10px; padding: 10px 0; border-bottom: 1px solid #eee; align-items: center; }
-        .cart-item img { width: 60px; height: 60px; object-fit: cover; border-radius: 5px; flex-shrink: 0; }
-
+        /* MOBILE AJUSTES */
         @media (max-width: 768px) {
-            .banner-text { width: 100%; padding: 30px; text-align: center; align-items: center; background: rgba(255,255,255,0.85); }
-            .banner-img-area { width: 100%; opacity: 0.3; }
-            .product-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-            .modal-content { flex-direction: column; height: auto; max-height: 90vh; overflow-y: auto; }
+            .slider-container { height: 350px; }
+            .banner-text { width: 100%; padding: 20px; text-align: center; align-items: center; background: rgba(255,255,255,0.8); }
+            .banner-text h2 { font-size: 28px; }
+            .banner-img-area { width: 100%; opacity: 0.5; }
+            
+            .product-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+            .logo-central { font-size: 16px; }
+
+            .modal-content { flex-direction: column; max-height: 90vh; overflow-y: auto; }
             .modal-img-side, .modal-info-side { width: 100%; }
-            .modal-img-side { height: 250px; }
-            .sidebar, .cart-sidebar { width: 100%; }
-            .sidebar { left: -100%; } .cart-sidebar { right: -100%; }
+
+            .cart-sidebar, .sidebar { width: 85%; }
+            .nav-btn { width: 28px; height: 28px; font-size: 12px; } /* Setas um pouco menores no mobile */
         }
     </style>
 </head>
@@ -132,14 +131,22 @@
 <div class="overlay" id="overlay" onclick="closeAll()"></div>
 
 <aside class="sidebar" id="sidebar">
-    <h3 style="letter-spacing: 2px;">MENU</h3>
-    <ul class="menu-list">
-        <li onclick="filtrar('todos')">Todos os Modelos</li>
-        <li onclick="filtrar('masculino')">Masculino</li>
-        <li onclick="filtrar('feminino')">Feminino</li>
-        <li onclick="filtrar('esportivo')">Linha Esportiva</li>
-    </ul>
-    <button onclick="closeAll()" style="margin-top: auto; border: none; background: none; cursor: pointer; color: #888;">FECHAR</button>
+    <div class="close-sidebar" onclick="closeAll()"><i class="fa-solid fa-xmark"></i></div>
+    <h3 style="margin-bottom: 20px; border-bottom: 2px solid var(--vibe-orange); padding-bottom: 10px;">CATEGORIAS</h3>
+    <div onclick="filtrar('todos')" style="padding: 15px 0; cursor: pointer; font-weight: 600;">TODOS</div>
+    <div onclick="filtrar('masculino')" style="padding: 15px 0; cursor: pointer; font-weight: 600;">MASCULINO</div>
+    <div onclick="filtrar('feminino')" style="padding: 15px 0; cursor: pointer; font-weight: 600;">FEMININO</div>
+    <div onclick="filtrar('esportivo')" style="padding: 15px 0; cursor: pointer; font-weight: 600;">ESPORTIVO</div>
+</aside>
+
+<aside class="cart-sidebar" id="cart-sidebar">
+    <div class="close-sidebar" onclick="closeAll()"><i class="fa-solid fa-xmark"></i></div>
+    <h3 style="margin-bottom: 20px;">MEU CARRINHO</h3>
+    <div id="cart-items" style="flex-grow: 1; overflow-y: auto;"></div>
+    <div style="padding: 20px 0; font-weight: 800; font-size: 18px; border-top: 1px solid #eee;">
+        TOTAL: R$ <span id="cart-total">0,00</span>
+    </div>
+    <button class="btn-banner" style="width: 100%; background: var(--whatsapp-color); border: none; cursor: pointer;" onclick="checkout()">PEDIR NO WHATSAPP</button>
 </aside>
 
 <section class="slider-container">
@@ -148,48 +155,43 @@
     <div class="main-slider" id="mainSlider">
         <div class="banner-slide">
             <div class="banner-text">
-                <img src="logo.png" style="max-width: 220px; margin-bottom: 20px; display: block;" onerror="this.src='https://via.placeholder.com/200x80?text=VIBES+LOGO'">
-                <h2>DESIGN<span> PREMIUM</span></h2>
-                <p>Estilo icônico e proteção UV400 completa para o seu olhar.</p>
-                <a href="#grid" class="btn-banner">VER COLEÇÃO</a>
+                <img src="logo.jpg" style="max-width: 150px; margin-bottom: 15px;" onerror="this.style.display='none'">
+                <h2>ESTILO<span> ÚNICO</span></h2>
+                <p>Proteção UV400 e design premium Vibes.</p>
+                <a href="#grid" class="btn-banner">VER MAIS</a>
             </div>
-            <div class="banner-img-area"><img src="banner destaque/destaque 1.jpg"></div>
+            <div class="banner-img-area"><img src="banner destaque/destaque 1.jpg" onerror="this.src='https://images.unsplash.com/photo-1511499767390-90342f56771f?w=800'"></div>
         </div>
         <div class="banner-slide">
             <div class="banner-text">
-                <h2>NOVA<span> COLEÇÃO</span></h2>
-                <p>Descubra o equilíbrio perfeito entre design e conforto premium.</p>
+                <h2>NOVA<span> LINHA</span></h2>
+                <p>O equilíbrio entre leveza e durabilidade.</p>
                 <a href="#grid" class="btn-banner">EXPLORAR</a>
             </div>
-            <div class="banner-img-area"><img src="banner destaque/destaque 2.jpg"></div>
+            <div class="banner-img-area"><img src="banner destaque/destaque 2.jpg" onerror="this.src='https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=800'"></div>
         </div>
         <div class="banner-slide">
             <div class="banner-text">
                 <h2>QUALIDADE<span> VIBES</span></h2>
-                <p>Lentes polarizadas com garantia total de satisfação.</p>
+                <p>Lentes polarizadas com garantia total.</p>
                 <a href="#grid" class="btn-banner">COMPRAR</a>
             </div>
-            <div class="banner-img-area"><img src="banner destaque/destaque 3.jpg"></div>
+            <div class="banner-img-area"><img src="banner destaque/destaque 3.jpg" onerror="this.src='https://images.unsplash.com/photo-1508296695146-257a814070b4?w=800'"></div>
         </div>
     </div>
 </section>
 
-<div class="main-layout"><main class="product-grid" id="grid"></main></div>
+<div class="main-layout" id="grid">
+    <main class="product-grid" id="product-list"></main>
+</div>
 
 <div class="modal" id="productModal">
     <div class="modal-content">
-        <i class="fa-solid fa-xmark close-modal" onclick="closeModal()"></i>
-        <div class="modal-img-side" id="modal-img-container"></div>
+        <div onclick="closeModal()" style="position: absolute; top: 15px; right: 15px; z-index: 20; cursor: pointer; font-size: 25px;"><i class="fa-solid fa-xmark"></i></div>
+        <div class="modal-img-side" id="modal-img"></div>
         <div class="modal-info-side" id="modal-info"></div>
     </div>
 </div>
-
-<aside class="cart-sidebar" id="cart-sidebar">
-    <h3>SEU CARRINHO</h3>
-    <div id="cart-items" style="flex-grow: 1; overflow-y: auto; margin: 20px 0;"></div>
-    <div style="font-weight: 800; font-size: 18px; margin-bottom: 15px;">TOTAL: R$ <span id="cart-total">0,00</span></div>
-    <button class="btn-banner" style="width: 100%; background: var(--whatsapp-color);" onclick="checkout()">FINALIZAR PEDIDO</button>
-</aside>
 
 <script>
     const catalogo = [
@@ -206,7 +208,6 @@
 
     let produtos = catalogo.map((p, i) => ({ id: i, nome: p[0], preco: p[1], cat: p[2], fotos: p[3], fotoAtual: 0 }));
     let carrinho = [];
-    let produtoNoModal = null;
     let filtroAtivo = 'todos';
     let currentSlide = 0;
 
@@ -216,19 +217,19 @@
     }
 
     function render() {
-        const listaFiltrada = filtroAtivo === 'todos' ? produtos : produtos.filter(p => p.cat === filtroAtivo);
-        document.getElementById('grid').innerHTML = listaFiltrada.map(p => `
+        const lista = filtroAtivo === 'todos' ? produtos : produtos.filter(p => p.cat === filtroAtivo);
+        document.getElementById('product-list').innerHTML = lista.map(p => `
             <div class="product-card">
                 <div class="img-box">
                     <button class="nav-btn btn-l" onclick="changePic(${p.id}, -1, event)">❮</button>
-                    <img src="oculos/${p.fotos[p.fotoAtual]}" onclick="openModal(${p.id})" onerror="this.src='https://via.placeholder.com/400'">
+                    <img src="oculos/${p.fotos[p.fotoAtual]}" onclick="openModal(${p.id})" onerror="this.src='https://via.placeholder.com/400?text=VIBES'">
                     <button class="nav-btn btn-r" onclick="changePic(${p.id}, 1, event)">❯</button>
                 </div>
                 <div class="card-info" onclick="openModal(${p.id})">
-                    <h4 style="font-size: 11px; height: 30px; text-transform: uppercase;">${p.nome}</h4>
+                    <p style="font-size: 11px; font-weight: 600; text-transform: uppercase; color: #555;">${p.nome}</p>
                     <span class="price">R$ ${p.preco.toFixed(2).replace('.',',')}</span>
                 </div>
-                <button class="btn-add-cart" onclick="addToCart(${p.id})">ADICIONAR AO CARRINHO</button>
+                <button class="btn-add-cart" onclick="addToCart(${p.id})">ADICIONAR</button>
             </div>
         `).join('');
     }
@@ -238,36 +239,42 @@
         const p = produtos.find(x => x.id === id);
         p.fotoAtual = (p.fotoAtual + dir + p.fotos.length) % p.fotos.length;
         render();
-        if(produtoNoModal && produtoNoModal.id === id) updateModalImg();
+        if(document.getElementById('productModal').classList.contains('active')) updateModalImg(p);
     }
 
     function openModal(id) {
-        produtoNoModal = produtos.find(x => x.id === id);
-        updateModalImg();
+        const p = produtos.find(x => x.id === id);
+        updateModalImg(p);
         document.getElementById('modal-info').innerHTML = `
-            <h2 style="text-transform:uppercase;">${produtoNoModal.nome}</h2>
-            <span class="price" style="font-size:32px; margin:20px 0; display:block;">R$ ${produtoNoModal.preco.toFixed(2).replace('.',',')}</span>
-            <p style="color:#666; margin-bottom:30px;">Lentes com proteção UV400 certificada. Armação premium de alta durabilidade e conforto.</p>
-            <button class="btn-add-cart" style="width:100%" onclick="addToCart(${produtoNoModal.id}); closeModal();">ADICIONAR AO CARRINHO</button>
+            <h2 style="font-size: 22px; text-transform: uppercase;">${p.nome}</h2>
+            <p class="price" style="font-size: 28px; margin: 15px 0;">R$ ${p.preco.toFixed(2).replace('.',',')}</p>
+            <p style="color: #666; font-size: 14px; margin-bottom: 25px;">Modelo exclusivo com proteção UV400. Inclui estojo e flanela original Vibes.</p>
+            <button class="btn-add-cart" style="border-radius: 5px;" onclick="addToCart(${p.id}); closeModal();">ADICIONAR AO CARRINHO</button>
         `;
         document.getElementById('productModal').classList.add('active');
     }
 
-    function updateModalImg() {
-        document.getElementById('modal-img-container').innerHTML = `
-            <button class="nav-btn btn-l" onclick="changePic(${produtoNoModal.id}, -1)">❮</button>
-            <img src="oculos/${produtoNoModal.fotos[produtoNoModal.fotoAtual]}" style="width:100%; height:100%; object-fit:cover;">
-            <button class="nav-btn btn-r" onclick="changePic(${produtoNoModal.id}, 1)">❯</button>
+    function updateModalImg(p) {
+        document.getElementById('modal-img').innerHTML = `
+            <button class="nav-btn btn-l" onclick="changePic(${p.id}, -1)">❮</button>
+            <img src="oculos/${p.fotos[p.fotoAtual]}" style="width:100%; height:100%; object-fit:cover;">
+            <button class="nav-btn btn-r" onclick="changePic(${p.id}, 1)">❯</button>
         `;
     }
 
-    function closeModal() { document.getElementById('productModal').classList.remove('active'); produtoNoModal = null; }
+    function closeModal() { document.getElementById('productModal').classList.remove('active'); }
+    function toggleSidebar(id) { document.getElementById(id).classList.toggle('active'); document.getElementById('overlay').classList.toggle('active'); }
+    function closeAll() { document.querySelectorAll('.sidebar, .cart-sidebar, .overlay').forEach(el => el.classList.remove('active')); }
 
     function addToCart(id) {
         const p = produtos.find(x => x.id === id);
         carrinho.push(p);
         updateCart();
-        toggleSidebar('cart-sidebar');
+        if (window.innerWidth > 768) toggleSidebar('cart-sidebar');
+        else {
+            document.getElementById('cart-sidebar').classList.add('active');
+            document.getElementById('overlay').classList.add('active');
+        }
     }
 
     function updateCart() {
@@ -278,26 +285,17 @@
             return `<div class="cart-item">
                 <img src="oculos/${item.fotos[0]}" onerror="this.src='https://via.placeholder.com/100'">
                 <div style="flex-grow:1; font-size:12px;"><b>${item.nome}</b><br>R$ ${item.preco.toFixed(2)}</div>
-                <i class="fa-solid fa-trash" onclick="removeItem(${i})" style="cursor:pointer; color:red;"></i>
+                <i class="fa-solid fa-trash" onclick="removeItem(${i})" style="cursor:pointer; color:red; padding: 10px;"></i>
             </div>`;
         }).join('');
         document.getElementById('cart-total').innerText = total.toFixed(2).replace('.',',');
     }
 
     function removeItem(i) { carrinho.splice(i, 1); updateCart(); }
-    function toggleSidebar(id) { document.getElementById(id).classList.toggle('active'); document.getElementById('overlay').classList.toggle('active'); }
-    function closeAll() { document.querySelectorAll('.sidebar, .cart-sidebar, .overlay').forEach(el => el.classList.remove('active')); }
-    
-    function filtrar(cat) {
-        filtroAtivo = cat;
-        render();
-        closeAll();
-        window.location.href = "#grid";
-    }
-
+    function filtrar(cat) { filtroAtivo = cat; render(); closeAll(); }
     function checkout() {
         if(carrinho.length === 0) return alert("Carrinho vazio!");
-        let msg = "Olá Vibes! Gostaria de encomendar:%0A" + carrinho.map(i => "- " + i.nome).join("%0A");
+        let msg = "Olá Vibes! Gostaria de pedir:%0A" + carrinho.map(i => "- " + i.nome).join("%0A");
         window.open(`https://wa.me/5519989620949?text=${msg}`);
     }
 
