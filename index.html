@@ -13,32 +13,18 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
         
         body { 
-            /* 3. CONFIGURAÇÃO PARA SEU FUNDO PERSONALIZADO */
-            /* Certifique-se de que o arquivo 'fundo.jpg' esteja na mesma pasta que este HTML */
             background-image: url('fundo.jpg'); 
-            
-            /* Fallback caso a imagem não carregue, mantendo a vibe */
             background-color: #f4f4f4; 
-            
             background-size: cover; 
             background-position: center; 
-            background-attachment: fixed; /* O fundo fica parado ao rolar */
-            min-height: 100vh; 
-            display: flex; 
-            flex-direction: column; 
-            overflow-x: hidden;
+            background-attachment: fixed;
+            min-height: 100vh; display: flex; flex-direction: column; overflow-x: hidden;
         }
 
         body::before {
-            content: ''; 
-            position: fixed; 
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(255, 255, 255, 0.1); /* Camada super leve para clarear */
-            
-            /* DESFOQUE SUAVE NO FUNDO DO SITE (GLASSMORPHISM) */
-            backdrop-filter: blur(5px); 
-            -webkit-backdrop-filter: blur(5px); 
-            
+            content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px);
             z-index: -1; 
         }
 
@@ -50,136 +36,67 @@
             position: sticky; top: 0; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(5px); z-index: 100;
         }
         
-        .menu-toggle, .cart-icon { font-size: 20px; cursor: pointer; position: relative; color: #000; text-align: center; }
-        .logo-central { font-weight: 800; font-size: 20px; letter-spacing: 3px; text-transform: uppercase; text-align: center; cursor: pointer; color: #000; text-decoration: none; }
-        
-        #cart-count {
-            position: absolute; top: -8px; right: 5px; background: #000;
-            color: #fff; font-size: 9px; font-weight: 800; width: 16px; height: 16px;
-            border-radius: 50%; display: flex; align-items: center; justify-content: center;
-        }
+        .logo-central { font-weight: 800; font-size: 20px; letter-spacing: 3px; text-transform: uppercase; text-align: center; cursor: pointer; color: #000; }
 
         /* BANNER */
-        .slider-container { position: relative; width: 100%; height: 550px; background: #fff; overflow: hidden; border-bottom: 1px solid #eee; }
+        .slider-container { position: relative; width: 100%; height: 500px; background: #fff; overflow: hidden; }
         .main-slider { width: 300%; height: 100%; display: flex; transition: transform 0.6s cubic-bezier(0.65, 0, 0.35, 1); }
-        .banner-slide { width: 100%; height: 100%; display: flex; align-items: center; position: relative; }
+        .banner-slide { width: 100%; height: 100%; display: flex; align-items: center; position: relative; background: #fff; }
         
-        /* Layout PC */
-        .banner-text { width: 45%; z-index: 5; padding-left: 5%; display: flex; flex-direction: column; align-items: flex-start; }
-        .banner-text h2 { font-size: 42px; font-weight: 800; line-height: 1; margin-bottom: 10px; text-transform: uppercase; }
+        .banner-text { width: 50%; z-index: 5; padding: 0 5%; display: flex; flex-direction: column; align-items: flex-start; }
+        .banner-text h2 { font-size: 38px; font-weight: 800; line-height: 1.1; margin-bottom: 10px; text-transform: uppercase; color: #000; }
         .banner-text h2 span { color: var(--vibe-orange); }
-        .banner-text p { font-size: 16px; color: #333; margin-bottom: 20px; max-width: 400px; }
-        .banner-img-area { position: absolute; right: 0; top: 0; width: 55%; height: 100%; }
+        .banner-text p { font-size: 15px; color: #444; margin-bottom: 20px; }
+        
+        .banner-img-area { width: 50%; height: 100%; position: relative; }
         .banner-img-area img { width: 100%; height: 100%; object-fit: cover; }
 
-        .slider-arrow { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.7); border: none; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; font-size: 18px; }
+        .slider-arrow { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.1); border: none; width: 35px; height: 35px; border-radius: 50%; cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; }
         .prev-arrow { left: 10px; } .next-arrow { right: 10px; }
-        .btn-banner { background: #000; color: #fff; padding: 15px 30px; text-decoration: none; font-weight: 800; font-size: 12px; text-transform: uppercase; display: inline-block; }
+
+        @media (max-width: 768px) {
+            .slider-container { height: 280px; }
+            .banner-slide { flex-direction: row !important; }
+            .banner-text { width: 55%; padding: 10px; }
+            .banner-text h2 { font-size: 18px; }
+            .banner-text p { font-size: 10px; margin-bottom: 10px; }
+            .banner-text img { max-width: 70px !important; margin-bottom: 5px !important; }
+            .banner-img-area { width: 45%; }
+        }
 
         /* GRID PRODUTOS */
-        .main-layout { max-width: 1200px; margin: 0 auto; padding: 20px 10px; width: 100%; }
+        .main-layout { max-width: 1200px; margin: 0 auto; padding: 20px 10px; width: 100%; flex-grow: 1; }
         .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; }
         
-        /* Cards "Glassmorphism" */
-        .product-card { 
-            background: rgba(255, 255, 255, 0.7);backdrop-filter: blur(10px);
-            border-radius: 12px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: 0.3s; display: flex; flex-direction: column; }
+        @media (max-width: 768px) { .product-grid { grid-template-columns: 1fr 1fr; gap: 10px; } }
+
+        .product-card { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(10px); border-radius: 12px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: 0.3s; display: flex; flex-direction: column; border: 1px solid rgba(255,255,255,0.2); }
+        .img-box { width: 100%; aspect-ratio: 1 / 1; position: relative; overflow: hidden; background: #fff; }
+        .img-box img { width: 100%; height: 100%; object-fit: cover; cursor: pointer; }
         
-        .img-box { width: 100%; aspect-ratio: 1 / 1; position: relative; overflow: hidden; background: #f9f9f9; }
-        .img-box img { width: 100%; height: 100%; object-fit: cover; transition: 0.3s; }
-        
-        .nav-btn {
-            position: absolute; top: 50%; transform: translateY(-50%); 
-            background: rgba(255,255,255,0.85); border: none; width: 32px; height: 32px; 
-            border-radius: 50%; cursor: pointer; z-index: 5; 
-            display: flex; align-items: center; justify-content: center; 
-            color: #000; font-weight: bold; box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-        .btn-l { left: 8px; } .btn-r { right: 8px; }
+        .nav-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.9); border: none; width: 28px; height: 28px; border-radius: 50%; cursor: pointer; z-index: 5; display: flex; align-items: center; justify-content: center; font-size: 12px; }
+        .btn-l { left: 5px; } .btn-r { right: 5px; }
 
-        .card-info { padding: 12px; text-align: center; flex-grow: 1; cursor: pointer; }
-        .price { color: var(--vibe-orange); font-weight: 800; font-size: 20px; display: block; margin-top: 5px; }
-        .btn-add-cart { background: var(--vibe-orange); color: #000; border: none; width: 100%; padding: 12px; font-weight: 800; text-transform: uppercase; cursor: pointer; font-size: 11px; }
-
-        /* SIDEBARS */
-        .sidebar, .cart-sidebar { position: fixed; top: 0; width: 320px; height: 100%; background: #fff; z-index: 200; transition: 0.4s; padding: 25px; display: flex; flex-direction: column; }
-        .sidebar { left: -325px; } .sidebar.active { left: 0; }
-        .cart-sidebar { right: -325px; } .cart-sidebar.active { right: 0; }
-        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: none; z-index: 150; }
-        .overlay.active { display: block; }
-
-        .close-sidebar { align-self: flex-end; font-size: 24px; cursor: pointer; margin-bottom: 20px; color: #000; }
-        .cart-item { display: flex; gap: 12px; padding: 12px 0; border-bottom: 1px solid #eee; align-items: center; }
-        .cart-item img { width: 60px; height: 60px; object-fit: cover; border-radius: 6px; flex-shrink: 0; }
+        .btn-add-cart { background: var(--vibe-orange); color: #000; border: none; width: 100%; padding: 12px; font-weight: 800; text-transform: uppercase; cursor: pointer; font-size: 11px; transition: 0.2s; }
+        .btn-add-cart:active { transform: scale(0.98); }
 
         /* MODAL */
-        .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 1000; display: none; align-items: center; justify-content: center; padding: 10px; }
+        .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 1000; display: none; align-items: center; justify-content: center; padding: 10px; }
         .modal.active { display: flex; }
         .modal-content { background: #fff; width: 100%; max-width: 800px; display: flex; border-radius: 15px; overflow: hidden; position: relative; }
-        .modal-img-side { width: 50%; aspect-ratio: 1/1; position: relative; background: #f0f0f0; }
-        .modal-info-side { width: 50%; padding: 30px; display: flex; flex-direction: column; justify-content: center; }
+        .modal-img-side { width: 50%; aspect-ratio: 1/1; position: relative; }
+        .modal-info-side { width: 50%; padding: 25px; display: flex; flex-direction: column; justify-content: center; }
+        @media (max-width: 768px) { .modal-content { flex-direction: column; max-height: 90vh; overflow-y: auto; } .modal-img-side, .modal-info-side { width: 100%; } }
 
-        /* --- AJUSTES MOBILE EXCLUSIVOS --- */
-        @media (max-width: 768px) {
-            /* Fundo de Praia Mobile - Sem Estourar */
-            body { background-attachment: scroll; } 
+        /* SIDEBARS */
+        .sidebar, .cart-sidebar { position: fixed; top: 0; width: 300px; height: 100%; background: #fff; z-index: 200; transition: 0.4s; padding: 25px; display: flex; flex-direction: column; }
+        .sidebar { left: -310px; } .sidebar.active { left: 0; }
+        .cart-sidebar { right: -310px; } .cart-sidebar.active { right: 0; }
+        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: none; z-index: 150; }
+        .overlay.active { display: block; }
+        .close-sidebar { align-self: flex-end; font-size: 24px; cursor: pointer; margin-bottom: 20px; }
 
-            /* NOVO BANNER MOBILE PREMIUM */
-            .slider-container { height: 480px; } /* Altura ideal */
-            .banner-slide { flex-direction: column; justify-content: flex-start; align-items: center; padding: 0; }
-
-            /* Imagem de Fundo (Tela Cheia) */
-            .banner-img-area { 
-                position: absolute; top: 0; left: 0; 
-                width: 100%; height: 100%; 
-                opacity: 1; z-index: 4; 
-            }
-            .banner-img-area img { object-fit: cover; } /* Cobre tudo sem distorcer */
-
-            /* Texto e Logo Centralizados (Sobreposição) */
-            .banner-text { 
-                width: 100%; height: 100%; 
-                /* 2. TEXTO MAIS PRA CIMA NO MOBILE */
-                padding: 30px 20px 0; /* Menos padding inferior para subir */
-                text-align: center; align-items: center; justify-content: flex-start; /* Alinha no topo */
-                position: relative; z-index: 6; 
-                
-                /* EFEITO DE SOBREPOSIÇÃO PREMIUM - AJUSTADO */
-                background: linear-gradient(0deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.1) 60%, rgba(255,255,255,0.7) 100%);
-                
-                /* 1. NÃO DESFOCAR TANTO AS IMAGENS DO BANNER (Reduzido para 1px) */
-                backdrop-filter: blur(1px); 
-                -webkit-backdrop-filter: blur(1px);
-            }
-
-            /* Estilo dos textos no mobile (Claros para contraste) */
-            .banner-text h2 { 
-                font-size: 28px; font-weight: 800; color: #fff; text-shadow: 0 2px 4px rgba(0,0,0,0.4);
-                margin-bottom: 8px; text-transform: uppercase;
-            }
-            .banner-text h2 span { color: var(--vibe-orange); text-shadow: none; }
-            
-            .banner-text p { 
-                font-size: 13px; color: rgba(255,255,255,0.95); margin-bottom: 15px; max-width: 100%; 
-                text-shadow: 0 1px 2px rgba(0,0,0,0.4);
-            }
-            
-            /* Botão mobile */
-            .btn-banner { 
-                padding: 12px 25px; font-size: 11px; 
-                border-radius: 5px; background: #fff; color: #000; 
-                font-weight: 800; box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-            }
-
-            /* Produtos - 2 colunas */
-            .product-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
-            .logo-central { font-size: 16px; }
-
-            .modal-content { flex-direction: column; max-height: 90vh; overflow-y: auto; }
-            .modal-img-side, .modal-info-side { width: 100%; }
-
-            .cart-sidebar, .sidebar { width: 85%; }
-        }
+        footer { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); padding: 20px; text-align: center; border-top: 2px solid var(--vibe-orange); }
     </style>
 </head>
 <body>
@@ -187,11 +104,11 @@
 <div class="promo-bar">VIBES | PREMIUM SUNGLASSES 2026</div>
 
 <header>
-    <div class="menu-toggle" onclick="toggleSidebar('sidebar')"><i class="fa-solid fa-bars"></i></div>
+    <div onclick="toggleSidebar('sidebar')" style="cursor:pointer; font-size: 20px;"><i class="fa-solid fa-bars"></i></div>
     <div class="logo-central" onclick="location.reload()">VIBES</div>
-    <div class="cart-icon" onclick="toggleSidebar('cart-sidebar')">
+    <div onclick="toggleSidebar('cart-sidebar')" style="cursor:pointer; position:relative; font-size: 20px;">
         <i class="fa-solid fa-cart-shopping"></i>
-        <span id="cart-count">0</span>
+        <span id="cart-count" style="position: absolute; top:-8px; right:-8px; background:#000; color:#fff; font-size:9px; width:16px; height:16px; border-radius:50%; display:flex; align-items:center; justify-content:center;">0</span>
     </div>
 </header>
 
@@ -199,24 +116,10 @@
 
 <aside class="sidebar" id="sidebar">
     <div class="close-sidebar" onclick="closeAll()"><i class="fa-solid fa-xmark"></i></div>
-    <h3 style="margin-bottom: 20px; border-bottom: 2px solid var(--vibe-orange); padding-bottom: 10px;">CATEGORIAS</h3>
+    <h3 style="border-bottom: 2px solid var(--vibe-orange); padding-bottom: 10px;">CATEGORIAS</h3>
     <div onclick="filtrar('todos')" style="padding: 15px 0; cursor: pointer; font-weight: 600;">TODOS</div>
     <div onclick="filtrar('masculino')" style="padding: 15px 0; cursor: pointer; font-weight: 600;">MASCULINO</div>
     <div onclick="filtrar('feminino')" style="padding: 15px 0; cursor: pointer; font-weight: 600;">FEMININO</div>
-    <div onclick="filtrar('esportivo')" style="padding: 15px 0; cursor: pointer; font-weight: 600;">ESPORTIVO</div>
-</aside>
-
-<aside class="cart-sidebar" id="cart-sidebar">
-    <div class="close-sidebar" onclick="closeAll()"><i class="fa-solid fa-xmark"></i></div>
-    <h3 style="margin-bottom: 20px;">MEU CARRINHO</h3>
-    <div id="cart-items" style="flex-grow: 1; overflow-y: auto;"></div>
-    <div style="padding: 20px 0; font-weight: 800; font-size: 18px; border-top: 1px solid #eee;">
-        TOTAL: R$ <span id="cart-total">0,00</span>
-    </div>
-    
-    <button class="btn-banner" style="width: 100%; background: var(--whatsapp-color); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;" onclick="checkout()">
-        <i class="fa-brands fa-whatsapp" style="font-size: 18px;"></i> PEDIR NO WHATSAPP
-    </button>
 </aside>
 
 <section class="slider-container">
@@ -225,28 +128,25 @@
     <div class="main-slider" id="mainSlider">
         <div class="banner-slide">
             <div class="banner-text">
-                <img src="logo.png" style="max-width: 150px; margin-bottom: 15px; display: block;" onerror="this.src='https://via.placeholder.com/150x60?text=VIBES'">
-                <h2>ESTILO<span> ÚNICO</span></h2>
-                <p>Proteção UV400 e design premium Vibes.</p>
-                <a href="#grid" class="btn-banner">VER MAIS</a>
+                <img src="logo.png" style="max-width: 130px; margin-bottom: 10px;" onerror="this.src='https://via.placeholder.com/130x40?text=VIBES'">
+                <h2>ESTILO<span> ÚNICO</span></h2><p>Proteção UV400 premium.</p>
+                <button class="btn-add-cart" style="width:auto; padding: 10px 20px;" onclick="location.href='#grid'">VER MAIS</button>
             </div>
-            <div class="banner-img-area"><img src="banner destaque/destaque 1.jpg" onerror="this.src='https://images.unsplash.com/photo-1511499767390-90342f56771f?w=800'"></div>
+            <div class="banner-img-area"><img src="banner destaque/destaque 1.jpg"></div>
         </div>
         <div class="banner-slide">
             <div class="banner-text">
-                <h2>NOVA<span> LINHA</span></h2>
-                <p>O equilíbrio entre leveza e durabilidade premium.</p>
-                <a href="#grid" class="btn-banner">EXPLORAR</a>
+                <h2>NOVA<span> LINHA</span></h2><p>Design moderno e leve.</p>
+                <button class="btn-add-cart" style="width:auto; padding: 10px 20px;" onclick="location.href='#grid'">EXPLORAR</button>
             </div>
-            <div class="banner-img-area"><img src="banner destaque/destaque 2.jpg" onerror="this.src='https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=800'"></div>
+            <div class="banner-img-area"><img src="banner destaque/destaque 2.jpg"></div>
         </div>
         <div class="banner-slide">
             <div class="banner-text">
-                <h2>QUALIDADE<span> VIBES</span></h2>
-                <p>Lentes polarizadas asseguradas pela Ótica Vibes.</p>
-                <a href="#grid" class="btn-banner">COMPRAR</a>
+                <h2>QUALIDADE<span> VIBES</span></h2><p>Lentes polarizadas.</p>
+                <button class="btn-add-cart" style="width:auto; padding: 10px 20px;" onclick="location.href='#grid'">COMPRAR</button>
             </div>
-            <div class="banner-img-area"><img src="banner destaque/destaque 3.jpg" onerror="this.src='https://images.unsplash.com/photo-1508296695146-257a814070b4?w=800'"></div>
+            <div class="banner-img-area"><img src="banner destaque/destaque 3.jpg"></div>
         </div>
     </div>
 </section>
@@ -254,6 +154,18 @@
 <div class="main-layout" id="grid">
     <main class="product-grid" id="product-list"></main>
 </div>
+
+<footer style="margin-top:auto">
+    <p style="font-size:11px; font-weight:800;">USE VIBES2026 / TODOS OS DIREITOS RESERVADOS</p>
+</footer>
+
+<aside class="cart-sidebar" id="cart-sidebar">
+    <div class="close-sidebar" onclick="closeAll()"><i class="fa-solid fa-xmark"></i></div>
+    <h3>MEU CARRINHO</h3>
+    <div id="cart-items" style="flex-grow: 1; overflow-y: auto; margin: 20px 0;"></div>
+    <div style="padding: 15px 0; font-weight: 800; border-top: 1px solid #eee;">TOTAL: R$ <span id="cart-total">0,00</span></div>
+    <button class="btn-add-cart" style="background: var(--whatsapp-color); color:#fff; font-size: 13px;" onclick="checkout()"><i class="fa-brands fa-whatsapp"></i> PEDIR NO WHATSAPP</button>
+</aside>
 
 <div class="modal" id="productModal">
     <div class="modal-content">
@@ -265,7 +177,7 @@
 
 <script>
     const catalogo = [
-        ["Casual Dourado Lente Verde", 69.90, "masculino", ["oculos casual dourado lente verde.jpg", "oculos dourado casual lente verde 2.jpg"]],
+         ["Casual Dourado Lente Verde", 69.90, "masculino", ["oculos casual dourado lente verde.jpg", "oculos dourado casual lente verde 2.jpg"]],
         ["Óculos Casual Urban Black", 74.90, "masculino", ["oculos casual urban black.jpg", "oculos casual urban black 2.jpg"]],
         ["Casual Redondo Madeira", 72.00, "masculino", ["oculos casual redondo madeira.jpg", "oculos casual redondo madeira 2.jpg"]],
         ["Esportivo Lente Amarela", 79.90, "esportivo", ["oculos esportivo lente amarela.jpg", "oculos esportivo lente amarela 2.jpg"]],
@@ -292,16 +204,23 @@
             <div class="product-card">
                 <div class="img-box">
                     <button class="nav-btn btn-l" onclick="changePic(${p.id}, -1, event)">❮</button>
-                    <img src="oculos/${p.fotos[p.fotoAtual]}" onclick="openModal(${p.id})" onerror="this.src='https://via.placeholder.com/400?text=VIBES'">
+                    <img src="oculos/${p.fotos[p.fotoAtual]}" onclick="openModal(${p.id})" onerror="this.src='https://via.placeholder.com/400'">
                     <button class="nav-btn btn-r" onclick="changePic(${p.id}, 1, event)">❯</button>
                 </div>
-                <div class="card-info" onclick="openModal(${p.id})">
-                    <p style="font-size: 11px; font-weight: 600; text-transform: uppercase; color: #555;">${p.nome}</p>
-                    <span class="price">R$ ${p.preco.toFixed(2).replace('.',',')}</span>
+                <div style="padding:12px; text-align:center; cursor:pointer" onclick="openModal(${p.id})">
+                    <p style="font-size:11px; font-weight:600; text-transform:uppercase;">${p.nome}</p>
+                    <span style="color:var(--vibe-orange); font-weight:800; font-size:18px;">R$ ${p.preco.toFixed(2).replace('.',',')}</span>
                 </div>
                 <button class="btn-add-cart" onclick="addToCart(${p.id})">ADICIONAR</button>
             </div>
         `).join('');
+    }
+
+    function filtrar(cat) {
+        filtroAtivo = cat;
+        render();
+        closeAll();
+        window.location.href = "#grid";
     }
 
     function changePic(id, dir, e) {
@@ -316,10 +235,10 @@
         const p = produtos.find(x => x.id === id);
         updateModalImg(p);
         document.getElementById('modal-info').innerHTML = `
-            <h2 style="font-size: 22px; text-transform: uppercase;">${p.nome}</h2>
-            <p class="price" style="font-size: 28px; margin: 15px 0;">R$ ${p.preco.toFixed(2).replace('.',',')}</p>
-            <p style="color: #666; font-size: 14px; margin-bottom: 25px;">Modelo premium com proteção UV400 certificada assegurado pela Ótica Vibes.</p>
-            <button class="btn-add-cart" style="border-radius: 5px;" onclick="addToCart(${p.id}); closeModal();">ADICIONAR AO CARRINHO</button>
+            <h2 style="font-size: 20px; text-transform:uppercase;">${p.nome}</h2>
+            <p style="color:var(--vibe-orange); font-size:24px; font-weight:800; margin:10px 0;">R$ ${p.preco.toFixed(2).replace('.',',')}</p>
+            <p style="font-size:13px; color:#666; margin-bottom:20px;">Proteção UV400 premium Vibes.</p>
+            <button class="btn-add-cart" onclick="addToCart(${p.id}); closeModal()">ADICIONAR AO CARRINHO</button>
         `;
         document.getElementById('productModal').classList.add('active');
     }
@@ -332,13 +251,12 @@
         `;
     }
 
-    function closeModal() { document.getElementById('productModal').classList.remove('active'); }
     function toggleSidebar(id) { document.getElementById(id).classList.toggle('active'); document.getElementById('overlay').classList.toggle('active'); }
     function closeAll() { document.querySelectorAll('.sidebar, .cart-sidebar, .overlay').forEach(el => el.classList.remove('active')); }
+    function closeModal() { document.getElementById('productModal').classList.remove('active'); }
 
     function addToCart(id) {
-        const p = produtos.find(x => x.id === id);
-        carrinho.push(p);
+        carrinho.push(produtos.find(x => x.id === id));
         updateCart();
         toggleSidebar('cart-sidebar');
     }
@@ -348,17 +266,20 @@
         let total = 0;
         document.getElementById('cart-items').innerHTML = carrinho.map((item, i) => {
             total += item.preco;
-            return `<div class="cart-item">
-                <img src="oculos/${item.fotos[0]}" onerror="this.src='https://via.placeholder.com/100'">
-                <div style="flex-grow:1; font-size:12px;"><b>${item.nome}</b><br>R$ ${item.preco.toFixed(2)}</div>
-                <i class="fa-solid fa-trash" onclick="removeItem(${i})" style="cursor:pointer; color:red; padding: 10px;"></i>
+            return `<div style="display:flex; gap:10px; margin-bottom:15px; align-items:center; border-bottom:1px solid #f0f0f0; padding-bottom:10px;">
+                <img src="oculos/${item.fotos[0]}" width="50" height="50" style="object-fit:cover; border-radius:5px;">
+                <div style="flex:1; font-size:11px;"><b>${item.nome}</b><br>R$ ${item.preco.toFixed(2)}</div>
+                <i class="fa-solid fa-trash" onclick="removeItem(${i})" style="color:red; cursor:pointer; padding:5px;"></i>
             </div>`;
         }).join('');
         document.getElementById('cart-total').innerText = total.toFixed(2).replace('.',',');
     }
 
-    function removeItem(i) { carrinho.splice(i, 1); updateCart(); }
-    function filtrar(cat) { filtroAtivo = cat; render(); closeAll(); }
+    function removeItem(i) {
+        carrinho.splice(i, 1);
+        updateCart();
+    }
+
     function checkout() {
         if(carrinho.length === 0) return alert("Carrinho vazio!");
         let msg = "Olá Vibes! Gostaria de pedir:%0A" + carrinho.map(i => "- " + i.nome).join("%0A");
@@ -366,8 +287,8 @@
     }
 
     render();
+    setInterval(() => moveSlider(1), 7000);
 </script>
 </body>
 </html>
-
 
