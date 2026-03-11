@@ -9,155 +9,110 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
-        :root {
-            --vibe-orange: #FF8F1C;
-            --vibe-orange-dark: #e67e17;
-            --bg-color: #ffffff;
-            --whatsapp-color: #25D366;
+        :root { --vibe-orange: #FF8F1C; --whatsapp-color: #25D366; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+        
+        body { 
+            background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=2073&auto=format&fit=crop');
+            background-size: cover; background-position: center; background-attachment: fixed;
+            min-height: 100vh; display: flex; flex-direction: column; overflow-x: hidden;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
-        body { background-color: var(--bg-color); color: #000; overflow-x: hidden; }
+        body::before {
+            content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); z-index: -1; 
+        }
 
         .promo-bar { background: var(--vibe-orange); color: #000; text-align: center; padding: 10px; font-size: 10px; text-transform: uppercase; font-weight: 800; letter-spacing: 2px; }
 
-        /* Header */
         header {
-            display: grid;
-            grid-template-columns: 50px 1fr 50px;
-            align-items: center;
-            padding: 10px 15px;
-            border-bottom: 2px solid var(--vibe-orange);
-            position: sticky;
-            top: 0;
-            background: rgba(255,255,255,0.98);
-            backdrop-filter: blur(10px);
-            z-index: 100;
+            display: grid; grid-template-columns: 50px 1fr 50px; align-items: center;
+            padding: 10px 15px; border-bottom: 2px solid var(--vibe-orange);
+            position: sticky; top: 0; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(5px); z-index: 100;
         }
         
-        .menu-toggle { font-size: 20px; cursor: pointer; display: flex; align-items: center; }
+        .menu-toggle, .cart-icon { font-size: 20px; cursor: pointer; position: relative; color: #000; }
         .logo-central { font-weight: 800; font-size: 22px; letter-spacing: 4px; text-transform: uppercase; text-align: center; cursor: pointer; color: #000; text-decoration: none; }
-        .cart-btn { position: relative; cursor: pointer; font-size: 20px; text-align: right; }
-        .cart-count { position: absolute; top: -8px; right: -10px; background: var(--vibe-orange); color: #000; font-size: 10px; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; }
-
-        /* Banner Hero - Sem Borda Laranja */
-        .hero-slider { 
-            width: 100%; 
-            background: #fdfdfd; 
-            display: flex; 
-            align-items: center; 
-            padding: 60px 20px; 
-            border-bottom: 1px solid #eee;
-        }
-        .slide { 
-            display: flex; 
-            align-items: center; 
-            justify-content: space-between; 
-            width: 100%; 
-            max-width: 1200px; 
-            margin: 0 auto; 
-            gap: 40px; 
-        }
         
-        /* Conteúdo do Banner Esquerdo */
-        .slide-content { flex: 1; text-align: left; }
-        .slide-content h2 { font-size: clamp(36px, 6vw, 65px); font-weight: 800; text-transform: uppercase; line-height: 0.9; margin-bottom: 15px; }
-        .slide-content h2 span { color: var(--vibe-orange); }
-        .slide-content p.subtitle { font-size: 16px; color: #555; margin-bottom: 25px; max-width: 450px; line-height: 1.5; }
-        
-        /* Novas Informações (Pontos de Destaque Laranjas) */
-        .banner-features { list-style: none; margin-bottom: 35px; display: flex; flex-direction: column; gap: 12px; }
-        .banner-features li { display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 600; color: #333; }
-        .banner-features li i { color: var(--vibe-orange); font-size: 16px; }
+        #cart-count {
+            position: absolute; top: -10px; right: -10px; background: var(--vibe-orange);
+            color: #000; font-size: 10px; font-weight: 800; width: 18px; height: 18px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+        }
 
-        /* Botão do Banner Laranja e Retangular */
-        .btn-banner { 
+        /* MENU LATERAL E CARRINHO */
+        .sidebar, .cart-sidebar { position: fixed; top: 0; width: 300px; height: 100%; background: #fff; z-index: 200; transition: 0.4s; padding: 30px; display: flex; flex-direction: column; }
+        .sidebar { left: -320px; } 
+        .sidebar.active { left: 0; }
+        .cart-sidebar { right: -320px; } 
+        .cart-sidebar.active { right: 0; }
+        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); display: none; z-index: 150; backdrop-filter: blur(3px); }
+        .overlay.active { display: block; }
+
+        .menu-list { list-style: none; margin-top: 20px; }
+        .menu-list li { padding: 15px 0; border-bottom: 1px solid #eee; cursor: pointer; font-weight: 700; text-transform: uppercase; font-size: 14px; }
+
+        /* BANNER */
+        .slider-container { position: relative; width: 100%; height: 550px; background: #fff; overflow: hidden; }
+        .main-slider { width: 300%; height: 100%; display: flex; transition: transform 0.7s cubic-bezier(0.65, 0, 0.35, 1); }
+        .banner-slide { width: 100%; height: 100%; display: flex; align-items: center; position: relative; }
+        .banner-text { width: 45%; z-index: 5; padding-left: 8%; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; }
+        .banner-text h2 { font-size: 50px; font-weight: 800; line-height: 1; margin-bottom: 15px; text-transform: uppercase; }
+        .banner-text h2 span { color: var(--vibe-orange); }
+        .banner-text p { font-size: 18px; color: #444; margin-bottom: 25px; line-height: 1.4; max-width: 450px; }
+        .banner-img-area { position: absolute; right: 0; top: 0; width: 55%; height: 100%; }
+        .banner-img-area img { width: 100%; height: 100%; object-fit: cover; }
+
+        .slider-arrow { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.8); border: none; width: 45px; height: 45px; border-radius: 50%; cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; }
+        .prev-arrow { left: 20px; } .next-arrow { right: 20px; }
+        .btn-banner { background: #000; color: #fff; padding: 18px 45px; text-decoration: none; font-weight: 800; font-size: 14px; text-transform: uppercase; display: inline-block; }
+
+        /* GRID */
+        .main-layout { max-width: 1200px; margin: 0 auto; padding: 40px 15px; width: 100%; }
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px; }
+        .product-card { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.08); transition: 0.3s; }
+        .img-box { height: 320px; width: 100%; position: relative; overflow: hidden; }
+        .img-box img { width: 100%; height: 100%; object-fit: cover; cursor: pointer; }
+        .nav-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.9); border: none; width: 35px; height: 35px; border-radius: 50%; cursor: pointer; z-index: 5; display: flex; align-items: center; justify-content: center; }
+        .btn-l { left: 10px; } .btn-r { right: 10px; }
+        .card-info { padding: 15px; text-align: center; cursor: pointer; }
+        .price { color: var(--vibe-orange); font-weight: 800; font-size: 22px; }
+        
+        /* BOTÃO ADICIONAR LARANJA */
+        .btn-add-cart { 
             background: var(--vibe-orange); 
             color: #000; 
-            padding: 18px 40px; 
-            text-decoration: none; 
-            font-weight: 800; 
-            font-size: 14px; 
-            text-transform: uppercase; 
-            letter-spacing: 1px;
-            display: inline-block; 
-            transition: 0.3s; 
             border: none; 
-            border-radius: 0; /* Pontas Quadradas */
-        }
-        .btn-banner:hover { background: #000; color: #fff; transform: translateY(-3px); }
-
-        /* Imagem do Banner Direita (Uma Imagem Retangular) */
-        .slide-images-wrapper { flex: 1.3; display: flex; justify-content: flex-end; align-items: center; }
-        .slide-images-wrapper img { 
             width: 100%; 
-            max-width: 600px;
-            height: 400px; /* Altura Retangular Fixa */
-            object-fit: cover; /* Mantém a proporção cortando */
-            border-radius: 0; /* Pontas Quadradas */
-            /* Borda Laranja e Sombra removidas */
+            padding: 15px; 
+            font-weight: 800; 
+            text-transform: uppercase; 
+            cursor: pointer; 
+            transition: background 0.3s;
         }
+        .btn-add-cart:hover { background: #e67e17; }
 
-        /* Sidebar, Grid, Modal, Carrinho (Mantenha o código anterior com ajustes de preço) */
-        .sidebar { position: fixed; top: 0; left: -100%; width: 280px; height: 100%; background: #fff; z-index: 200; transition: 0.4s; padding: 40px 20px; box-shadow: 10px 0 30px rgba(0,0,0,0.1); }
-        .sidebar.active { left: 0; }
-        .sidebar-menu { list-style: none; margin-top: 30px; }
-        .sidebar-menu li { padding: 15px; border-radius: 8px; cursor: pointer; font-size: 14px; font-weight: 700; margin-bottom: 10px; text-transform: uppercase; border: 1px solid #eee; }
-        .sidebar-menu li.active { background: var(--vibe-orange); color: #000; border-color: var(--vibe-orange); }
-        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: none; z-index: 150; }
-        .overlay.active { display: block; }
-        .main-layout { max-width: 1200px; margin: 0 auto; padding: 30px 15px; }
-        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; }
-        .product-card { background: #fff; border-radius: 12px; overflow: hidden; border: 1px solid #eee; position: relative; transition: 0.3s; cursor: pointer; }
-        .product-card:hover { transform: translateY(-5px); border-color: var(--vibe-orange); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
-        .img-box { height: 300px; width: 100%; position: relative; background: #f9f9f9; }
-        .img-box img { width: 100%; height: 100%; object-fit: cover; }
-        .nav-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.9); border: none; width: 35px; height: 35px; border-radius: 50%; cursor: pointer; z-index: 5; color: #000; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        .btn-l { left: 5px; } .btn-r { right: 5px; }
-        .card-info { padding: 15px; text-align: center; }
-        .price { color: var(--vibe-orange); font-weight: 800; font-size: 20px; }
-        
-        /* Estilo do Selo de Promoção */
-        .promo-badge {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            background-color: var(--vibe-orange);
-            color: #000;
-            padding: 5px 10px;
-            font-size: 10px;
-            font-weight: 800;
-            text-transform: uppercase;
-            border-radius: 50px;
-            z-index: 10;
-            letter-spacing: 1px;
-        }
-
-        .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 1000; display: none; align-items: center; justify-content: center; padding: 15px; }
+        /* MODAL */
+        .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 1000; display: none; align-items: center; justify-content: center; padding: 15px; backdrop-filter: blur(10px); }
         .modal.active { display: flex; }
-        .modal-content { background: #fff; width: 100%; max-width: 900px; border-radius: 20px; display: flex; flex-direction: row; overflow: hidden; position: relative; max-height: 90vh; }
-        .modal-img-container { width: 55%; background: #f9f9f9; position: relative; display: flex; align-items: center; justify-content: center; }
-        .modal-img-container img { width: 100%; height: 100%; object-fit: cover; }
-        .modal-details { width: 45%; padding: 40px; display: flex; flex-direction: column; justify-content: center; overflow-y: auto; }
-        .close-modal { position: absolute; top: 15px; right: 15px; font-size: 24px; z-index: 11; cursor: pointer; color: #000; }
-        .btn-buy { background: var(--vibe-orange); border: none; padding: 18px; border-radius: 10px; font-weight: 800; cursor: pointer; margin-top: 10px; width: 100%; text-transform: uppercase; font-size: 13px; letter-spacing: 1px;}
-        .cart-sidebar { position: fixed; top: 0; right: -100%; width: 320px; height: 100%; background: #fff; z-index: 200; transition: 0.4s; padding: 25px; display: flex; flex-direction: column; box-shadow: -10px 0 30px rgba(0,0,0,0.1); }
-        .cart-sidebar.active { right: 0; }
+        .modal-content { background: #fff; width: 100%; max-width: 900px; display: flex; border-radius: 20px; overflow: hidden; position: relative; min-height: 500px; }
+        .modal-img-side { width: 55%; background: #f4f4f4; position: relative; display: flex; align-items: center; justify-content: center; }
+        .modal-info-side { width: 45%; padding: 40px; display: flex; flex-direction: column; justify-content: center; }
+        .close-modal { position: absolute; top: 20px; right: 20px; font-size: 30px; cursor: pointer; z-index: 10; color: #333; }
 
-        /* Ajustes Mobile (Banner e Grid) */
+        /* CARRINHO ITEM - CORREÇÃO DA IMAGEM */
+        .cart-item { display: flex; gap: 10px; padding: 10px 0; border-bottom: 1px solid #eee; align-items: center; }
+        .cart-item img { width: 60px; height: 60px; object-fit: cover; border-radius: 5px; flex-shrink: 0; }
+
         @media (max-width: 768px) {
-            .hero-slider { padding: 40px 15px; }
-            .slide { flex-direction: column; text-align: center; gap: 30px; }
-            .slide-content { text-align: center; display: flex; flex-direction: column; align-items: center; }
-            .banner-features { align-items: center; }
-            .slide-images-wrapper { width: 100%; justify-content: center; }
-            .slide-images-wrapper img { height: 250px; }
+            .banner-text { width: 100%; padding: 30px; text-align: center; align-items: center; background: rgba(255,255,255,0.85); }
+            .banner-img-area { width: 100%; opacity: 0.3; }
             .product-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-            .img-box { height: 180px; }
-            .modal-content { flex-direction: column; }
-            .modal-img-container, .modal-details { width: 100%; }
-            .modal-img-container { height: 250px; }
-            .modal-details { padding: 20px; }
+            .modal-content { flex-direction: column; height: auto; max-height: 90vh; overflow-y: auto; }
+            .modal-img-side, .modal-info-side { width: 100%; }
+            .modal-img-side { height: 250px; }
+            .sidebar, .cart-sidebar { width: 100%; }
+            .sidebar { left: -100%; } .cart-sidebar { right: -100%; }
         }
     </style>
 </head>
@@ -166,223 +121,189 @@
 <div class="promo-bar">VIBES | PREMIUM SUNGLASSES 2026</div>
 
 <header>
-    <div class="menu-toggle" onclick="toggleMenu()">
-        <i class="fa-solid fa-bars"></i>
-    </div>
-    <div class="logo-central" onclick="window.location.reload()">VIBES</div>
-    <div class="icons">
-        <div class="cart-btn" onclick="toggleCart()">
-            <i class="fa-solid fa-bag-shopping"></i>
-            <span class="cart-count" id="cartCount">0</span>
-        </div>
+    <div class="menu-toggle" onclick="toggleSidebar('sidebar')"><i class="fa-solid fa-bars"></i></div>
+    <div class="logo-central" onclick="location.reload()">VIBES</div>
+    <div class="cart-icon" onclick="toggleSidebar('cart-sidebar')">
+        <i class="fa-solid fa-cart-shopping"></i>
+        <span id="cart-count">0</span>
     </div>
 </header>
 
-<div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+<div class="overlay" id="overlay" onclick="closeAll()"></div>
+
 <aside class="sidebar" id="sidebar">
-    <div style="display:flex; justify-content:space-between; align-items:center;">
-        <h3 style="letter-spacing:2px;">FILTRAR</h3>
-        <i class="fa-solid fa-xmark" onclick="toggleMenu()" style="font-size:20px; cursor:pointer;"></i>
-    </div>
-    <ul class="sidebar-menu">
-        <li class="active" onclick="filtrar('todos', this)">Todos os Modelos</li>
-        <li onclick="filtrar('esportivo', this)">Linha Esportiva</li>
-        <li onclick="filtrar('masculino', this)">Masculino</li>
-        <li onclick="filtrar('feminino', this)">Feminino</li>
+    <h3 style="letter-spacing: 2px;">MENU</h3>
+    <ul class="menu-list">
+        <li onclick="filtrar('todos')">Todos os Modelos</li>
+        <li onclick="filtrar('masculino')">Masculino</li>
+        <li onclick="filtrar('feminino')">Feminino</li>
+        <li onclick="filtrar('esportivo')">Linha Esportiva</li>
     </ul>
+    <button onclick="closeAll()" style="margin-top: auto; border: none; background: none; cursor: pointer; color: #888;">FECHAR</button>
 </aside>
 
-<section class="hero-slider">
-    <div class="slide">
-        <div class="slide-content">
-            <h2>USE<br><span>VIBES</span></h2>
-            <p class="subtitle">O equilíbrio perfeito entre design arrojado, proteção máxima e conforto premium para o seu dia a dia.</p>
-            
-            <ul class="banner-features">
-                <li><i class="fa-solid fa-shield-halved"></i> Lentes com Proteção UV400 Certificada</li>
-                <li><i class="fa-solid fa-gem"></i> Armações Leves e de Alta Durabilidade</li>
-                <li><i class="fa-solid fa-truck-fast"></i> Frete Grátis para todo o Brasil (Consulte)</li>
-            </ul>
-            
-            <a href="#grid" class="btn-banner">EXPLORAR AGORA</a>
+<section class="slider-container">
+    <button class="slider-arrow prev-arrow" onclick="moveSlider(-1)">❮</button>
+    <button class="slider-arrow next-arrow" onclick="moveSlider(1)">❯</button>
+    <div class="main-slider" id="mainSlider">
+        <div class="banner-slide">
+            <div class="banner-text">
+                <img src="logo.png" style="max-width: 220px; margin-bottom: 20px; display: block;" onerror="this.src='https://via.placeholder.com/200x80?text=VIBES+LOGO'">
+                <h2>DESIGN<span> PREMIUM</span></h2>
+                <p>Estilo icônico e proteção UV400 completa para o seu olhar.</p>
+                <a href="#grid" class="btn-banner">VER COLEÇÃO</a>
+            </div>
+            <div class="banner-img-area"><img src="banner destaque/destaque 1.jpg"></div>
         </div>
-        
-        <div class="slide-images-wrapper">
-            <img src="banner destaque/oculos dourado casual lente verde 2.jpg" alt="Óculos Casual Dourado Lente Verde - Use Vibes" onerror="this.src='https://images.unsplash.com/photo-1572635196237-14b3f281503f?auto=format&fit=crop&w=1200&h=800&q=80'">
+        <div class="banner-slide">
+            <div class="banner-text">
+                <h2>NOVA<span> COLEÇÃO</span></h2>
+                <p>Descubra o equilíbrio perfeito entre design e conforto premium.</p>
+                <a href="#grid" class="btn-banner">EXPLORAR</a>
+            </div>
+            <div class="banner-img-area"><img src="banner destaque/destaque 2.jpg"></div>
+        </div>
+        <div class="banner-slide">
+            <div class="banner-text">
+                <h2>QUALIDADE<span> VIBES</span></h2>
+                <p>Lentes polarizadas com garantia total de satisfação.</p>
+                <a href="#grid" class="btn-banner">COMPRAR</a>
+            </div>
+            <div class="banner-img-area"><img src="banner destaque/destaque 3.jpg"></div>
         </div>
     </div>
 </section>
 
-<div class="main-layout">
-    <main class="product-grid" id="grid"></main>
-</div>
+<div class="main-layout"><main class="product-grid" id="grid"></main></div>
 
 <div class="modal" id="productModal">
     <div class="modal-content">
         <i class="fa-solid fa-xmark close-modal" onclick="closeModal()"></i>
-        <div class="modal-img-container" id="modalImgContainer"></div>
-        <div class="modal-details" id="modalDetails"></div>
+        <div class="modal-img-side" id="modal-img-container"></div>
+        <div class="modal-info-side" id="modal-info"></div>
     </div>
 </div>
 
-<div class="cart-sidebar" id="cart">
-    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
-        <h3 style="letter-spacing:1px">SUA SACOLA</h3>
-        <i class="fa-solid fa-xmark" onclick="toggleCart()" style="cursor:pointer; font-size:18px;"></i>
-    </div>
-    <div id="cartItems" style="flex-grow:1; overflow-y:auto;"></div>
-    <div style="border-top:1px solid #eee; padding-top:20px; margin-top:auto;">
-        <p style="display:flex; justify-content:space-between; font-weight:800; font-size:16px;">Total: <span id="cartTotal">R$ 0,00</span></p><br>
-        <button class="btn-buy" onclick="finalizar()" style="background:var(--whatsapp-color); color:#fff; border-radius:50px; width:100%;">FINALIZAR NO WHATSAPP</button>
-    </div>
-</div>
+<aside class="cart-sidebar" id="cart-sidebar">
+    <h3>SEU CARRINHO</h3>
+    <div id="cart-items" style="flex-grow: 1; overflow-y: auto; margin: 20px 0;"></div>
+    <div style="font-weight: 800; font-size: 18px; margin-bottom: 15px;">TOTAL: R$ <span id="cart-total">0,00</span></div>
+    <button class="btn-banner" style="width: 100%; background: var(--whatsapp-color);" onclick="checkout()">FINALIZAR PEDIDO</button>
+</aside>
 
 <script>
-    // --- ONDE VOCÊ ALTERA OS PREÇOS ---
-// Estrutura: ["Nome", Preço, "Categoria", ["fotos.jpg"]]
-const catalogoVibes = [
-    ["Casual Dourado Lente Verde", 69.90, "masculino", ["oculos casual dourado lente verde.jpg", "oculos dourado casual lente verde 2.jpg"]],
-    ["Casual Redondo Madeira", 72.00, "masculino", ["oculos casual redondo madeira.jpg", "oculos casual redondo madeira 2.jpg"]],
-    ["Esportivo Lente Amarela", 79.90, "esportivo", ["oculos esportivo lente amarela.jpg", "oculos esportivo lente amarela 2.jpg"]],
-    ["Esportivo Carbon Preto", 80.00, "esportivo", ["oculos esportivo preto.jpg", "oculos esportivo preto 2.jpg"]],
-    ["Casual Quadrado Black", 69.90, "masculino", ["oculos preto casual quadrado.jpg", "oculos preto casual quadrado 2.jpg"]],
-    ["Casual Redondo Black", 74.50, "masculino", ["oculos preto casual redondo.jpg", "oculos preto casual redondo 2.jpg"]],
-    ["Transparente Lente Verde", 78.00, "masculino", ["oculos preto transparente lente verde.jpg", "oculos preto transparente lente verde 2.jpg"]],
-    ["Redondo Marrom Tortoise", 73.00, "feminino", ["oculos redondo casual marrom.jpg", "oculos redondo casual marrom 2.jpg"]],
-    ["Urban White Style", 79.00, "masculino", ["oculos urban branco.jpg", "oculos urban 2.jpg"]],
-    ["Urban Red Matte", 69.90, "masculino", ["oculos urban vermelho.jpg", "oculos urban vermelho 2.jpg"]]
-];
+    const catalogo = [
+        ["Casual Dourado Lente Verde", 69.90, "masculino", ["oculos casual dourado lente verde.jpg", "oculos dourado casual lente verde 2.jpg"]],
+        ["Óculos Casual Urban Black", 74.90, "masculino", ["oculos casual urban black.jpg", "oculos casual urban black 2.jpg"]],
+        ["Casual Redondo Madeira", 72.00, "masculino", ["oculos casual redondo madeira.jpg", "oculos casual redondo madeira 2.jpg"]],
+        ["Esportivo Lente Amarela", 79.90, "esportivo", ["oculos esportivo lente amarela.jpg", "oculos esportivo lente amarela 2.jpg"]],
+        ["Esportivo Carbon Preto", 80.00, "esportivo", ["oculos esportivo preto.jpg", "oculos esportivo preto 2.jpg"]],
+        ["Casual Quadrado Black", 69.90, "masculino", ["oculos preto casual quadrado.jpg", "oculos preto casual quadrado 2.jpg"]],
+        ["Casual Redondo Black", 74.50, "masculino", ["oculos preto casual redondo.jpg", "oculos preto casual redondo 2.jpg"]],
+        ["Transparente Lente Verde", 78.00, "masculino", ["oculos preto transparente lente verde.jpg", "oculos preto transparente lente verde 2.jpg"]],
+        ["Redondo Marrom Tortoise", 73.00, "feminino", ["oculos redondo casual marrom.jpg", "oculos redondo casual marrom 2.jpg"]]
+    ];
 
-// O sistema agora apenas lê o que você escreveu acima
-const produtos = catalogoVibes.map((p, i) => ({ 
-    id: i, 
-    nome: p[0], 
-    preco: p[1], 
-    cat: p[2], 
-    fotos: p[3], 
-    fotoAtual: 0 
-}));
-    
+    let produtos = catalogo.map((p, i) => ({ id: i, nome: p[0], preco: p[1], cat: p[2], fotos: p[3], fotoAtual: 0 }));
     let carrinho = [];
-    let pAtivo = null;
+    let produtoNoModal = null;
+    let filtroAtivo = 'todos';
+    let currentSlide = 0;
 
-    function render(lista) {
-        document.getElementById('grid').innerHTML = lista.map(p => {
-            // Lógica do Selo de Promoção: Preço < R$ 75
-            let promoBadge = '';
-            if (p.preco < 75) {
-                promoBadge = `<span class="promo-badge">PROMOÇÃO:<br><span style="text-decoration: line-through; color: #555; font-size: 8px;">R$ 99,90</span> por R$ ${p.preco.toFixed(2).replace('.',',')}</span>`;
-            }
+    function moveSlider(dir) {
+        currentSlide = (currentSlide + dir + 3) % 3;
+        document.getElementById('mainSlider').style.transform = `translateX(-${(currentSlide * 100) / 3}%)`;
+    }
 
-            return `
-                <div class="product-card">
-                    ${promoBadge} <div class="img-box">
-                        ${p.fotos.length > 1 ? `<button class="nav-btn btn-l" onclick="event.stopPropagation(); trocarFotoCard(${p.id}, -1)">❮</button>` : ''}
-                        <img src="oculos/${p.fotos[p.fotoAtual]}" onclick="openModal(${p.id})" onerror="this.src='https://via.placeholder.com/400x500?text=Use+Vibes'">
-                        ${p.fotos.length > 1 ? `<button class="nav-btn btn-r" onclick="event.stopPropagation(); trocarFotoCard(${p.id}, 1)">❯</button>` : ''}
-                    </div>
-                    <div class="card-info" onclick="openModal(${p.id})">
-                        <h4 style="font-size:12px; text-transform:uppercase; letter-spacing:1px; font-weight:700;">${p.nome}</h4>
-                        <span class="price">R$ ${p.preco.toFixed(2).replace('.',',')}</span>
-                        <small style="color:#aaa; font-weight:600; font-size:11px; text-transform:uppercase;">Ver detalhes</small>
-                    </div>
+    function render() {
+        const listaFiltrada = filtroAtivo === 'todos' ? produtos : produtos.filter(p => p.cat === filtroAtivo);
+        document.getElementById('grid').innerHTML = listaFiltrada.map(p => `
+            <div class="product-card">
+                <div class="img-box">
+                    <button class="nav-btn btn-l" onclick="changePic(${p.id}, -1, event)">❮</button>
+                    <img src="oculos/${p.fotos[p.fotoAtual]}" onclick="openModal(${p.id})" onerror="this.src='https://via.placeholder.com/400'">
+                    <button class="nav-btn btn-r" onclick="changePic(${p.id}, 1, event)">❯</button>
                 </div>
-            `;
-        }).join('');
+                <div class="card-info" onclick="openModal(${p.id})">
+                    <h4 style="font-size: 11px; height: 30px; text-transform: uppercase;">${p.nome}</h4>
+                    <span class="price">R$ ${p.preco.toFixed(2).replace('.',',')}</span>
+                </div>
+                <button class="btn-add-cart" onclick="addToCart(${p.id})">ADICIONAR AO CARRINHO</button>
+            </div>
+        `).join('');
     }
 
-    function toggleMenu() {
-        document.getElementById('sidebar').classList.toggle('active');
-        document.getElementById('overlay').classList.toggle('active');
-    }
-
-    function filtrar(cat, el) {
-        document.querySelectorAll('.sidebar-menu li').forEach(l => l.classList.remove('active'));
-        el.classList.add('active');
-        render(cat === 'todos' ? produtos : produtos.filter(p => p.cat === cat));
-        if(window.innerWidth < 768) toggleMenu();
+    function changePic(id, dir, e) {
+        if(e) e.stopPropagation();
+        const p = produtos.find(x => x.id === id);
+        p.fotoAtual = (p.fotoAtual + dir + p.fotos.length) % p.fotos.length;
+        render();
+        if(produtoNoModal && produtoNoModal.id === id) updateModalImg();
     }
 
     function openModal(id) {
-        pAtivo = produtos.find(x => x.id === id);
-        pAtivo.fotoAtual = 0;
-        updateModal();
+        produtoNoModal = produtos.find(x => x.id === id);
+        updateModalImg();
+        document.getElementById('modal-info').innerHTML = `
+            <h2 style="text-transform:uppercase;">${produtoNoModal.nome}</h2>
+            <span class="price" style="font-size:32px; margin:20px 0; display:block;">R$ ${produtoNoModal.preco.toFixed(2).replace('.',',')}</span>
+            <p style="color:#666; margin-bottom:30px;">Lentes com proteção UV400 certificada. Armação premium de alta durabilidade e conforto.</p>
+            <button class="btn-add-cart" style="width:100%" onclick="addToCart(${produtoNoModal.id}); closeModal();">ADICIONAR AO CARRINHO</button>
+        `;
         document.getElementById('productModal').classList.add('active');
     }
 
-    function updateModal() {
-        // Lógica do Selo de Promoção no Modal
-        let promoInfo = '';
-        if (pAtivo.preco < 75) {
-            promoInfo = `<span style="text-decoration: line-through; color: #888; font-size: 16px;">R$ 99,90</span> por R$ ${pAtivo.preco.toFixed(2).replace('.',',')}`;
-        } else {
-            promoInfo = `R$ ${pAtivo.preco.toFixed(2).replace('.',',')}`;
-        }
-
-        document.getElementById('modalImgContainer').innerHTML = `
-            ${pAtivo.fotos.length > 1 ? `<button class="nav-btn btn-l" onclick="trocarFotoModal(-1)">❮</button>` : ''}
-            <img src="oculos/${pAtivo.fotos[pAtivo.fotoAtual]}" onerror="this.src='https://via.placeholder.com/600x600?text=Vibes'">
-            ${pAtivo.fotos.length > 1 ? `<button class="nav-btn btn-r" onclick="trocarFotoModal(1)">❯</button>` : ''}
-        `;
-        document.getElementById('modalDetails').innerHTML = `
-            <h2 style="font-size:28px; font-weight:800; text-transform:uppercase; line-height:1; margin-bottom:10px;">${pAtivo.nome}</h2>
-            <span class="price" style="font-size:30px; margin:10px 0; display:block;">${promoInfo}</span>
-            <p style="font-size:14px; color:#555; line-height:1.6; margin-bottom:20px;">Lentes com proteção UV400 certificada e armação premium de alta durabilidade. Conforto e estilo arrojado para o seu dia.</p>
-            <button class="btn-buy" onclick="add(${pAtivo.id}); closeModal();">ADICIONAR À SACOLA</button>
-            <button class="btn-buy" onclick="buyNow(${pAtivo.id})" style="background:#000; color:#fff; margin-top:10px;">COMPRAR AGORA</button>
+    function updateModalImg() {
+        document.getElementById('modal-img-container').innerHTML = `
+            <button class="nav-btn btn-l" onclick="changePic(${produtoNoModal.id}, -1)">❮</button>
+            <img src="oculos/${produtoNoModal.fotos[produtoNoModal.fotoAtual]}" style="width:100%; height:100%; object-fit:cover;">
+            <button class="nav-btn btn-r" onclick="changePic(${produtoNoModal.id}, 1)">❯</button>
         `;
     }
 
-    function trocarFotoCard(id, dir) {
+    function closeModal() { document.getElementById('productModal').classList.remove('active'); produtoNoModal = null; }
+
+    function addToCart(id) {
         const p = produtos.find(x => x.id === id);
-        p.fotoAtual = (p.fotoAtual + dir + p.fotos.length) % p.fotos.length;
-        renderAtual();
+        carrinho.push(p);
+        updateCart();
+        toggleSidebar('cart-sidebar');
     }
 
-    function trocarFotoModal(dir) {
-        pAtivo.fotoAtual = (pAtivo.fotoAtual + dir + pAtivo.fotos.length) % pAtivo.fotos.length;
-        updateModal();
-    }
-
-    function renderAtual() {
-        const catAtiva = document.querySelector('.sidebar-menu li.active');
-        const cat = catAtiva ? catAtiva.innerText.toLowerCase() : 'todos';
-        render(cat.includes('todos') ? produtos : produtos.filter(i => cat.includes(i.cat)));
-    }
-
-    function closeModal() { document.getElementById('productModal').classList.remove('active'); }
-    function toggleCart() { document.getElementById('cart').classList.toggle('active'); }
-    function add(id) { carrinho.push({...produtos.find(x => x.id === id)}); atualizarCarrinho(); toggleCart(); }
-    function remover(i) { carrinho.splice(i, 1); atualizarCarrinho(); }
-
-    function atualizarCarrinho() {
-        document.getElementById('cartCount').innerText = carrinho.length;
-        let t = 0;
-        document.getElementById('cartItems').innerHTML = carrinho.map((p, i) => {
-            t += p.preco;
-            return `<div style="display:flex; gap:12px; margin-bottom:15px; align-items:center; border-bottom: 1px solid #f9f9f9; padding-bottom:10px;">
-                <img src="oculos/${p.fotos[0]}" style="width:60px; height:60px; object-fit:cover; border-radius:8px; background:#f9f9f9;">
-                <div style="flex-grow:1;"><p style="font-size:13px; font-weight:700; color:#333;">${p.nome}</p><p style="font-size:14px; color:var(--vibe-orange); font-weight:800;">R$ ${p.preco.toFixed(2)}</p></div>
-                <i class="fa-solid fa-trash" onclick="remover(${i})" style="font-size:14px; color:#ccc; cursor:pointer;"></i>
+    function updateCart() {
+        document.getElementById('cart-count').innerText = carrinho.length;
+        let total = 0;
+        document.getElementById('cart-items').innerHTML = carrinho.map((item, i) => {
+            total += item.preco;
+            return `<div class="cart-item">
+                <img src="oculos/${item.fotos[0]}" onerror="this.src='https://via.placeholder.com/100'">
+                <div style="flex-grow:1; font-size:12px;"><b>${item.nome}</b><br>R$ ${item.preco.toFixed(2)}</div>
+                <i class="fa-solid fa-trash" onclick="removeItem(${i})" style="cursor:pointer; color:red;"></i>
             </div>`;
         }).join('');
-        document.getElementById('cartTotal').innerText = `R$ ${t.toFixed(2).replace('.',',')}`;
+        document.getElementById('cart-total').innerText = total.toFixed(2).replace('.',',');
     }
 
-    function finalizar() {
-        if(carrinho.length === 0) return alert("Sua sacola está vazia!");
-        window.open(`https://wa.me/5519989620949?text=Novo Pedido Vibes:\n` + carrinho.map(p => `- ${p.nome}`).join('\n'));
+    function removeItem(i) { carrinho.splice(i, 1); updateCart(); }
+    function toggleSidebar(id) { document.getElementById(id).classList.toggle('active'); document.getElementById('overlay').classList.toggle('active'); }
+    function closeAll() { document.querySelectorAll('.sidebar, .cart-sidebar, .overlay').forEach(el => el.classList.remove('active')); }
+    
+    function filtrar(cat) {
+        filtroAtivo = cat;
+        render();
+        closeAll();
+        window.location.href = "#grid";
     }
 
-    function buyNow(id) {
-        const p = produtos.find(x => x.id === id);
-        window.open(`https://wa.me/5519989620949?text=Olá Vibes! Quero comprar o modelo: ${p.nome} (R$ ${p.preco.toFixed(2)})`);
+    function checkout() {
+        if(carrinho.length === 0) return alert("Carrinho vazio!");
+        let msg = "Olá Vibes! Gostaria de encomendar:%0A" + carrinho.map(i => "- " + i.nome).join("%0A");
+        window.open(`https://wa.me/5519989620949?text=${msg}`);
     }
 
-    window.onclick = (e) => { if(e.target == document.getElementById('productModal')) closeModal(); }
-
-    render(produtos);
+    render();
 </script>
 </body>
 </html>
+
 
