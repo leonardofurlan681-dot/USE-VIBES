@@ -38,37 +38,35 @@
         
         .logo-central { font-weight: 800; font-size: 20px; letter-spacing: 3px; text-transform: uppercase; text-align: center; cursor: pointer; color: #000; }
 
-        /* --- BANNER FLUTUANTE --- */
+        /* BANNER FLUTUANTE */
         .slider-container { 
             position: relative; 
-            width: 94%; /* Deixa margens nas laterais */
+            width: 94%; 
             max-width: 1100px;
             height: 400px; 
-            margin: 20px auto; /* Flutua no topo com margem */
+            margin: 20px auto; 
             background: #fff; 
             overflow: hidden; 
-            border-radius: 20px; /* Bordas arredondadas */
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15); /* Sombra para flutuar */
+            border-radius: 20px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15); 
         }
 
         .main-slider { width: 300%; height: 100%; display: flex; transition: transform 0.6s cubic-bezier(0.65, 0, 0.35, 1); }
         .banner-slide { width: 100%; height: 100%; display: flex; align-items: center; position: relative; background: #fff; }
         
-        /* Metade Esquerda: Texto */
         .banner-text { width: 50%; z-index: 5; padding: 0 5%; display: flex; flex-direction: column; align-items: flex-start; }
         .banner-text h2 { font-size: 32px; font-weight: 800; line-height: 1.1; margin-bottom: 10px; text-transform: uppercase; color: #000; }
         .banner-text h2 span { color: var(--vibe-orange); }
         .banner-text p { font-size: 14px; color: #444; margin-bottom: 15px; }
         
-        /* Metade Direita: Foto (Cobrindo 50%) */
-        .banner-img-area { width: 50%; height: 100%; position: relative; }
-        .banner-img-area img { width: 100%; height: 100%; object-fit: cover; }
+        .banner-img-area { width: 50%; height: 100%; position: relative; overflow: hidden; }
+        .banner-img-area video, .banner-img-area img { width: 100%; height: 100%; object-fit: cover; }
 
-        .slider-arrow { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.8); border: none; width: 35px; height: 35px; border-radius: 50%; cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .slider-arrow { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.8); border: none; width: 35px; height: 35px; border-radius: 50%; cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; }
         .prev-arrow { left: 10px; } .next-arrow { right: 10px; }
 
         @media (max-width: 768px) {
-            .slider-container { height: 220px; width: 92%; margin: 15px auto; } /* Menor no mobile */
+            .slider-container { height: 220px; width: 92%; margin: 15px auto; }
             .banner-text { padding: 10px; }
             .banner-text h2 { font-size: 16px; margin-bottom: 4px; }
             .banner-text p { font-size: 9px; margin-bottom: 8px; }
@@ -90,8 +88,13 @@
 
         .btn-add-cart { background: var(--vibe-orange); color: #000; border: none; width: 100%; padding: 12px; font-weight: 800; text-transform: uppercase; cursor: pointer; font-size: 11px; }
 
-        /* FOOTER */
-        footer { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); padding: 20px; text-align: center; border-top: 2px solid var(--vibe-orange); }
+        /* MODAL */
+        .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 1000; display: none; align-items: center; justify-content: center; padding: 10px; }
+        .modal.active { display: flex; }
+        .modal-content { background: #fff; width: 100%; max-width: 800px; display: flex; border-radius: 15px; overflow: hidden; position: relative; }
+        .modal-img-side { width: 50%; aspect-ratio: 1/1; position: relative; }
+        .modal-info-side { width: 50%; padding: 25px; display: flex; flex-direction: column; justify-content: center; }
+        @media (max-width: 768px) { .modal-content { flex-direction: column; max-height: 90vh; overflow-y: auto; } .modal-img-side, .modal-info-side { width: 100%; } }
 
         /* SIDEBARS */
         .sidebar, .cart-sidebar { position: fixed; top: 0; width: 300px; height: 100%; background: #fff; z-index: 200; transition: 0.4s; padding: 25px; display: flex; flex-direction: column; }
@@ -100,6 +103,8 @@
         .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: none; z-index: 150; }
         .overlay.active { display: block; }
         .close-sidebar { align-self: flex-end; font-size: 24px; cursor: pointer; margin-bottom: 20px; }
+
+        footer { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); padding: 20px; text-align: center; border-top: 2px solid var(--vibe-orange); margin-top: auto; }
     </style>
 </head>
 <body>
@@ -130,26 +135,49 @@
     <button class="slider-arrow next-arrow" onclick="moveSlider(1)">❯</button>
     <div class="main-slider" id="mainSlider">
         <div class="banner-slide">
+    <div class="banner-text">
+        <img src="logo.png" style="max-width: 120px; margin-bottom: 10px;" onerror="this.src='https://via.placeholder.com/120x40?text=VIBES'">
+        <h2>ESTILO<span> EM MOVIMENTO</span></h2>
+        <p>A nova coleção chegou com tudo.</p>
+        <button class="btn-add-cart btn-banner-action" style="width:auto; padding: 10px 20px; border-radius: 5px;" onclick="location.href='#grid'">VER MAIS</button>
+    </div>
+    <div class="banner-img-area">
+        <video autoplay muted loop playsinline preload="auto" style="width: 100%; height: 100%; object-fit: cover;">
+            <source src="banner destaque/video.mov" type="video/mp4">
+            Seu navegador não suporta vídeos.
+        </video>
+    </div>
+</div>
+
+<script>
+    // Script de segurança para forçar o Play (alguns navegadores barram o autoplay)
+    window.addEventListener('load', function() {
+        var v = document.getElementById('videoBanner');
+        if (v) {
+            v.muted = true; // Força o mudo via JS também
+            v.play().catch(function(error) {
+                console.log("O autoplay foi bloqueado, tentando novamente...");
+            });
+        }
+    });
+</script>
+        <div class="banner-slide">
             <div class="banner-text">
-                <img src="logo.png" style="max-width: 120px; margin-bottom: 10px;" onerror="this.src='https://via.placeholder.com/120x40?text=VIBES'">
-                <h2>ESTILO<span> ÚNICO</span></h2><p>Proteção UV400 premium.</p>
-                <button class="btn-add-cart btn-banner-action" style="width:auto; padding: 10px 20px; border-radius: 5px;" onclick="location.href='#grid'">VER MAIS</button>
+                <h2>CONHEÇA<span> NOSSA LOJA</span></h2><p>Um espaço exclusivo para você encontrar a sua Vibe.</p>
+                <button class="btn-add-cart btn-banner-action" style="width:auto; padding: 10px 20px; border-radius: 5px;" onclick="window.open('https://maps.google.com')">COMO CHEGAR</button>
             </div>
-            <div class="banner-img-area"><img src="banner destaque/destaque 1.jpg" onerror="this.src='https://images.unsplash.com/photo-1511499767390-90342f56771f?w=600'"></div>
+            <div class="banner-img-area">
+                <img src="banner destaque/loja1.jpg" alt="Loja Vibes">
+            </div>
         </div>
         <div class="banner-slide">
             <div class="banner-text">
-                <h2>NOVA<span> LINHA</span></h2><p>Design moderno e leve.</p>
-                <button class="btn-add-cart btn-banner-action" style="width:auto; padding: 10px 20px; border-radius: 5px;" onclick="location.href='#grid'">EXPLORAR</button>
+                <h2>NOSSO<span> ESPAÇO</span></h2><p>Atendimento personalizado e as melhores marcas.</p>
+                <button class="btn-add-cart btn-banner-action" style="width:auto; padding: 10px 20px; border-radius: 5px;" onclick="location.href='#grid'">VER PRODUTOS</button>
             </div>
-            <div class="banner-img-area"><img src="banner destaque/destaque 2.jpg" onerror="this.src='https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=600'"></div>
-        </div>
-        <div class="banner-slide">
-            <div class="banner-text">
-                <h2>QUALIDADE<span> VIBES</span></h2><p>Lentes polarizadas.</p>
-                <button class="btn-add-cart btn-banner-action" style="width:auto; padding: 10px 20px; border-radius: 5px;" onclick="location.href='#grid'">COMPRAR</button>
+            <div class="banner-img-area">
+                <img src="banner destaque/loja2.jpg" alt="Vibes Store">
             </div>
-            <div class="banner-img-area"><img src="banner destaque/destaque 3.jpg" onerror="this.src='https://images.unsplash.com/photo-1508296695146-257a814070b4?w=600'"></div>
         </div>
     </div>
 </section>
@@ -170,8 +198,15 @@
     <button class="btn-add-cart" style="background: var(--whatsapp-color); color:#fff; font-size: 13px;" onclick="checkout()"><i class="fa-brands fa-whatsapp"></i> PEDIR NO WHATSAPP</button>
 </aside>
 
+<div class="modal" id="productModal">
+    <div class="modal-content">
+        <div onclick="closeModal()" style="position: absolute; top: 15px; right: 15px; z-index: 20; cursor: pointer; font-size: 25px;"><i class="fa-solid fa-xmark"></i></div>
+        <div class="modal-img-side" id="modal-img"></div>
+        <div class="modal-info-side" id="modal-info"></div>
+    </div>
+</div>
+
 <script>
-    // Seus dados e funções permanecem aqui, agora integrados com o novo banner
     const catalogo = [
          ["Casual Dourado Lente Verde", 69.90, "masculino", ["oculos casual dourado lente verde.jpg", "oculos dourado casual lente verde 2.jpg"]],
         ["Óculos Casual Urban Black", 74.90, "masculino", ["oculos casual urban black.jpg", "oculos casual urban black 2.jpg"]],
@@ -212,6 +247,38 @@
         `).join('');
     }
 
+    function changePic(id, dir, e) {
+        if(e) e.stopPropagation();
+        const p = produtos.find(x => x.id === id);
+        p.fotoAtual = (p.fotoAtual + dir + p.fotos.length) % p.fotos.length;
+        render();
+        if(document.getElementById('productModal').classList.contains('active')) updateModalImg(p);
+    }
+
+    function openModal(id) {
+        const p = produtos.find(x => x.id === id);
+        updateModalImg(p);
+        document.getElementById('modal-info').innerHTML = `
+            <h2 style="font-size: 20px; text-transform:uppercase;">${p.nome}</h2>
+            <p style="color:var(--vibe-orange); font-size:24px; font-weight:800; margin:10px 0;">R$ ${p.preco.toFixed(2).replace('.',',')}</p>
+            <p style="font-size:13px; color:#666; margin-bottom:20px;">Proteção UV400 premium Vibes.</p>
+            <button class="btn-add-cart" onclick="addToCart(${p.id}); closeModal()">ADICIONAR AO CARRINHO</button>
+        `;
+        document.getElementById('productModal').classList.add('active');
+    }
+
+    function updateModalImg(p) {
+        document.getElementById('modal-img').innerHTML = `
+            <button class="nav-btn btn-l" onclick="changePic(${p.id}, -1)">❮</button>
+            <img src="oculos/${p.fotos[p.fotoAtual]}" style="width:100%; height:100%; object-fit:cover;">
+            <button class="nav-btn btn-r" onclick="changePic(${p.id}, 1)">❯</button>
+        `;
+    }
+
+    function closeModal() { document.getElementById('productModal').classList.remove('active'); }
+    function toggleSidebar(id) { document.getElementById(id).classList.toggle('active'); document.getElementById('overlay').classList.toggle('active'); }
+    function closeAll() { document.querySelectorAll('.sidebar, .cart-sidebar, .overlay').forEach(el => el.classList.remove('active')); }
+
     function filtrar(cat) {
         filtroAtivo = cat;
         render();
@@ -219,9 +286,6 @@
         window.location.href = "#grid";
     }
 
-    function toggleSidebar(id) { document.getElementById(id).classList.toggle('active'); document.getElementById('overlay').classList.toggle('active'); }
-    function closeAll() { document.querySelectorAll('.sidebar, .cart-sidebar, .overlay').forEach(el => el.classList.remove('active')); }
-    
     function addToCart(id) {
         carrinho.push(produtos.find(x => x.id === id));
         updateCart();
@@ -251,13 +315,6 @@
         if(carrinho.length === 0) return alert("Carrinho vazio!");
         let msg = "Olá Vibes! Gostaria de pedir:%0A" + carrinho.map(i => "- " + i.nome).join("%0A");
         window.open(`https://wa.me/5519989620949?text=${msg}`);
-    }
-
-    function changePic(id, dir, e) {
-        if(e) e.stopPropagation();
-        const p = produtos.find(x => x.id === id);
-        p.fotoAtual = (p.fotoAtual + dir + p.fotos.length) % p.fotos.length;
-        render();
     }
 
     render();
