@@ -2,325 +2,297 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>VIBES | Sunglasses</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ballena Outlet | Camisas de Time</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
+
     <style>
-        :root { --vibe-orange: #FF8F1C; --whatsapp-color: #25D366; }
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+        :root { 
+            --accent: #2e7d32; 
+            --accent-hover: #1b5e20; 
+            --bg: #ffffff; 
+            --text: #1a1a1a; 
+            --card-bg: #ffffff; 
+            --border: #eeeeee; 
+            --header-bg: rgba(255, 255, 255, 0.98); 
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { background: var(--bg); color: var(--text); overflow-x: hidden; }
+
+        /* HEADER CENTRALIZADO */
+        header { 
+            background: var(--header-bg); 
+            padding: 15px 5%; 
+            border-bottom: 1px solid var(--border); 
+            position: sticky; 
+            top: 0; 
+            z-index: 1000; 
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            align-items: center;
+        }
         
-        body { 
-            background-image: url('fundo.jpg'); 
-            background-color: #f4f4f4; 
-            background-size: cover; 
-            background-position: center; 
-            background-attachment: fixed;
-            min-height: 100vh; display: flex; flex-direction: column; overflow-x: hidden;
-        }
+        .header-left { display: flex; align-items: center; justify-content: flex-start; }
+        .header-center { display: flex; align-items: center; justify-content: center; }
+        .header-right { display: flex; align-items: center; justify-content: flex-end; gap: 20px; }
 
-        body::before {
-            content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px);
-            z-index: -1; 
-        }
+        /* LOGO.JPG DE VOLTA */
+        .logo-nav { height: 50px; object-fit: contain; }
 
-        .promo-bar { background: var(--vibe-orange); color: #000; text-align: center; padding: 8px; font-size: 10px; text-transform: uppercase; font-weight: 800; letter-spacing: 2px; }
+        header i { color: var(--text); font-size: 1.2rem; cursor: pointer; }
 
-        header {
-            display: grid; grid-template-columns: 50px 1fr 50px; align-items: center;
-            padding: 10px 15px; border-bottom: 2px solid var(--vibe-orange);
-            position: sticky; top: 0; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(5px); z-index: 100;
-        }
-        
-        .logo-central { font-weight: 800; font-size: 20px; letter-spacing: 3px; text-transform: uppercase; text-align: center; cursor: pointer; color: #000; }
-
-        /* BANNER FLUTUANTE */
-        .slider-container { 
+        /* HERO SECTION LIMPA (FUNDO.JPG) */
+        .hero-image { 
+            width: 100%; 
+            height: 55vh; 
             position: relative; 
-            width: 94%; 
-            max-width: 1100px;
-            height: 400px; 
-            margin: 20px auto; 
-            background: #fff; 
             overflow: hidden; 
-            border-radius: 20px; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15); 
+            background: #fff; 
+        }
+        .hero-image img.bg-hero { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
+        }
+        .hero-gradient { 
+            position: absolute; 
+            inset: 0; 
+            background: linear-gradient(to bottom, transparent 70%, var(--bg) 100%); 
+            z-index: 1;
         }
 
-        .main-slider { width: 300%; height: 100%; display: flex; transition: transform 0.6s cubic-bezier(0.65, 0, 0.35, 1); }
-        .banner-slide { width: 100%; height: 100%; display: flex; align-items: center; position: relative; background: #fff; }
-        
-        .banner-text { width: 50%; z-index: 5; padding: 0 5%; display: flex; flex-direction: column; align-items: flex-start; }
-        .banner-text h2 { font-size: 32px; font-weight: 800; line-height: 1.1; margin-bottom: 10px; text-transform: uppercase; color: #000; }
-        .banner-text h2 span { color: var(--vibe-orange); }
-        .banner-text p { font-size: 14px; color: #444; margin-bottom: 15px; }
-        
-        .banner-img-area { width: 50%; height: 100%; position: relative; overflow: hidden; }
-        .banner-img-area video, .banner-img-area img { width: 100%; height: 100%; object-fit: cover; }
-
-        .slider-arrow { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.8); border: none; width: 35px; height: 35px; border-radius: 50%; cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; }
-        .prev-arrow { left: 10px; } .next-arrow { right: 10px; }
-
-        @media (max-width: 768px) {
-            .slider-container { height: 220px; width: 92%; margin: 15px auto; }
-            .banner-text { padding: 10px; }
-            .banner-text h2 { font-size: 16px; margin-bottom: 4px; }
-            .banner-text p { font-size: 9px; margin-bottom: 8px; }
-            .banner-text img { max-width: 60px !important; margin-bottom: 5px !important; }
-            .btn-banner-action { padding: 6px 12px !important; font-size: 8px !important; }
+        /* GRID DE PRODUTOS */
+        .container { padding: 40px 5%; max-width: 1300px; margin: 0 auto; position: relative; z-index: 2; }
+        .cat-title { 
+            font-size: 1.3rem; 
+            font-weight: 800; 
+            text-transform: uppercase; 
+            margin-bottom: 30px; 
+            text-align: center;
+            letter-spacing: 2px;
+            color: var(--accent);
         }
 
-        /* GRID PRODUTOS */
-        .main-layout { max-width: 1200px; margin: 0 auto; padding: 10px 10px 40px; width: 100%; flex-grow: 1; }
-        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; }
-        @media (max-width: 768px) { .product-grid { grid-template-columns: 1fr 1fr; gap: 10px; } }
-
-        .product-card { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(10px); border-radius: 12px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: 0.3s; display: flex; flex-direction: column; border: 1px solid rgba(255,255,255,0.2); }
-        .img-box { width: 100%; aspect-ratio: 1 / 1; position: relative; overflow: hidden; background: #fff; }
-        .img-box img { width: 100%; height: 100%; object-fit: cover; cursor: pointer; }
+        .grid { 
+            display: grid; 
+            grid-template-columns: repeat(2, 1fr); 
+            gap: 15px; 
+        }
+        @media (min-width: 768px) { .grid { grid-template-columns: repeat(4, 1fr); gap: 25px; } }
         
-        .nav-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.9); border: none; width: 28px; height: 28px; border-radius: 50%; cursor: pointer; z-index: 5; display: flex; align-items: center; justify-content: center; font-size: 12px; }
-        .btn-l { left: 5px; } .btn-r { right: 5px; }
+        .product-card { 
+            background: var(--card-bg); 
+            border-radius: 8px; 
+            padding: 10px; 
+            border: 1px solid var(--border); 
+            cursor: pointer; 
+            transition: 0.3s;
+            display: flex; flex-direction: column;
+        }
+        .product-card:hover { border-color: var(--accent); transform: translateY(-3px); }
 
-        .btn-add-cart { background: var(--vibe-orange); color: #000; border: none; width: 100%; padding: 12px; font-weight: 800; text-transform: uppercase; cursor: pointer; font-size: 11px; }
+        .img-container { width: 100%; aspect-ratio: 1/1; overflow: hidden; margin-bottom: 12px; border-radius: 4px; }
+        .product-card img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+        .product-card:hover img { transform: scale(1.05); }
 
-        /* MODAL */
-        .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 1000; display: none; align-items: center; justify-content: center; padding: 10px; }
-        .modal.active { display: flex; }
-        .modal-content { background: #fff; width: 100%; max-width: 800px; display: flex; border-radius: 15px; overflow: hidden; position: relative; }
-        .modal-img-side { width: 50%; aspect-ratio: 1/1; position: relative; }
-        .modal-info-side { width: 50%; padding: 25px; display: flex; flex-direction: column; justify-content: center; }
-        @media (max-width: 768px) { .modal-content { flex-direction: column; max-height: 90vh; overflow-y: auto; } .modal-img-side, .modal-info-side { width: 100%; } }
+        .product-info { text-align: center; margin-top: auto; }
+        .product-card h3 { font-size: 0.8rem; font-weight: 600; margin-bottom: 5px; color: #444; text-transform: uppercase; min-height: 2.4em; display: flex; align-items: center; justify-content: center; }
+        .product-card .price { font-weight: 800; color: var(--text); font-size: 1rem; }
 
-        /* SIDEBARS */
-        .sidebar, .cart-sidebar { position: fixed; top: 0; width: 300px; height: 100%; background: #fff; z-index: 200; transition: 0.4s; padding: 25px; display: flex; flex-direction: column; }
-        .sidebar { left: -310px; } .sidebar.active { left: 0; }
-        .cart-sidebar { right: -310px; } .cart-sidebar.active { right: 0; }
-        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: none; z-index: 150; }
-        .overlay.active { display: block; }
-        .close-sidebar { align-self: flex-end; font-size: 24px; cursor: pointer; margin-bottom: 20px; }
+        /* MODAIS E CARRINHO */
+        .modal-overlay { 
+            position: fixed; inset: 0; background: rgba(0,0,0,0.6); 
+            z-index: 3000; display: none; align-items: center; justify-content: center; 
+            backdrop-filter: blur(4px);
+        }
+        .modal-overlay.active { display: flex; }
+        .modal-content { width: 90%; max-width: 400px; background: #fff; text-align: center; padding: 25px; border-radius: 12px; }
+        
+        .size-btn {
+            padding: 10px 15px; border: 1px solid var(--border); background: none;
+            margin: 5px; cursor: pointer; font-weight: 600; min-width: 55px; border-radius: 6px;
+        }
+        .size-btn.selected { background: var(--accent); color: white; border-color: var(--accent); }
 
-        footer { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); padding: 20px; text-align: center; border-top: 2px solid var(--vibe-orange); margin-top: auto; }
+        .btn-action { 
+            width: 100%; padding: 18px; margin-top: 15px; border: none; 
+            font-weight: 800; cursor: pointer; text-transform: uppercase; border-radius: 8px;
+        }
+        .btn-primary { background: var(--accent); color: #fff; }
+
+        .cart-sidebar { 
+            position: fixed; right: -100%; top: 0; width: 100%; max-width: 350px; 
+            height: 100%; background: #fff; z-index: 2000; transition: 0.4s; 
+            padding: 30px; border-left: 1px solid var(--border); display: flex; flex-direction: column; 
+        }
+        .cart-sidebar.open { right: 0; }
+        
+        .cart-item { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; border-bottom: 1px solid #f9f9f9; padding-bottom: 15px; }
+        .cart-item img { width: 60px; height: 60px; object-fit: cover; border-radius: 6px; }
+
+        #search-box { display: none; padding: 20px 5%; border-bottom: 1px solid var(--border); }
+        #search-box input { width: 100%; max-width: 500px; margin: 0 auto; display: block; padding: 15px; border: 1px solid var(--border); text-align: center; border-radius: 50px; outline: none; }
     </style>
 </head>
 <body>
 
-<div class="promo-bar">VIBES | PREMIUM SUNGLASSES 2026</div>
-
 <header>
-    <div onclick="toggleSidebar('sidebar')" style="cursor:pointer; font-size: 20px;"><i class="fa-solid fa-bars"></i></div>
-    <div class="logo-central" onclick="location.reload()">VIBES</div>
-    <div onclick="toggleSidebar('cart-sidebar')" style="cursor:pointer; position:relative; font-size: 20px;">
-        <i class="fa-solid fa-cart-shopping"></i>
-        <span id="cart-count" style="position: absolute; top:-8px; right:-8px; background:#000; color:#fff; font-size:9px; width:16px; height:16px; border-radius:50%; display:flex; align-items:center; justify-content:center;">0</span>
+    <div class="header-left">
+        <i class="fas fa-search" onclick="toggleSearch()"></i>
+    </div>
+
+    <div class="header-center">
+        <img src="logo.jpg" class="logo-nav" alt="Ballena Outlet">
+    </div>
+
+    <div class="header-right">
+        <div onclick="toggleCart()" style="position:relative; cursor:pointer">
+            <i class="fas fa-shopping-bag"></i>
+            <span id="cart-count" style="position:absolute; top:-8px; right:-10px; background:var(--accent); color:#fff; font-size:0.6rem; padding:2px 6px; border-radius:50%; font-weight:800">0</span>
+        </div>
     </div>
 </header>
 
-<div class="overlay" id="overlay" onclick="closeAll()"></div>
-
-<aside class="sidebar" id="sidebar">
-    <div class="close-sidebar" onclick="closeAll()"><i class="fa-solid fa-xmark"></i></div>
-    <h3 style="border-bottom: 2px solid var(--vibe-orange); padding-bottom: 10px;">CATEGORIAS</h3>
-    <div onclick="filtrar('todos')" style="padding: 15px 0; cursor: pointer; font-weight: 600;">TODOS</div>
-    <div onclick="filtrar('masculino')" style="padding: 15px 0; cursor: pointer; font-weight: 600;">MASCULINO</div>
-    <div onclick="filtrar('feminino')" style="padding: 15px 0; cursor: pointer; font-weight: 600;">FEMININO</div>
-</aside>
-
-<section class="slider-container">
-    <button class="slider-arrow prev-arrow" onclick="moveSlider(-1)">❮</button>
-    <button class="slider-arrow next-arrow" onclick="moveSlider(1)">❯</button>
-    <div class="main-slider" id="mainSlider">
-        <div class="banner-slide">
-    <div class="banner-text">
-        <img src="logo.png" style="max-width: 120px; margin-bottom: 10px;" onerror="this.src='https://via.placeholder.com/120x40?text=VIBES'">
-        <h2>ESTILO<span> EM MOVIMENTO</span></h2>
-        <p>A nova coleção chegou com tudo.</p>
-        <button class="btn-add-cart btn-banner-action" style="width:auto; padding: 10px 20px; border-radius: 5px;" onclick="location.href='#grid'">VER MAIS</button>
-    </div>
-    <div class="banner-img-area">
-        <video autoplay muted loop playsinline preload="auto" style="width: 100%; height: 100%; object-fit: cover;">
-            <source src="banner destaque/video.mov" type="video/mp4">
-            Seu navegador não suporta vídeos.
-        </video>
-    </div>
+<div id="search-box">
+    <input type="text" id="input-busca" placeholder="O QUE VOCÊ PROCURA?" oninput="buscarProduto()">
 </div>
 
-<script>
-    // Script de segurança para forçar o Play (alguns navegadores barram o autoplay)
-    window.addEventListener('load', function() {
-        var v = document.getElementById('videoBanner');
-        if (v) {
-            v.muted = true; // Força o mudo via JS também
-            v.play().catch(function(error) {
-                console.log("O autoplay foi bloqueado, tentando novamente...");
-            });
-        }
-    });
-</script>
-        <div class="banner-slide">
-            <div class="banner-text">
-                <h2>CONHEÇA<span> NOSSA LOJA</span></h2><p>Um espaço exclusivo para você encontrar a sua Vibe.</p>
-                <button class="btn-add-cart btn-banner-action" style="width:auto; padding: 10px 20px; border-radius: 5px;" onclick="window.open('https://maps.google.com')">COMO CHEGAR</button>
-            </div>
-            <div class="banner-img-area">
-                <img src="banner destaque/loja1.jpg" alt="Loja Vibes">
-            </div>
-        </div>
-        <div class="banner-slide">
-            <div class="banner-text">
-                <h2>NOSSO<span> ESPAÇO</span></h2><p>Atendimento personalizado e as melhores marcas.</p>
-                <button class="btn-add-cart btn-banner-action" style="width:auto; padding: 10px 20px; border-radius: 5px;" onclick="location.href='#grid'">VER PRODUTOS</button>
-            </div>
-            <div class="banner-img-area">
-                <img src="banner destaque/loja2.jpg" alt="Vibes Store">
-            </div>
-        </div>
-    </div>
+<section class="hero-image">
+    <div class="hero-gradient"></div>
+    <img src="fundo.jpg" class="bg-hero">
 </section>
 
-<div class="main-layout" id="grid">
-    <main class="product-grid" id="product-list"></main>
+<div class="container">
+    <h2 class="cat-title">Camisas de Time</h2>
+    <div id="main-content" class="grid"></div>
 </div>
 
-<footer>
-    <p style="font-size:11px; font-weight:800;">USE VIBES2026 / TODOS OS DIREITOS RESERVADOS</p>
-</footer>
+<div class="cart-sidebar" id="cart-sidebar">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px">
+        <h2 style="font-weight:800">Carrinho</h2>
+        <i class="fas fa-times" onclick="toggleCart()" style="cursor:pointer; color:#888"></i>
+    </div>
+    <div id="cart-list" style="flex:1; overflow-y:auto;"></div>
+    <div id="cart-total" style="padding:20px 0; font-weight:800; border-top:1px solid #eee; display:flex; justify-content:space-between">
+        <span>Total:</span>
+        <span id="total-value">R$ 0,00</span>
+    </div>
+    <button class="btn-action btn-primary" onclick="finalizarWhatsApp()">Finalizar no WhatsApp</button>
+</div>
 
-<aside class="cart-sidebar" id="cart-sidebar">
-    <div class="close-sidebar" onclick="closeAll()"><i class="fa-solid fa-xmark"></i></div>
-    <h3>MEU CARRINHO</h3>
-    <div id="cart-items" style="flex-grow: 1; overflow-y: auto; margin: 20px 0;"></div>
-    <div style="padding: 15px 0; font-weight: 800; border-top: 1px solid #eee;">TOTAL: R$ <span id="cart-total">0,00</span></div>
-    <button class="btn-add-cart" style="background: var(--whatsapp-color); color:#fff; font-size: 13px;" onclick="checkout()"><i class="fa-brands fa-whatsapp"></i> PEDIR NO WHATSAPP</button>
-</aside>
-
-<div class="modal" id="productModal">
+<div class="modal-overlay" id="modal-produto">
     <div class="modal-content">
-        <div onclick="closeModal()" style="position: absolute; top: 15px; right: 15px; z-index: 20; cursor: pointer; font-size: 25px;"><i class="fa-solid fa-xmark"></i></div>
-        <div class="modal-img-side" id="modal-img"></div>
-        <div class="modal-info-side" id="modal-info"></div>
+        <div class="img-container">
+            <img id="m-img" src="" style="width:100%; height:100%; object-fit:cover">
+        </div>
+        <h2 id="m-nome" style="font-size:1rem; margin-bottom:10px"></h2>
+        <p id="m-preco" style="font-weight:800; font-size:1.3rem; color:var(--accent); margin-bottom:15px"></p>
+        <div id="m-sizes"></div>
+        <button class="btn-action btn-primary" onclick="addAoCarrinho()">Adicionar ao Carrinho</button>
+        <p onclick="closeModals()" style="text-align:center; cursor:pointer; margin-top:15px; font-size:0.8rem; color:#888">VOLTAR</p>
     </div>
 </div>
 
 <script>
-    const catalogo = [
-         ["Casual Dourado Lente Verde", 69.90, "masculino", ["oculos casual dourado lente verde.jpg", "oculos dourado casual lente verde 2.jpg"]],
-        ["Óculos Casual Urban Black", 74.90, "masculino", ["oculos casual urban black.jpg", "oculos casual urban black 2.jpg"]],
-        ["Casual Redondo Madeira", 72.00, "masculino", ["oculos casual redondo madeira.jpg", "oculos casual redondo madeira 2.jpg"]],
-        ["Esportivo Lente Amarela", 79.90, "esportivo", ["oculos esportivo lente amarela.jpg", "oculos esportivo lente amarela 2.jpg"]],
-        ["Esportivo Carbon Preto", 80.00, "esportivo", ["oculos esportivo preto.jpg", "oculos esportivo preto 2.jpg"]],
-        ["Casual Quadrado Black", 69.90, "masculino", ["oculos preto casual quadrado.jpg", "oculos preto casual quadrado 2.jpg"]],
-        ["Casual Redondo Black", 74.50, "masculino", ["oculos preto casual redondo.jpg", "oculos preto casual redondo 2.jpg"]],
-        ["Transparente Lente Verde", 78.00, "masculino", ["oculos preto transparente lente verde.jpg", "oculos preto transparente lente verde 2.jpg"]],
-        ["Redondo Marrom Tortoise", 73.00, "feminino", ["oculos redondo casual marrom.jpg", "oculos redondo casual marrom 2.jpg"]]
-    ];
+const PRODUTOS_ESTATICOS = [
+    { id: 1, nome: "Brasil Home 24/25", preco: "299,90", imagem: "https://images.tcdn.com.br/img/img_prod/1127110/camisa_selecao_brasileira_home_2024_sn_torcedor_masculina_amarela_3163_1_e417a869a239b9776f823293e5acda37.jpg" },
+    { id: 2, nome: "Real Madrid Home 24/25", preco: "349,90", imagem: "https://imgcentauro-a.akamaihd.net/1300x1300/98713202.jpg" },
+    { id: 3, nome: "Manchester City Home 24/25", preco: "349,90", imagem: "https://imgcentauro-a.akamaihd.net/1300x1300/98555102.jpg" },
+    { id: 4, nome: "Flamengo I 2024", preco: "299,90", imagem: "https://images.tcdn.com.br/img/img_prod/1127110/camisa_flamengo_i_2024_sn_torcedor_masculina_vermelha_e_preta_2831_1_45d1d49f05244e85973e2ff1758e5f88.jpg" },
+    { id: 5, nome: "Palmeiras I 2024", preco: "299,90", imagem: "https://images.tcdn.com.br/img/img_prod/1127110/camisa_palmeiras_i_2024_sn_torcedor_masculina_verde_2813_1_4dbf6f69185a732a392e21f669074094.jpg" },
+    { id: 6, nome: "Inter de Milão Home 24/25", preco: "349,90", imagem: "https://imgcentauro-a.akamaihd.net/1300x1300/M0UP9702.jpg" },
+    { id: 7, nome: "Barcelona Away 24/25", preco: "349,90", imagem: "https://imgcentauro-a.akamaihd.net/1300x1300/M0UL1802.jpg" },
+    { id: 8, nome: "Argentina Home 2024", preco: "299,90", imagem: "https://images.tcdn.com.br/img/img_prod/1127110/camisa_selecao_argentina_home_2024_sn_torcedor_masculina_branca_e_celeste_3172_1_e46d03d387f31b8a531f868ac9d4a46d.jpg" }
+];
 
-    let produtos = catalogo.map((p, i) => ({ id: i, nome: p[0], preco: p[1], cat: p[2], fotos: p[3], fotoAtual: 0 }));
-    let carrinho = [];
-    let filtroAtivo = 'todos';
-    let currentSlide = 0;
+let CART = [];
+let SELECTED_PROD = null;
+let SELECTED_SIZE = null;
 
-    function moveSlider(dir) {
-        currentSlide = (currentSlide + dir + 3) % 3;
-        document.getElementById('mainSlider').style.transform = `translateX(-${(currentSlide * 100) / 3}%)`;
-    }
-
-    function render() {
-        const lista = filtroAtivo === 'todos' ? produtos : produtos.filter(p => p.cat === filtroAtivo);
-        document.getElementById('product-list').innerHTML = lista.map(p => `
-            <div class="product-card">
-                <div class="img-box">
-                    <button class="nav-btn btn-l" onclick="changePic(${p.id}, -1, event)">❮</button>
-                    <img src="oculos/${p.fotos[p.fotoAtual]}" onclick="openModal(${p.id})" onerror="this.src='https://via.placeholder.com/400'">
-                    <button class="nav-btn btn-r" onclick="changePic(${p.id}, 1, event)">❯</button>
-                </div>
-                <div style="padding:12px; text-align:center; cursor:pointer" onclick="openModal(${p.id})">
-                    <p style="font-size:11px; font-weight:600; text-transform:uppercase;">${p.nome}</p>
-                    <span style="color:var(--vibe-orange); font-weight:800; font-size:18px;">R$ ${p.preco.toFixed(2).replace('.',',')}</span>
-                </div>
-                <button class="btn-add-cart" onclick="addToCart(${p.id})">ADICIONAR</button>
+function renderLoja(data = PRODUTOS_ESTATICOS) {
+    const main = document.getElementById('main-content');
+    main.innerHTML = data.map(p => `
+        <div class="product-card" onclick="openProduct(${p.id})">
+            <div class="img-container"><img src="${p.imagem}" onerror="this.src='https://via.placeholder.com/400x400?text=Camisa'"></div>
+            <div class="product-info">
+                <h3>${p.nome}</h3>
+                <span class="price">R$ ${p.preco}</span>
             </div>
-        `).join('');
-    }
+        </div>
+    `).join('');
+}
 
-    function changePic(id, dir, e) {
-        if(e) e.stopPropagation();
-        const p = produtos.find(x => x.id === id);
-        p.fotoAtual = (p.fotoAtual + dir + p.fotos.length) % p.fotos.length;
-        render();
-        if(document.getElementById('productModal').classList.contains('active')) updateModalImg(p);
-    }
+function openProduct(id) {
+    SELECTED_PROD = PRODUTOS_ESTATICOS.find(p => p.id === id);
+    document.getElementById('m-img').src = SELECTED_PROD.imagem;
+    document.getElementById('m-nome').innerText = SELECTED_PROD.nome;
+    document.getElementById('m-preco').innerText = `R$ ${SELECTED_PROD.preco}`;
+    let sizes = ['P', 'M', 'G', 'GG'];
+    SELECTED_SIZE = null;
+    document.getElementById('m-sizes').innerHTML = sizes.map(s => `<button class="size-btn" onclick="selectSize(this, '${s}')">${s}</button>`).join('');
+    document.getElementById('modal-produto').classList.add('active');
+}
 
-    function openModal(id) {
-        const p = produtos.find(x => x.id === id);
-        updateModalImg(p);
-        document.getElementById('modal-info').innerHTML = `
-            <h2 style="font-size: 20px; text-transform:uppercase;">${p.nome}</h2>
-            <p style="color:var(--vibe-orange); font-size:24px; font-weight:800; margin:10px 0;">R$ ${p.preco.toFixed(2).replace('.',',')}</p>
-            <p style="font-size:13px; color:#666; margin-bottom:20px;">Proteção UV400 premium Vibes.</p>
-            <button class="btn-add-cart" onclick="addToCart(${p.id}); closeModal()">ADICIONAR AO CARRINHO</button>
-        `;
-        document.getElementById('productModal').classList.add('active');
-    }
+function selectSize(btn, s) {
+    SELECTED_SIZE = s;
+    Array.from(btn.parentNode.children).forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+}
 
-    function updateModalImg(p) {
-        document.getElementById('modal-img').innerHTML = `
-            <button class="nav-btn btn-l" onclick="changePic(${p.id}, -1)">❮</button>
-            <img src="oculos/${p.fotos[p.fotoAtual]}" style="width:100%; height:100%; object-fit:cover;">
-            <button class="nav-btn btn-r" onclick="changePic(${p.id}, 1)">❯</button>
-        `;
-    }
+function addAoCarrinho() {
+    if(!SELECTED_SIZE) return alert("Selecione um tamanho!");
+    CART.push({...SELECTED_PROD, tamanho: SELECTED_SIZE, cartId: Date.now()});
+    updateCart(); closeModals(); toggleCart();
+}
 
-    function closeModal() { document.getElementById('productModal').classList.remove('active'); }
-    function toggleSidebar(id) { document.getElementById(id).classList.toggle('active'); document.getElementById('overlay').classList.toggle('active'); }
-    function closeAll() { document.querySelectorAll('.sidebar, .cart-sidebar, .overlay').forEach(el => el.classList.remove('active')); }
-
-    function filtrar(cat) {
-        filtroAtivo = cat;
-        render();
-        closeAll();
-        window.location.href = "#grid";
-    }
-
-    function addToCart(id) {
-        carrinho.push(produtos.find(x => x.id === id));
-        updateCart();
-        toggleSidebar('cart-sidebar');
-    }
-
-    function updateCart() {
-        document.getElementById('cart-count').innerText = carrinho.length;
-        let total = 0;
-        document.getElementById('cart-items').innerHTML = carrinho.map((item, i) => {
-            total += item.preco;
-            return `<div style="display:flex; gap:10px; margin-bottom:15px; align-items:center; border-bottom:1px solid #f0f0f0; padding-bottom:10px;">
-                <img src="oculos/${item.fotos[0]}" width="50" height="50" style="object-fit:cover; border-radius:5px;">
-                <div style="flex:1; font-size:11px;"><b>${item.nome}</b><br>R$ ${item.preco.toFixed(2)}</div>
-                <i class="fa-solid fa-trash" onclick="removeItem(${i})" style="color:red; cursor:pointer; padding:5px;"></i>
+function updateCart() {
+    document.getElementById('cart-count').innerText = CART.length;
+    const list = document.getElementById('cart-list');
+    let total = 0;
+    list.innerHTML = CART.map(i => {
+        total += parseFloat(i.preco.replace(',','.'));
+        return `
+            <div class="cart-item">
+                <img src="${i.imagem}">
+                <div style="flex:1">
+                    <div style="font-size:0.8rem; font-weight:600">${i.nome}</div>
+                    <div style="font-size:0.7rem; color:#888">Tamanho: ${i.tamanho}</div>
+                    <div style="font-weight:800; font-size:0.9rem">R$ ${i.preco}</div>
+                </div>
+                <i class="fas fa-trash" style="color:#ff4444; cursor:pointer" onclick="removerDoCarrinho(${i.cartId})"></i>
             </div>`;
-        }).join('');
-        document.getElementById('cart-total').innerText = total.toFixed(2).replace('.',',');
-    }
+    }).join('');
+    document.getElementById('total-value').innerText = `R$ ${total.toFixed(2).replace('.',',')}`;
+}
 
-    function removeItem(i) {
-        carrinho.splice(i, 1);
-        updateCart();
-    }
+function removerDoCarrinho(cid) { CART = CART.filter(i => i.cartId !== cid); updateCart(); }
 
-    function checkout() {
-        if(carrinho.length === 0) return alert("Carrinho vazio!");
-        let msg = "Olá Vibes! Gostaria de pedir:%0A" + carrinho.map(i => "- " + i.nome).join("%0A");
-        window.open(`https://wa.me/5519989620949?text=${msg}`);
-    }
+function finalizarWhatsApp() {
+    if(CART.length === 0) return alert("Carrinho vazio!");
+    let msg = `*BALLENA OUTLET - NOVO PEDIDO*%0A%0A`;
+    CART.forEach(i => msg += `- ${i.nome} (${i.tamanho}) - R$ ${i.preco}%0A`);
+    msg += `%0A*Total: ${document.getElementById('total-value').innerText}*`;
+    window.open(`https://wa.me/5519989620949?text=${msg}`);
+}
 
-    render();
-    setInterval(() => moveSlider(1), 8000);
+function toggleSearch() {
+    const box = document.getElementById('search-box');
+    box.style.display = box.style.display === 'block' ? 'none' : 'block';
+}
+
+function buscarProduto() {
+    const termo = document.getElementById('input-busca').value.toLowerCase();
+    const filtrados = PRODUTOS_ESTATICOS.filter(p => p.nome.toLowerCase().includes(termo));
+    renderLoja(filtrados);
+}
+
+function toggleCart() { document.getElementById('cart-sidebar').classList.toggle('open'); }
+function closeModals() { document.querySelectorAll('.modal-overlay').forEach(m => m.classList.remove('active')); }
+
+renderLoja();
 </script>
+
 </body>
 </html>
-
-
