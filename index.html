@@ -3,29 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ballena Outlet | Camisas de Time</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <title>MD SHOES | Sneaker & Streetwear</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <style>
-        /* CORES EXTRAÍDAS DA LOGO */
         :root { 
-            --accent: #79bcc7; /* Azul Turquesa da logo */
-            --accent-hover: #5fa4af; /* Tom mais escuro para hover */
-            --bg: #ffffff; 
-            --text: #2b2e2a; /* Cinza Escuro da escrita Ballena */
-            --card-bg: #ffffff; 
-            --border: #eeeeee; 
-            --header-bg: rgba(255, 255, 255, 0.98); 
+            --accent: #2e67ff; 
+            --bg: #101113; 
+            --text: #ffffff; 
+            --text-secondary: #aaaaaa; 
+            --card-bg: #1a1c1f; 
+            --border: #2a2d33; 
+            --header-bg: rgba(16, 17, 19, 0.95); 
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Montserrat', sans-serif; }
         body { background: var(--bg); color: var(--text); overflow-x: hidden; }
 
-        /* HEADER CENTRALIZADO */
+        /* HEADER */
         header { 
             background: var(--header-bg); 
-            padding: 15px 5%; 
+            padding: 10px 5%; 
             border-bottom: 1px solid var(--border); 
             position: sticky; 
             top: 0; 
@@ -35,212 +34,211 @@
             align-items: center;
         }
         
-        .header-left { display: flex; align-items: center; justify-content: flex-start; }
-        .header-center { display: flex; align-items: center; justify-content: center; }
-        .header-right { display: flex; align-items: center; justify-content: flex-end; gap: 20px; }
+        .header-left { justify-self: start; }
+        .header-center { justify-self: center; }
+        .header-right { justify-self: end; }
 
-        .logo-nav { height: 65px; object-fit: contain; } /* Aumentado levemente para destacar a logo */
-
+        /* Logo no Header */
+        .logo-nav { height: 85px; width: auto; object-fit: contain; }
+        
         header i { color: var(--text); font-size: 1.2rem; cursor: pointer; transition: 0.3s; }
         header i:hover { color: var(--accent); }
+
+        /* BANNER PROMOCIONAL */
+        .promo-banner {
+            width: 100%;
+            background: var(--accent);
+            color: #fff;
+            text-align: center;
+            padding: 8px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
 
         /* HERO SECTION */
         .hero-image { 
             width: 100%; 
-            height: 55vh; 
+            height: 60vh; 
             position: relative; 
             overflow: hidden; 
-            background: #fff; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-        .hero-image img.bg-hero { 
+        
+        .hero-image .bg-hero { 
+            position: absolute;
             width: 100%; 
             height: 100%; 
             object-fit: cover; 
+            filter: brightness(0.6);
         }
+
+        .hero-content {
+            position: relative;
+            z-index: 5;
+            text-align: center;
+            max-width: 800px;
+            padding: 20px;
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            line-height: 1;
+            margin-bottom: 10px;
+            text-shadow: 0 10px 20px rgba(0,0,0,0.5);
+        }
+
+        .hero-content p {
+            font-weight: 400;
+            color: #ccc;
+            letter-spacing: 2px;
+        }
+
         .hero-gradient { 
             position: absolute; 
             inset: 0; 
-            background: linear-gradient(to bottom, transparent 70%, var(--bg) 100%); 
-            z-index: 1;
+            background: linear-gradient(to bottom, transparent 40%, var(--bg) 100%); 
+            z-index: 2;
         }
 
         /* GRID DE PRODUTOS */
-        .container { padding: 40px 5%; max-width: 1300px; margin: 0 auto; position: relative; z-index: 2; }
-        .cat-title { 
-            font-size: 1.3rem; 
-            font-weight: 800; 
-            text-transform: uppercase; 
-            margin-bottom: 30px; 
-            text-align: center;
-            letter-spacing: 2px;
-            color: var(--text); /* Mantendo cinza escuro no título */
-            border-bottom: 3px solid var(--accent); /* Detalhe em azul */
-            display: table;
-            margin-left: auto;
-            margin-right: auto;
-            padding-bottom: 5px;
-        }
-
-        .grid { 
-            display: grid; 
-            grid-template-columns: repeat(2, 1fr); 
-            gap: 15px; 
-        }
-        @media (min-width: 768px) { .grid { grid-template-columns: repeat(4, 1fr); gap: 25px; } }
+        .container { padding: 40px 5%; max-width: 1300px; margin: 0 auto; }
+        .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+        @media (min-width: 768px) { .grid { grid-template-columns: repeat(4, 1fr); } }
+        @media (min-width: 1100px) { .grid { grid-template-columns: repeat(5, 1fr); } }
         
         .product-card { 
-            background: var(--card-bg); 
-            border-radius: 8px; 
-            padding: 10px; 
-            border: 1px solid var(--border); 
-            cursor: pointer; 
-            transition: 0.3s;
-            display: flex; flex-direction: column;
+            background: var(--card-bg); padding: 15px; border-radius: 15px; border: 1px solid var(--border); 
+            cursor: pointer; transition: 0.3s;
         }
-        .product-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+        .product-card:hover { border-color: var(--accent); transform: translateY(-5px); }
+        .product-card img { width: 100%; aspect-ratio: 1/1; object-fit: cover; background: #fff; border-radius: 10px; margin-bottom: 12px; }
+        .product-card h3 { font-size: 0.8rem; font-weight: 700; height: 40px; overflow: hidden; margin-bottom: 5px; }
+        .product-card .price { color: var(--accent); font-weight: 900; font-size: 1.1rem; }
 
-        .img-container { width: 100%; aspect-ratio: 1/1; overflow: hidden; margin-bottom: 12px; border-radius: 4px; }
-        .product-card img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
-        .product-card:hover img { transform: scale(1.05); }
-
-        .product-info { text-align: center; margin-top: auto; }
-        .product-card h3 { font-size: 0.8rem; font-weight: 600; margin-bottom: 5px; color: var(--text); text-transform: uppercase; min-height: 2.4em; display: flex; align-items: center; justify-content: center; }
-        .product-card .price { font-weight: 800; color: var(--accent); font-size: 1rem; }
-
-        /* MODAIS E CARRINHO */
-        .modal-overlay { 
-            position: fixed; inset: 0; background: rgba(0,0,0,0.6); 
-            z-index: 3000; display: none; align-items: center; justify-content: center; 
-            backdrop-filter: blur(4px);
-        }
-        .modal-overlay.active { display: flex; }
-        .modal-content { width: 90%; max-width: 400px; background: #fff; text-align: center; padding: 25px; border-radius: 12px; }
-        
-        .size-btn {
-            padding: 10px 15px; border: 1px solid var(--border); background: none;
-            margin: 5px; cursor: pointer; font-weight: 600; min-width: 55px; border-radius: 6px;
-        }
-        .size-btn.selected { background: var(--accent); color: white; border-color: var(--accent); }
-
-        .btn-action { 
-            width: 100%; padding: 18px; margin-top: 15px; border: none; 
-            font-weight: 800; cursor: pointer; text-transform: uppercase; border-radius: 8px;
-            transition: 0.3s;
-        }
-        .btn-primary { background: var(--text); color: #fff; } /* Botão em cinza escuro para contraste */
-        .btn-primary:hover { background: var(--accent); }
-
-        .cart-sidebar { 
-            position: fixed; right: -100%; top: 0; width: 100%; max-width: 350px; 
-            height: 100%; background: #fff; z-index: 2000; transition: 0.4s; 
-            padding: 30px; border-left: 1px solid var(--border); display: flex; flex-direction: column; 
-        }
+        /* CARRINHO E MODAIS */
+        .cart-sidebar { position: fixed; right: -100%; top: 0; width: 100%; max-width: 400px; height: 100%; background: #16181b; z-index: 2000; transition: 0.4s; padding: 30px; border-left: 1px solid var(--border); display: flex; flex-direction: column; }
         .cart-sidebar.open { right: 0; }
-        
-        .cart-item { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; border-bottom: 1px solid #f9f9f9; padding-bottom: 15px; }
-        .cart-item img { width: 60px; height: 60px; object-fit: cover; border-radius: 6px; }
-
-        #search-box { display: none; padding: 20px 5%; border-bottom: 1px solid var(--border); }
-        #search-box input { width: 100%; max-width: 500px; margin: 0 auto; display: block; padding: 15px; border: 1px solid var(--border); text-align: center; border-radius: 50px; outline: none; }
-        #search-box input:focus { border-color: var(--accent); }
+        .cart-item { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; background: #1f2226; padding: 10px; border-radius: 12px; }
+        .cart-item img { width: 60px; height: 60px; object-fit: contain; background: #fff; border-radius: 5px; }
+        .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 3000; display: none; align-items: center; justify-content: center; backdrop-filter: blur(8px); }
+        .modal-overlay.active { display: flex; }
+        .modal-content { width: 90%; max-width: 400px; background: var(--card-bg); padding: 30px; border-radius: 20px; text-align: center; }
+        .size-btn { padding: 10px; border: 1px solid var(--border); background: #2a2d33; color: #fff; margin: 4px; cursor: pointer; border-radius: 8px; font-weight: 700; }
+        .size-btn.selected { background: var(--accent); }
+        .btn-action { width: 100%; padding: 18px; border: none; font-weight: 900; cursor: pointer; text-transform: uppercase; border-radius: 10px; background: var(--accent); color: #fff; }
+        .sidebar-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 1500; display: none; }
+        .sidebar-overlay.active { display: block; }
     </style>
 </head>
 <body>
 
-<header>
-    <div class="header-left">
-        <i class="fas fa-search" onclick="toggleSearch()"></i>
-    </div>
+<div class="promo-banner">🔥 FRETE GRÁTIS PARA TODO O BRASIL EM COMPRAS ACIMA DE R$ 499</div>
 
+<div class="sidebar-overlay" id="sidebar-overlay" onclick="toggleCart()"></div>
+
+<header>
+    <div class="header-left"><i class="fas fa-search" onclick="toggleSearch()"></i></div>
+    
     <div class="header-center">
-        <img src="logo.jpg" class="logo-nav" alt="Ballena Outlet">
+        <!-- Logo alterada para imagem conforme solicitado -->
+        <img src="logo1.png" class="logo-nav" alt="MD SHOES Logo">
     </div>
 
     <div class="header-right">
         <div onclick="toggleCart()" style="position:relative; cursor:pointer">
             <i class="fas fa-shopping-bag"></i>
-            <span id="cart-count" style="position:absolute; top:-8px; right:-10px; background:var(--accent); color:#fff; font-size:0.6rem; padding:2px 6px; border-radius:50%; font-weight:800">0</span>
+            <span id="cart-count" style="position:absolute; top:-10px; right:-10px; background:var(--accent); color:#fff; font-size:0.7rem; padding:2px 6px; border-radius:50%; font-weight:900">0</span>
         </div>
     </div>
 </header>
 
-<div id="search-box">
-    <input type="text" id="input-busca" placeholder="O QUE VOCÊ PROCURA?" oninput="buscarProduto()">
+<div id="search-box" style="display:none; padding: 20px 5%; background: var(--card-bg); border-bottom: 1px solid var(--border);">
+    <input type="text" id="input-busca" placeholder="O QUE VOCÊ PROCURA?" style="width: 100%; padding: 15px; border-radius: 30px; border: 1px solid var(--border); background: #2a2d33; color: #fff; outline: none; text-align: center;">
 </div>
 
 <section class="hero-image">
     <div class="hero-gradient"></div>
-    <img src="fundo.jpg" class="bg-hero">
+    <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=2070&auto=format&fit=crop" class="bg-hero" alt="Nike Banner">
+    
+    <div class="hero-content">
+        <p>JUST DO IT</p>
+        <h1>NIKE COLLECTION</h1>
+        <p>O TOPO DO STREETWEAR MUNDIAL NA SUA MÃO</p>
+    </div>
 </section>
 
 <div class="container">
-    <h2 class="cat-title">Camisas de Time</h2>
+    <h2 style="text-align:center; margin-bottom:30px; text-transform:uppercase; letter-spacing:2px; font-weight:900;">Destaques da Semana</h2>
     <div id="main-content" class="grid"></div>
 </div>
 
 <div class="cart-sidebar" id="cart-sidebar">
-    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px">
-        <h2 style="font-weight:800">Carrinho</h2>
-        <i class="fas fa-times" onclick="toggleCart()" style="cursor:pointer; color:#888"></i>
+    <div class="cart-header" style="display:flex; justify-content:space-between; margin-bottom:20px;">
+        <h2>Meu Carrinho</h2>
+        <i class="fas fa-times" onclick="toggleCart()" style="cursor:pointer"></i>
     </div>
     <div id="cart-list" style="flex:1; overflow-y:auto;"></div>
-    <div id="cart-total" style="padding:20px 0; font-weight:800; border-top:1px solid #eee; display:flex; justify-content:space-between">
-        <span>Total:</span>
-        <span id="total-value">R$ 0,00</span>
+    <div class="cart-footer" style="border-top:1px solid var(--border); padding-top:20px;">
+        <div style="display:flex; justify-content:space-between; margin-bottom:20px; font-weight:900;">
+            <span>Total:</span>
+            <span id="total-value" style="color:var(--accent)">R$ 0,00</span>
+        </div>
+        <button class="btn-action" onclick="finalizarWhatsApp()">Finalizar Pedido</button>
     </div>
-    <button class="btn-action btn-primary" onclick="finalizarWhatsApp()">Finalizar no WhatsApp</button>
 </div>
 
 <div class="modal-overlay" id="modal-produto">
     <div class="modal-content">
-        <div class="img-container">
-            <img id="m-img" src="" style="width:100%; height:100%; object-fit:cover">
-        </div>
-        <h2 id="m-nome" style="font-size:1rem; margin-bottom:10px"></h2>
-        <p id="m-preco" style="font-weight:800; font-size:1.3rem; color:var(--accent); margin-bottom:15px"></p>
-        <div id="m-sizes"></div>
-        <button class="btn-action btn-primary" onclick="addAoCarrinho()">Adicionar ao Carrinho</button>
-        <p onclick="closeModals()" style="text-align:center; cursor:pointer; margin-top:15px; font-size:0.8rem; color:#888">VOLTAR</p>
+        <img id="m-img" src="" style="width:100%; border-radius:12px; margin-bottom:15px; background:#fff;">
+        <h2 id="m-nome"></h2>
+        <p id="m-preco" style="font-size:1.8rem; color:var(--accent); font-weight:900; margin:10px 0;"></p>
+        <div id="m-sizes" style="margin-bottom:20px;"></div>
+        <button class="btn-action" onclick="addAoCarrinho()">Adicionar ao Carrinho</button>
+        <p onclick="closeModals()" style="margin-top:15px; cursor:pointer; color:var(--text-secondary);">Voltar</p>
     </div>
 </div>
 
 <script>
-const PRODUTOS_ESTATICOS = [
-    { id: 1, nome: "Brasil Home 24/25", preco: "299,90", imagem: "https://images.tcdn.com.br/img/img_prod/1127110/camisa_selecao_brasileira_home_2024_sn_torcedor_masculina_amarela_3163_1_e417a869a239b9776f823293e5acda37.jpg" },
-    { id: 2, nome: "Real Madrid Home 24/25", preco: "349,90", imagem: "https://imgcentauro-a.akamaihd.net/1300x1300/98713202.jpg" },
-    { id: 3, nome: "Manchester City Home 24/25", preco: "349,90", imagem: "https://imgcentauro-a.akamaihd.net/1300x1300/98555102.jpg" },
-    { id: 4, nome: "Flamengo I 2024", preco: "299,90", imagem: "https://images.tcdn.com.br/img/img_prod/1127110/camisa_flamengo_i_2024_sn_torcedor_masculina_vermelha_e_preta_2831_1_45d1d49f05244e85973e2ff1758e5f88.jpg" },
-    { id: 5, nome: "Palmeiras I 2024", preco: "299,90", imagem: "https://images.tcdn.com.br/img/img_prod/1127110/camisa_palmeiras_i_2024_sn_torcedor_masculina_verde_2813_1_4dbf6f69185a732a392e21f669074094.jpg" },
-    { id: 6, nome: "Inter de Milão Home 24/25", preco: "349,90", imagem: "https://imgcentauro-a.akamaihd.net/1300x1300/M0UP9702.jpg" },
-    { id: 7, nome: "Barcelona Away 24/25", preco: "349,90", imagem: "https://imgcentauro-a.akamaihd.net/1300x1300/M0UL1802.jpg" },
-    { id: 8, nome: "Argentina Home 2024", preco: "299,90", imagem: "https://images.tcdn.com.br/img/img_prod/1127110/camisa_selecao_argentina_home_2024_sn_torcedor_masculina_branca_e_celeste_3172_1_e46d03d387f31b8a531f868ac9d4a46d.jpg" }
+const PRODUTOS = [
+    { id: 1, nome: "Nike Air Force 1 '07 All White", preco: "799,90", imagem: "https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?q=80&w=1000&auto=format&fit=crop" },
+    { id: 2, nome: "Nike Dunk Low Retro 'Panda'", preco: "1.199,90", imagem: "https://images.unsplash.com/photo-1605348532760-6753d2c43329?q=80&w=1000&auto=format&fit=crop" },
+    { id: 3, nome: "Air Jordan 1 Retro 'Lost & Found'", preco: "1.899,90", imagem: "https://images.unsplash.com/photo-1597040933228-09e530420661?q=80&w=1000&auto=format&fit=crop" },
+    { id: 4, nome: "Nike Air Max 270 Black Triple", preco: "999,90", imagem: "https://images.unsplash.com/photo-1514989940723-e8e51635b782?q=80&w=1000&auto=format&fit=crop" },
+    { id: 5, nome: "Nike SB Dunk Low Blue Lagoon", preco: "1.349,00", imagem: "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?q=80&w=1000&auto=format&fit=crop" }
 ];
 
 let CART = [];
 let SELECTED_PROD = null;
 let SELECTED_SIZE = null;
 
-function renderLoja(data = PRODUTOS_ESTATICOS) {
+function renderLoja() {
     const main = document.getElementById('main-content');
-    main.innerHTML = data.map(p => `
+    main.innerHTML = PRODUTOS.map(p => `
         <div class="product-card" onclick="openProduct(${p.id})">
-            <div class="img-container"><img src="${p.imagem}" onerror="this.src='https://via.placeholder.com/400x400?text=Camisa'"></div>
-            <div class="product-info">
-                <h3>${p.nome}</h3>
-                <span class="price">R$ ${p.preco}</span>
-            </div>
+            <img src="${p.imagem}" alt="${p.nome}">
+            <h3>${p.nome}</h3>
+            <span class="price">R$ ${p.preco}</span>
         </div>
     `).join('');
 }
 
 function openProduct(id) {
-    SELECTED_PROD = PRODUTOS_ESTATICOS.find(p => p.id === id);
+    SELECTED_PROD = PRODUTOS.find(p => p.id === id);
     document.getElementById('m-img').src = SELECTED_PROD.imagem;
     document.getElementById('m-nome').innerText = SELECTED_PROD.nome;
     document.getElementById('m-preco').innerText = `R$ ${SELECTED_PROD.preco}`;
-    let sizes = ['P', 'M', 'G', 'GG'];
+    
+    let sizes = ['38', '39', '40', '41', '42', '43', '44'];
     SELECTED_SIZE = null;
-    document.getElementById('m-sizes').innerHTML = sizes.map(s => `<button class="size-btn" onclick="selectSize(this, '${s}')">${s}</button>`).join('');
+    document.getElementById('m-sizes').innerHTML = sizes.map(s => `
+        <button class="size-btn" onclick="selectSize(this, '${s}')">${s}</button>
+    `).join('');
     document.getElementById('modal-produto').classList.add('active');
 }
 
@@ -253,7 +251,9 @@ function selectSize(btn, s) {
 function addAoCarrinho() {
     if(!SELECTED_SIZE) return alert("Selecione um tamanho!");
     CART.push({...SELECTED_PROD, tamanho: SELECTED_SIZE, cartId: Date.now()});
-    updateCart(); closeModals(); toggleCart();
+    updateCart();
+    closeModals();
+    toggleCart();
 }
 
 function updateCart() {
@@ -261,44 +261,46 @@ function updateCart() {
     const list = document.getElementById('cart-list');
     let total = 0;
     list.innerHTML = CART.map(i => {
-        total += parseFloat(i.preco.replace(',','.'));
-        return `
-            <div class="cart-item">
-                <img src="${i.imagem}">
-                <div style="flex:1">
-                    <div style="font-size:0.8rem; font-weight:600">${i.nome}</div>
-                    <div style="font-size:0.7rem; color:#888">Tamanho: ${i.tamanho}</div>
-                    <div style="font-weight:800; font-size:0.9rem">R$ ${i.preco}</div>
-                </div>
-                <i class="fas fa-trash" style="color:#ff4444; cursor:pointer" onclick="removerDoCarrinho(${i.cartId})"></i>
-            </div>`;
+        total += parseFloat(i.preco.replace('.','').replace(',','.'));
+        return `<div class="cart-item">
+            <img src="${i.imagem}">
+            <div style="flex:1">
+                <p style="font-size:0.8rem; font-weight:700">${i.nome}</p>
+                <p style="font-size:0.7rem; color:var(--text-secondary)">Tam: ${i.tamanho}</p>
+                <p style="color:var(--accent); font-weight:900">R$ ${i.preco}</p>
+            </div>
+            <i class="fas fa-trash-alt" onclick="removerDoCarrinho(${i.cartId})" style="color:#ff4d4d; cursor:pointer"></i>
+        </div>`;
     }).join('');
     document.getElementById('total-value').innerText = `R$ ${total.toFixed(2).replace('.',',')}`;
 }
 
-function removerDoCarrinho(cid) { CART = CART.filter(i => i.cartId !== cid); updateCart(); }
+function removerDoCarrinho(cid) {
+    CART = CART.filter(i => i.cartId !== cid);
+    updateCart();
+}
 
-function finalizarWhatsApp() {
-    if(CART.length === 0) return alert("Carrinho vazio!");
-    let msg = `*BALLENA OUTLET - NOVO PEDIDO*%0A%0A`;
-    CART.forEach(i => msg += `- ${i.nome} (${i.tamanho}) - R$ ${i.preco}%0A`);
-    msg += `%0A*Total: ${document.getElementById('total-value').innerText}*`;
-    window.open(`https://wa.me/5519989620949?text=${msg}`);
+function toggleCart() {
+    document.getElementById('cart-sidebar').classList.toggle('open');
+    document.getElementById('sidebar-overlay').classList.toggle('active');
 }
 
 function toggleSearch() {
     const box = document.getElementById('search-box');
-    box.style.display = box.style.display === 'block' ? 'none' : 'block';
+    box.style.display = box.style.display === 'none' ? 'block' : 'none';
 }
 
-function buscarProduto() {
-    const termo = document.getElementById('input-busca').value.toLowerCase();
-    const filtrados = PRODUTOS_ESTATICOS.filter(p => p.nome.toLowerCase().includes(termo));
-    renderLoja(filtrados);
+function closeModals() {
+    document.getElementById('modal-produto').classList.remove('active');
 }
 
-function toggleCart() { document.getElementById('cart-sidebar').classList.toggle('open'); }
-function closeModals() { document.querySelectorAll('.modal-overlay').forEach(m => m.classList.remove('active')); }
+function finalizarWhatsApp() {
+    if(CART.length === 0) return alert("Carrinho vazio!");
+    let msg = `*MD SHOES - NOVO PEDIDO*%0A%0A`;
+    CART.forEach(i => msg += `- ${i.nome} (Tam: ${i.tamanho}) - R$ ${i.preco}%0A`);
+    msg += `%0A*Total: ${document.getElementById('total-value').innerText}*`;
+    window.open(`https://wa.me/5519989620949?text=${msg}`);
+}
 
 renderLoja();
 </script>
