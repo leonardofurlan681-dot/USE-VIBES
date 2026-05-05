@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MD SHOES | Sneaker & Streetwear</title>
+    <title>P10 STORE | Sneaker & Streetwear</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <style>
         :root { 
-            --accent: #2e67ff; 
+            --accent: #ffffff; /* Mudado de azul para branco */
             --bg: #101113; 
             --text: #ffffff; 
             --text-secondary: #aaaaaa; 
@@ -48,7 +48,7 @@
         .promo-banner {
             width: 100%;
             background: var(--accent);
-            color: #fff;
+            color: #000; /* Texto preto para contrastar com o fundo branco */
             text-align: center;
             padding: 8px;
             font-size: 0.75rem;
@@ -113,25 +113,52 @@
         @media (min-width: 1100px) { .grid { grid-template-columns: repeat(5, 1fr); } }
         
         .product-card { 
-            background: var(--card-bg); padding: 15px; border-radius: 15px; border: 1px solid var(--border); 
-            cursor: pointer; transition: 0.3s;
+            background: var(--card-bg); 
+            padding: 0 0 15px 0; /* Padding zero no topo e laterais para a imagem encostar */
+            border-radius: 0; /* Borda quadrada */
+            border: 1px solid var(--border); 
+            cursor: pointer; 
+            transition: 0.3s;
+            overflow: hidden;
         }
         .product-card:hover { border-color: var(--accent); transform: translateY(-5px); }
-        .product-card img { width: 100%; aspect-ratio: 1/1; object-fit: cover; background: #fff; border-radius: 10px; margin-bottom: 12px; }
-        .product-card h3 { font-size: 0.8rem; font-weight: 700; height: 40px; overflow: hidden; margin-bottom: 5px; }
-        .product-card .price { color: var(--accent); font-weight: 900; font-size: 1.1rem; }
+        
+        .product-card img { 
+            width: 100%; 
+            aspect-ratio: 1/1; 
+            object-fit: cover; 
+            background: #fff; 
+            border-radius: 0; /* Foto quadrada */
+            margin-bottom: 12px; 
+            display: block;
+        }
+        
+        .product-card h3 { 
+            font-size: 0.8rem; 
+            font-weight: 700; 
+            height: 40px; 
+            overflow: hidden; 
+            margin-bottom: 5px; 
+            padding: 0 15px; /* Adicionado padding para o texto não encostar na borda */
+        }
+        .product-card .price { 
+            color: var(--accent); 
+            font-weight: 900; 
+            font-size: 1.1rem; 
+            padding: 0 15px; /* Adicionado padding para o preço */
+        }
 
         /* CARRINHO E MODAIS */
         .cart-sidebar { position: fixed; right: -100%; top: 0; width: 100%; max-width: 400px; height: 100%; background: #16181b; z-index: 2000; transition: 0.4s; padding: 30px; border-left: 1px solid var(--border); display: flex; flex-direction: column; }
         .cart-sidebar.open { right: 0; }
-        .cart-item { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; background: #1f2226; padding: 10px; border-radius: 12px; }
-        .cart-item img { width: 60px; height: 60px; object-fit: contain; background: #fff; border-radius: 5px; }
+        .cart-item { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; background: #1f2226; padding: 10px; border-radius: 0; } /* Borda quadrada */
+        .cart-item img { width: 60px; height: 60px; object-fit: contain; background: #fff; border-radius: 0; }
         .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 3000; display: none; align-items: center; justify-content: center; backdrop-filter: blur(8px); }
         .modal-overlay.active { display: flex; }
-        .modal-content { width: 90%; max-width: 400px; background: var(--card-bg); padding: 30px; border-radius: 20px; text-align: center; }
-        .size-btn { padding: 10px; border: 1px solid var(--border); background: #2a2d33; color: #fff; margin: 4px; cursor: pointer; border-radius: 8px; font-weight: 700; }
-        .size-btn.selected { background: var(--accent); }
-        .btn-action { width: 100%; padding: 18px; border: none; font-weight: 900; cursor: pointer; text-transform: uppercase; border-radius: 10px; background: var(--accent); color: #fff; }
+        .modal-content { width: 90%; max-width: 400px; background: var(--card-bg); padding: 30px; border-radius: 0; text-align: center; } /* Borda quadrada */
+        .size-btn { padding: 10px; border: 1px solid var(--border); background: #2a2d33; color: #fff; margin: 4px; cursor: pointer; border-radius: 0; font-weight: 700; }
+        .size-btn.selected { background: var(--accent); color: #000; }
+        .btn-action { width: 100%; padding: 18px; border: none; font-weight: 900; cursor: pointer; text-transform: uppercase; border-radius: 0; background: var(--accent); color: #000; }
         .sidebar-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 1500; display: none; }
         .sidebar-overlay.active { display: block; }
     </style>
@@ -146,20 +173,19 @@
     <div class="header-left"><i class="fas fa-search" onclick="toggleSearch()"></i></div>
     
     <div class="header-center">
-        <!-- Logo alterada para imagem conforme solicitado -->
-        <img src="logo1.png" class="logo-nav" alt="MD SHOES Logo">
+        <img src="logo.png" class="logo-nav" alt="P10 STORE">
     </div>
 
     <div class="header-right">
         <div onclick="toggleCart()" style="position:relative; cursor:pointer">
             <i class="fas fa-shopping-bag"></i>
-            <span id="cart-count" style="position:absolute; top:-10px; right:-10px; background:var(--accent); color:#fff; font-size:0.7rem; padding:2px 6px; border-radius:50%; font-weight:900">0</span>
+            <span id="cart-count" style="position:absolute; top:-10px; right:-10px; background:var(--accent); color:#000; font-size:0.7rem; padding:2px 6px; border-radius:50%; font-weight:900">0</span>
         </div>
     </div>
 </header>
 
 <div id="search-box" style="display:none; padding: 20px 5%; background: var(--card-bg); border-bottom: 1px solid var(--border);">
-    <input type="text" id="input-busca" placeholder="O QUE VOCÊ PROCURA?" style="width: 100%; padding: 15px; border-radius: 30px; border: 1px solid var(--border); background: #2a2d33; color: #fff; outline: none; text-align: center;">
+    <input type="text" id="input-busca" placeholder="O QUE VOCÊ PROCURA?" style="width: 100%; padding: 15px; border-radius: 0; border: 1px solid var(--border); background: #2a2d33; color: #fff; outline: none; text-align: center;">
 </div>
 
 <section class="hero-image">
@@ -195,7 +221,7 @@
 
 <div class="modal-overlay" id="modal-produto">
     <div class="modal-content">
-        <img id="m-img" src="" style="width:100%; border-radius:12px; margin-bottom:15px; background:#fff;">
+        <img id="m-img" src="" style="width:100%; border-radius:0; margin-bottom:15px; background:#fff;">
         <h2 id="m-nome"></h2>
         <p id="m-preco" style="font-size:1.8rem; color:var(--accent); font-weight:900; margin:10px 0;"></p>
         <div id="m-sizes" style="margin-bottom:20px;"></div>
