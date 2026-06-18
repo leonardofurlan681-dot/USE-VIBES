@@ -10,7 +10,7 @@
     </script>
 
     <meta charset="UTF-8">
-    <link rel="icon" type="image/png" href="favicon.png">
+    <link class="favicon" rel="icon" type="image/png" href="favicon.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LONNE STORE | Sneakers Premium</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
@@ -119,18 +119,51 @@
         .product-card h3 { font-size: 0.8rem; margin: 12px 0 6px; color: #bbb; text-transform: uppercase; font-weight: 600; line-height: 1.3; }
         .product-card .price { font-weight: 800; color: #fff; font-size: 0.95rem; margin-top: auto; }
 
-        /* POPUP CENTRALIZADO RESPONSIVO (MOBILE ADAPTADO) */
+        /* POPUP CENTRALIZADO RESPONSIVO (CORREÇÃO DE SOBREPOSIÇÃO NO MOBILE) */
         #modal-produto { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(8px); z-index: 4000; display: none; align-items: center; justify-content: center; padding: 15px; }
         #modal-produto.active { display: flex !important; }
-        .modal-content-wrapper { width: 100%; max-width: 850px; background: #0a0a0c; border: 1px solid #222; border-radius: 16px; padding: 20px; display: grid; grid-template-columns: 1fr; gap: 20px; max-height: 92vh; overflow-y: auto; position: relative; animation: fadeIn 0.3s ease-out; }
-        @media (min-width: 768px) { .modal-content-wrapper { grid-template-columns: 1fr 1fr; gap: 40px; padding: 30px; } }
+        
+        .modal-content-wrapper { 
+            width: 100%; 
+            max-width: 850px; 
+            background: #0a0a0c; 
+            border: 1px solid #222; 
+            border-radius: 16px; 
+            padding: 20px; 
+            display: flex;
+            flex-direction: column;
+            gap: 20px; 
+            max-height: 90vh; 
+            overflow-y: auto; 
+            position: relative; 
+            animation: fadeIn 0.3s ease-out; 
+        }
+        @media (min-width: 768px) { 
+            .modal-content-wrapper { 
+                display: grid;
+                grid-template-columns: 1fr 1fr; 
+                gap: 40px; 
+                padding: 30px; 
+            } 
+        }
 
         .btn-back-store { position: absolute; top: 15px; right: 15px; color: #fff; background: #1a1a1a; border: none; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1rem; z-index: 10; }
         .btn-back-store:hover { background: #333; }
-        .modal-media-side { width: 100%; display: flex; justify-content: center; align-items: center; background: #111; border-radius: 12px; overflow: hidden; aspect-ratio: 1/1; }
+        
+        .modal-media-side { 
+            width: 100%; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            background: #111; 
+            border-radius: 12px; 
+            overflow: hidden; 
+            aspect-ratio: 1/1; 
+            flex-shrink: 0;
+        }
         #m-img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-        .modal-body { padding: 0; display: flex; flex-direction: column; justify-content: center; }
+        .modal-body { padding: 0; display: flex; flex-direction: column; height: auto; }
         #m-nome { font-size: 1.3rem; font-weight: 800; line-height: 1.2; text-transform: uppercase; color: #fff; margin-bottom: 8px; margin-top: 5px; }
         @media (min-width: 768px) { #m-nome { font-size: 1.5rem; margin-bottom: 12px; margin-top: 0; } }
         #m-preco { font-size: 1.2rem; font-weight: 800; color: #fff; margin-bottom: 15px; }
