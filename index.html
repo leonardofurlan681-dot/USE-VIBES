@@ -119,23 +119,22 @@
         .product-card h3 { font-size: 0.8rem; margin: 12px 0 6px; color: #bbb; text-transform: uppercase; font-weight: 600; line-height: 1.3; }
         .product-card .price { font-weight: 800; color: #fff; font-size: 0.95rem; margin-top: auto; }
 
-        /* Estilo da Tag Dinâmica (Novidade, Promo, Esgotado, etc.) */
-        .tag-produto { position: absolute; top: 20px; left: 20px; padding: 4px 10px; border-radius: 4px; font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; z-index: 2; color: #fff; }
-
-        /* POPUP CENTRALIZADO CORRIGIDO */
-        #modal-produto { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(8px); z-index: 4000; display: none; align-items: center; justify-content: center; padding: 20px; }
+        /* POPUP CENTRALIZADO RESPONSIVO (MOBILE ADAPTADO) */
+        #modal-produto { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(8px); z-index: 4000; display: none; align-items: center; justify-content: center; padding: 15px; }
         #modal-produto.active { display: flex !important; }
-        .modal-content-wrapper { width: 100%; max-width: 850px; background: #0a0a0c; border: 1px solid #222; border-radius: 16px; padding: 30px; display: grid; grid-template-columns: 1fr; gap: 30px; max-height: 90vh; overflow-y: auto; position: relative; animation: fadeIn 0.3s ease-out; }
-        @media (min-width: 768px) { .modal-content-wrapper { grid-template-columns: 1fr 1fr; gap: 40px; } }
+        .modal-content-wrapper { width: 100%; max-width: 850px; background: #0a0a0c; border: 1px solid #222; border-radius: 16px; padding: 20px; display: grid; grid-template-columns: 1fr; gap: 20px; max-height: 92vh; overflow-y: auto; position: relative; animation: fadeIn 0.3s ease-out; }
+        @media (min-width: 768px) { .modal-content-wrapper { grid-template-columns: 1fr 1fr; gap: 40px; padding: 30px; } }
 
-        .btn-back-store { position: absolute; top: 15px; right: 15px; color: #fff; background: #1a1a1a; border: none; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 0.9rem; z-index: 10; }
+        .btn-back-store { position: absolute; top: 15px; right: 15px; color: #fff; background: #1a1a1a; border: none; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1rem; z-index: 10; }
         .btn-back-store:hover { background: #333; }
         .modal-media-side { width: 100%; display: flex; justify-content: center; align-items: center; background: #111; border-radius: 12px; overflow: hidden; aspect-ratio: 1/1; }
         #m-img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
         .modal-body { padding: 0; display: flex; flex-direction: column; justify-content: center; }
-        #m-nome { font-size: 1.5rem; font-weight: 800; line-height: 1.2; text-transform: uppercase; color: #fff; margin-bottom: 12px; }
-        #m-preco { font-size: 1.3rem; font-weight: 800; color: #fff; margin-bottom: 20px; }
+        #m-nome { font-size: 1.3rem; font-weight: 800; line-height: 1.2; text-transform: uppercase; color: #fff; margin-bottom: 8px; margin-top: 5px; }
+        @media (min-width: 768px) { #m-nome { font-size: 1.5rem; margin-bottom: 12px; margin-top: 0; } }
+        #m-preco { font-size: 1.2rem; font-weight: 800; color: #fff; margin-bottom: 15px; }
+        @media (min-width: 768px) { #m-preco { font-size: 1.3rem; margin-bottom: 20px; } }
         .size-container-label { font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: #888; margin-bottom: 12px; }
 
         .size-box { border: 1px solid #333; background: #111; color: #fff; min-width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; font-weight: 600; cursor: pointer; padding: 5px; border-radius: 6px; }
@@ -394,15 +393,6 @@ function carregarProdutosFirebase() {
     });
 }
 
-function gerarTagHtml(tag) {
-    if (!tag) return '';
-    let cor = '#3a86ff';
-    if(tag.toLowerCase() === 'esgotado') cor = '#ff4444';
-    if(tag.toLowerCase() === 'novidade') cor = '#9d4edd';
-    if(tag.toLowerCase() === 'promo') cor = '#00cb51';
-    return `<span class="tag-produto" style="background:${cor}">${tag}</span>`;
-}
-
 function renderFull(filtered = null) {
     const main = document.getElementById('main-content');
     if(!main) return;
@@ -452,7 +442,6 @@ function renderFull(filtered = null) {
                             prodsDoModelo.forEach(p => {
                                 const img = p.imagem || p.foto || '';
                                 html += `<div class="product-card" onclick="abrirProduto('${p.id}')">
-                                             ${gerarTagHtml(p.tag)}
                                              <div class="img-container"><img src="${img}"></div>
                                              <h3>${p.nome}</h3>
                                              <span class="price">R$ ${parseFloat(p.preco || 0).toFixed(2).replace('.',',')}</span>
@@ -469,7 +458,6 @@ function renderFull(filtered = null) {
                         restoTenis.forEach(p => {
                             const img = p.imagem || p.foto || '';
                             html += `<div class="product-card" onclick="abrirProduto('${p.id}')">
-                                         ${gerarTagHtml(p.tag)}
                                          <div class="img-container"><img src="${img}"></div>
                                          <h3>${p.nome}</h3>
                                          <span class="price">R$ ${parseFloat(p.preco || 0).toFixed(2).replace('.',',')}</span>
@@ -484,7 +472,6 @@ function renderFull(filtered = null) {
                     prodsFiltradosModelo.forEach(p => {
                         const img = p.imagem || p.foto || '';
                         html += `<div class="product-card" onclick="abrirProduto('${p.id}')">
-                                    ${gerarTagHtml(p.tag)}
                                     <div class="img-container"><img src="${img}"></div>
                                     <h3>${p.nome}</h3>
                                     <span class="price">R$ ${parseFloat(p.preco || 0).toFixed(2).replace('.',',')}</span>
@@ -498,7 +485,6 @@ function renderFull(filtered = null) {
                 prods.forEach(p => {
                     const img = p.imagem || p.foto || '';
                     html += `<div class="product-card" onclick="abrirProduto('${p.id}')">
-                                ${gerarTagHtml(p.tag)}
                                 <div class="img-container"><img src="${img}"></div>
                                 <h3>${p.nome}</h3>
                                 <span class="price">R$ ${parseFloat(p.preco || 0).toFixed(2).replace('.',',')}</span>
@@ -518,7 +504,6 @@ function renderFull(filtered = null) {
             const img = p.imagem || p.foto || '';
             main.innerHTML += `
                 <div class="product-card" onclick="abrirProduto('${p.id}')">
-                    ${gerarTagHtml(p.tag)}
                     <div class="img-container"><img src="${img}" alt="${p.nome}"></div>
                     <h3>${p.nome}</h3>
                     <div class="price">R$ ${parseFloat(p.preco || 0).toFixed(2).replace('.',',')}</div>
@@ -530,11 +515,7 @@ function renderFull(filtered = null) {
 
 function filtrarModeloTenis(modelo) {
     CURRENT_MODEL_FILTER = modelo;
-    if(CURRENT_MODEL_FILTER === 'todos') {
-        renderFull(null);
-    } else {
-        renderFull(null);
-    }
+    renderFull(null);
 }
 
 function filterCat(c) {
@@ -567,19 +548,11 @@ function abrirProduto(id) {
     document.getElementById('m-preco').innerText = `R$ ${parseFloat(SELECTED_PROD.preco || 0).toFixed(2).replace('.',',')}`;
     
     const btnCart = document.getElementById('btn-add-cart');
-    if (SELECTED_PROD.tag && SELECTED_PROD.tag.toLowerCase() === 'esgotado') {
-        btnCart.innerText = "Produto Esgotado";
-        btnCart.style.background = "#222";
-        btnCart.style.color = "#555";
-        btnCart.style.cursor = "not-allowed";
-        btnCart.disabled = true;
-    } else {
-        btnCart.innerText = "Adicionar ao Pedido";
-        btnCart.style.background = "#fff";
-        btnCart.style.color = "#000";
-        btnCart.style.cursor = "pointer";
-        btnCart.disabled = false;
-    }
+    btnCart.innerText = "Adicionar ao Pedido";
+    btnCart.style.background = "#fff";
+    btnCart.style.color = "#000";
+    btnCart.style.cursor = "pointer";
+    btnCart.disabled = false;
 
     const sizesCont = document.getElementById('m-sizes');
     sizesCont.innerHTML = '';
@@ -610,7 +583,6 @@ function selecionarTamanho(el, size) {
 }
 
 function addAoCarrinho() {
-    if(SELECTED_PROD && SELECTED_PROD.tag && SELECTED_PROD.tag.toLowerCase() === 'esgotado') return;
     if (!SELECTED_SIZE) { alert('Por favor, selecione seu tamanho primeiro!'); return; }
     
     CART.push({ ...SELECTED_PROD, tamanhoEscolhido: SELECTED_SIZE, cartId: Date.now() });
